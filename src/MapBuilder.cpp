@@ -6,11 +6,12 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 09:45:41 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/07 13:02:37 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/07 14:27:56 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/MapBuilder.hpp"
+#include <algorithm>
 
 //Constructor and destructor
 MapBuilder::MapBuilder(std::string &input): _dicPath("dictionary/dictionary.fdf"){
@@ -37,7 +38,7 @@ void MapBuilder::feedDictionary(){
 		throw (BadDicFileException());
 	}
 
-	for (int i = 0; i < 10; i++){
+	for (int i = 0; i < 36; i++){
 		std::string line;
 		std::vector<std::string> tmp;
 		std::getline(dicFile, line);
@@ -57,14 +58,17 @@ void MapBuilder::buildMapFromString(std::string &str){
 	//Char maps are 12x28
 	if (str.size() > 10) {throw(StringTooLongException());}
 
-	//Length to check the built map
-	//size_t rowL = (str.length() * 28) /*+ (str.length() > 0 ? str.length() - 1 : 0)*/;
+	std::transform(str.begin(), str.end(), str.begin(), ::toupper);
 
 	for (int i = 0; i < 12; i++){
 		std::string row;
 		for (size_t j = 0; j < str.length(); j++){
 			int idx = str.at(j) - 48;
-			std::vector<std::string> tmp = this->_mapDictionary[idx];
+			std::vector<std::string> tmp;
+			if (idx > 9)
+				tmp = this->_mapDictionary[idx - 7];
+			else
+				tmp = this->_mapDictionary[idx];
 			row += tmp.at(i);
 			row += "  ";
 		}
