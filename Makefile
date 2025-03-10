@@ -6,7 +6,7 @@
 #    By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/13 13:48:05 by hmunoz-g          #+#    #+#              #
-#    Updated: 2025/03/10 13:32:41 by hmunoz-g         ###   ########.fr        #
+#    Updated: 2025/03/10 14:37:41 by hmunoz-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,6 +87,7 @@ clean:
 fclean: clean
 	@$(RM) $(NAME)
 	@$(RM) MLX42/build
+	@rm -rf libs/mlx42
 	@echo "$(RED)Cleaned all binaries$(DEF_COLOR)"
 
 re: fclean all
