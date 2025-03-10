@@ -6,7 +6,7 @@
 #    By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/13 13:48:05 by hmunoz-g          #+#    #+#              #
-#    Updated: 2025/03/10 14:37:41 by hmunoz-g         ###   ########.fr        #
+#    Updated: 2025/03/10 15:53:26 by hmunoz-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ NAME        := FDF++
 # -=-=-=-=-    FLAG -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= #
 
 CPP          = c++
-FLAGS       = -Werror -Wall -Wextra -std=c++17 -pedantic -g -fsanitize=address
+FLAGS       = -Werror -Wall -Wextra -std=c++17 -pedantic -g #-fsanitize=address
 DEPFLAGS    = -MMD -MP
 
 # -=-=-=-=-    PATH -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
@@ -35,11 +35,16 @@ RM          = rm -fr
 OBJ_DIR     = .obj
 DEP_DIR     = .dep
 MLXDIR		:= 	libs/mlx42
-MLX42LIB	:=	$(MLXDIR)/build/libmlx42.a
+
+# -=-=-=-=-    LIBRARIES -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
+LIBS		:=	$(MLXDIR)/build/libmlx42.a /usr/lib/x86_64-linux-gnu/libglfw.so \
+				-lm -ldl -Ofast -pthread -lglfw
 
 # -=-=-=-=-    FILES -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
 
 SRC         := src/main.cpp \
+				src/FDF.cpp \
+				src/MLXHandler.cpp \
 				src/mapHandler/MapBuilder.cpp \
 				src/mapHandler/MapParser.cpp \
 				src/projections/IsometricProjection.cpp \
@@ -76,7 +81,7 @@ $(OBJ_DIR)/%.o: %.cpp
 
 $(NAME): $(OBJS) Makefile
 	@echo "$(GREEN)Linking $(NAME)!$(DEF_COLOR)"
-	$(CPP) $(FLAGS) $(OBJS) -o $(NAME)
+	$(CPP) $(FLAGS) $(OBJS) $(LIBS) -o $(NAME)
 	@echo "$(GREEN)$(NAME) compiled!$(DEF_COLOR)"
 	@echo "$(RED)So preoccupied with whether or not I could, I didn't stop to think if I should.$(DEF_COLOR)"
 
