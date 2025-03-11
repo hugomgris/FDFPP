@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:13:14 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/10 15:54:06 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/11 16:04:49 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,28 +23,40 @@ int main(int argc, char **argv){
 		exit (1);
 	}
 	
-	MapBuilder *mapBuilder = NULL;
+	MapBuilder *builder = NULL;
+	MLXHandler *mlx = NULL;
+	MapParser *parser = NULL;
+	IsometricProjection *iso = NULL;
+	FDF *fdf = NULL;
 	
 	try{	
 		std::string input = std::string(argv[1]);
-		mapBuilder = new MapBuilder(input);
+		builder = new MapBuilder(input);
+		mlx = new MLXHandler(1920, 1080, "FDF++");
+		parser = new MapParser(builder->getMap());
+		iso = new IsometricProjection();
 
-		MapParser mapParser(mapBuilder->getMap());
-		mapParser.parseMap();
-
-		mapBuilder->mapPrinter();
+		parser->parseMap();
 		
-		MLXHandler MLXHandler(1920, 1080, "FDF++");
+		fdf = new FDF(builder->getMap(), iso, *mlx);
+		fdf->printMatrix();
 
-		IsometricProjection iso;
-		FDF fdf(mapBuilder->getMap(), &iso, MLXHandler);
-
-		MLXHandler.render();
-
-		delete mapBuilder;
+		delete builder;
+		delete mlx;
+		delete parser;
+		delete iso;
+		delete fdf;
 	} catch (const std::exception &e){
-		if (mapBuilder != NULL)
-			delete mapBuilder;
+		if (builder != NULL)
+			delete builder;
+		if (mlx != NULL)
+			delete mlx;
+		if (parser != NULL)
+			delete parser;
+		if (iso != NULL)
+			delete iso;
+		if (fdf != NULL)
+			delete fdf;
 		std::cout << "Exception caught: " << e.what() << std::endl;
 		return (1);
 	}

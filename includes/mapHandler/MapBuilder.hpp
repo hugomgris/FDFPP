@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 09:39:17 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/07 13:02:35 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:13:52 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ class MapBuilder{
 		};
 
 		class BadMapFileException : public std::exception{
+			const char *what () const throw();
+		};
+
+		class BadExtensionException : public std::exception{
 			const char *what () const throw();
 		};
 

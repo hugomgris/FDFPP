@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:41:26 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/10 16:04:01 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/11 14:56:15 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ MLXHandler &MLXHandler::operator=(const MLXHandler &other){
 }
 
 MLXHandler::~MLXHandler(){
-    if (this->_mlx) {
+    /*if (this->_mlx) {
         if (this->_img) {
             mlx_delete_image(this->_mlx, this->_img);
             this->_img = nullptr;
         }
         mlx_terminate(this->_mlx);
         this->_mlx = nullptr;
-    }
+    }*/
 }
 
 //Methods

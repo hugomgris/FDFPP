@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 09:45:41 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/10 13:08:01 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:15:46 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,11 @@ bool MapBuilder::checkInputType(std::string &input){
 
 	std::string prefix = "maps/";
 	std::string suffix = ".fdf";
-	return (input.substr(0, prefix.length()) == prefix && input.substr(input.length() - suffix.length()) == suffix);
+	std::string checkA = input.substr(0, prefix.length());
+	std::string checkB = input.substr(input.length() - suffix.length());
+	if (checkB != suffix)
+		throw (BadExtensionException());
+	return (checkA == prefix && checkB == suffix);
 }
 
 //Debuggers
@@ -117,4 +121,8 @@ const char *MapBuilder::StringTooLongException::what() const throw(){
 
 const char *MapBuilder::BadMapFileException::what() const throw(){
 	return ("Bad map file! (check existance and premissions)");
+}
+
+const char *MapBuilder::BadExtensionException::what() const throw(){
+	return ("Bad map file extension! (maps have to be .fdf)");
 }
