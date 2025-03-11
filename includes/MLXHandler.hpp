@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:42:55 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/10 16:00:33 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/11 16:59:42 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ class MLXHandler{
 
 		//Operator overload
 		MLXHandler &operator=(const MLXHandler &other);
+
+		//Getters
+		mlx_image_t *getImage() const;
+		mlx_t *getMLX() const;
 
 		//Methods
 		void render() const;

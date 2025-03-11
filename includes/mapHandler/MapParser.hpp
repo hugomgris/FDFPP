@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:51:39 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/07 12:59:35 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/11 17:20:27 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 class MapParser{
 	private:
-		std::vector<std::string> &_map;
+		std::vector<std::vector<int>> &_map;
 
 	public:
 		//Exception classes
@@ -27,7 +27,7 @@ class MapParser{
 		};
 		
 		//Constructor and destructor
-		MapParser(std::vector<std::string> &map);
+		MapParser(std::vector<std::vector<int>> &map);
 		~MapParser();
 
 		//Methods

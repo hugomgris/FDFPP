@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:41:26 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/11 14:56:15 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/11 17:00:04 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,17 @@ MLXHandler::MLXHandler(const MLXHandler &other): _title(other._title){
 	*this = other;
 }
 
+MLXHandler::~MLXHandler(){
+    /*if (this->_mlx) {
+        if (this->_img) {
+            mlx_delete_image(this->_mlx, this->_img);
+            this->_img = nullptr;
+        }
+        mlx_terminate(this->_mlx);
+        this->_mlx = nullptr;
+    }*/
+}
+
 //Operator overload
 MLXHandler &MLXHandler::operator=(const MLXHandler &other){
 	if (this != &other){
@@ -44,15 +55,13 @@ MLXHandler &MLXHandler::operator=(const MLXHandler &other){
 	return (*this);
 }
 
-MLXHandler::~MLXHandler(){
-    /*if (this->_mlx) {
-        if (this->_img) {
-            mlx_delete_image(this->_mlx, this->_img);
-            this->_img = nullptr;
-        }
-        mlx_terminate(this->_mlx);
-        this->_mlx = nullptr;
-    }*/
+//Getters
+mlx_image_t *MLXHandler::getImage() const{
+	return (_img);
+}
+
+mlx_t *MLXHandler::getMLX() const{
+	return (_mlx);
 }
 
 //Methods

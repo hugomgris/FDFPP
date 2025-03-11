@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:13:14 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/11 16:04:49 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/11 17:24:44 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,16 @@ int main(int argc, char **argv){
 		std::string input = std::string(argv[1]);
 		builder = new MapBuilder(input);
 		mlx = new MLXHandler(1920, 1080, "FDF++");
-		parser = new MapParser(builder->getMap());
 		iso = new IsometricProjection();
 
-		parser->parseMap();
 		
 		fdf = new FDF(builder->getMap(), iso, *mlx);
-		fdf->printMatrix();
+		parser = new MapParser(fdf->getMatrix());
+		parser->parseMap();
+		//fdf->printMatrix();
+
+		fdf->drawPoints();
+		mlx_loop(mlx->getMLX());
 
 		delete builder;
 		delete mlx;
