@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   IsometricProjection.hpp                            :+:      :+:    :+:   */
+/*   DimetricProjection.cpp                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/10 11:47:04 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/12 12:58:43 by hmunoz-g         ###   ########.fr       */
+/*   Created: 2025/03/10 12:28:14 by hmunoz-g          #+#    #+#             */
+/*   Updated: 2025/03/12 14:25:15 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ISOMETRICPROJECTION_HPP
-# define ISOMETRICPROJECTION_HPP
+#include "../../includes/projections/DimetricProjection.hpp"
 
-#include "IProjection.hpp"
+DimetricProjection::~DimetricProjection(){}
 
-class IsometricProjection : public IProjection{
-	public:
-		~IsometricProjection();
-		virtual std::pair<int, int> project(int &x, int &y, int &z) const;
-};
-
-#endif
+std::pair<int, int> DimetricProjection::project(int &x, int &y, int &z) const {
+    double alpha = M_PI / 8;
+    double beta = M_PI / 4;
+    int newX = x * cos(alpha) + y * cos(beta);
+    int newY = x * sin(alpha) + y * sin(beta) - z;
+    return {newX, newY};
+}

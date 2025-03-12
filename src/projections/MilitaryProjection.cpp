@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   IsometricProjection.hpp                            :+:      :+:    :+:   */
+/*   MilitaryProjection.cpp                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/10 11:47:04 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/12 12:58:43 by hmunoz-g         ###   ########.fr       */
+/*   Created: 2025/03/10 12:28:14 by hmunoz-g          #+#    #+#             */
+/*   Updated: 2025/03/12 14:24:53 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ISOMETRICPROJECTION_HPP
-# define ISOMETRICPROJECTION_HPP
+#include "../../includes/projections/MilitaryProjection.hpp"
 
-#include "IProjection.hpp"
+MilitaryProjection::~MilitaryProjection(){}
 
-class IsometricProjection : public IProjection{
-	public:
-		~IsometricProjection();
-		virtual std::pair<int, int> project(int &x, int &y, int &z) const;
-};
-
-#endif
+std::pair<int, int> MilitaryProjection::project(int &x, int &y, int &z) const {
+    int newX = x;
+    int newY = y - z;
+    return {newX, newY};
+}

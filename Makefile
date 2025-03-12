@@ -6,7 +6,7 @@
 #    By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/13 13:48:05 by hmunoz-g          #+#    #+#              #
-#    Updated: 2025/03/11 15:06:08 by hmunoz-g         ###   ########.fr        #
+#    Updated: 2025/03/12 14:09:20 by hmunoz-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,13 @@ SRC         := src/main.cpp \
 				src/mapHandler/MapParser.cpp \
 				src/projections/IsometricProjection.cpp \
 				src/projections/OrthographicProjection.cpp \
-				src/projections/PerspectiveProjection.cpp
+				src/projections/PerspectiveProjection.cpp \
+				src/projections/TrimectricProjection.cpp \
+				src/projections/DimetricProjection.cpp \
+				src/projections/CabinetProjection.cpp \
+				src/projections/CavalierProjection.cpp \
+				src/projections/MilitaryProjection.cpp \
+				src/projections/FishEyeProjection.cpp 
 
 OBJS        = $(addprefix $(OBJ_DIR)/, $(SRC:.cpp=.o))
 DEPS        = $(addprefix $(DEP_DIR)/, $(SRC:.cpp=.d))
