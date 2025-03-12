@@ -99,6 +99,18 @@ void MLXHandler::basicHooks(void *param){
 
 	if (mlx_is_key_down(self->_mlx, MLX_KEY_ESCAPE)) 
 		mlx_close_window(self->_mlx);
+
+	if (mlx_is_key_down(self->_mlx, MLX_KEY_UP)){
+		self->clearImage(self->_img);
+		self->_fdf->setZFactor(0.1, 1);
+		self->_fdf->draw();
+	}
+
+	if (mlx_is_key_down(self->_mlx, MLX_KEY_DOWN)){
+		self->clearImage(self->_img);
+		self->_fdf->setZFactor(0.1, -1);
+		self->_fdf->draw();
+	}
 }
 
 void MLXHandler::perspectiveHooks(void *param){

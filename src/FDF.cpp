@@ -29,11 +29,12 @@ FDF::FDF(std::vector<std::string> &map, Projector *projector, MLXHandler &MLXHan
 		_matrixHeight = _matrix.size();
 		_matrixWidth = _matrix[0].size();
 		_spacing = 20;
+        _zFactor = 10.0;
 }
 
 FDF::~FDF(){}
 
-//Getters
+//Getters and setters
 std::vector<std::vector<int>> &FDF::getMatrix(){
 	return (_matrix);
 }
@@ -42,11 +43,22 @@ Projector *FDF::getProjector(){
     return (_projector);
 }
 
+double FDF::getZFactor(){
+    return _zFactor;
+}
+
+void FDF::setZFactor(double increase, int mode){
+    if (mode > 0)
+        _zFactor += increase;
+    if (mode < 0)
+        _zFactor -= increase;
+}
+
 //Methods
 int FDF::getZ(int x, int y) const{
     if (y < 0 || y >= _matrixHeight || x < 0 || x >= _matrixWidth)
         return (0);
-    return (_matrix[y][x]);
+    return (_matrix[y][x] * _zFactor);
 }
 
 void FDF::calculateOffset() {

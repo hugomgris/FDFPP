@@ -30,6 +30,7 @@ class FDF{
 		int _horizontalOffset;
 		int _verticalOffset;
 		int _spacing;
+		double _zFactor;
 
 		Projector *_projector;
 		MLXHandler _MLXHandler;		
@@ -47,9 +48,12 @@ class FDF{
 		void drawLines();
 		void drawLine(std::pair<int, int> start, std::pair<int, int> end, int color);
 
-		//Getters
+		//Getters & setters
 		std::vector<std::vector<int>> &getMatrix();
 		Projector *getProjector();
+		double getZFactor();
+
+		void setZFactor(double increase, int mode);
 
 		//Debug methods
 		void printMatrix() const;
