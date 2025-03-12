@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:41:26 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/11 17:00:04 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/12 11:49:18 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ MLXHandler::MLXHandler(int width, int height, const char *title): _width(width),
 	}
 
 	mlx_image_to_window(this->_mlx, this->_img, 0, 0);
-	//mlx_put_pixel(this->_img, 100, 100, 0x22222200);
 }
 
 MLXHandler::MLXHandler(const MLXHandler &other): _title(other._title){
@@ -56,6 +55,14 @@ MLXHandler &MLXHandler::operator=(const MLXHandler &other){
 }
 
 //Getters
+int &MLXHandler::getHeight(){
+	return (_height);
+}
+
+int &MLXHandler::getWidth(){
+	return (_width);
+}
+
 mlx_image_t *MLXHandler::getImage() const{
 	return (_img);
 }

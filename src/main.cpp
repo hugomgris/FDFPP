@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:13:14 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/11 17:24:44 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/12 12:51:04 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int main(int argc, char **argv){
 		parser->parseMap();
 		//fdf->printMatrix();
 
-		fdf->drawPoints();
+		fdf->draw();
 		mlx_loop(mlx->getMLX());
 
 		delete builder;

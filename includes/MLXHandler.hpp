@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:42:55 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/11 16:59:42 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/12 11:49:31 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ class MLXHandler{
 		MLXHandler &operator=(const MLXHandler &other);
 
 		//Getters
+		int &getHeight();
+		int &getWidth();
 		mlx_image_t *getImage() const;
 		mlx_t *getMLX() const;
 
