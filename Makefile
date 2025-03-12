@@ -6,7 +6,7 @@
 #    By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/13 13:48:05 by hmunoz-g          #+#    #+#              #
-#    Updated: 2025/03/12 14:09:20 by hmunoz-g         ###   ########.fr        #
+#    Updated: 2025/03/12 15:08:19 by hmunoz-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRC         := src/main.cpp \
 				src/MLXHandler.cpp \
 				src/mapHandler/MapBuilder.cpp \
 				src/mapHandler/MapParser.cpp \
+				src/projections/Projector.cpp \
 				src/projections/IsometricProjection.cpp \
 				src/projections/OrthographicProjection.cpp \
 				src/projections/PerspectiveProjection.cpp \

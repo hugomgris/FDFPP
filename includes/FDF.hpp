@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:06:36 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/12 12:38:50 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/12 16:34:55 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@
 # include <sstream>
 # include <climits>
 # include "MLXHandler.hpp"
-# include "projections/OrthographicProjection.hpp"
-# include "projections/IsometricProjection.hpp"
-# include "projections/PerspectiveProjection.hpp"
+# include "projections/Projector.hpp"
+
 
 class FDF{
 	private:
@@ -31,13 +30,13 @@ class FDF{
 		int _horizontalOffset;
 		int _verticalOffset;
 		int _spacing;
-		
-		IProjection *_projection;
-		MLXHandler _MLXHandler;
+
+		Projector *_projector;
+		MLXHandler _MLXHandler;		
 	
 	public:
 		//Constructor and destructor
-		FDF(std::vector<std::string> &map, IProjection *projection, MLXHandler &MLXHandler);
+		FDF(std::vector<std::string> &map, Projector *projector, MLXHandler &MLXHandler);
 		~FDF();
 
 		//Methods
@@ -50,6 +49,7 @@ class FDF{
 
 		//Getters
 		std::vector<std::vector<int>> &getMatrix();
+		Projector *getProjector();
 
 		//Debug methods
 		void printMatrix() const;

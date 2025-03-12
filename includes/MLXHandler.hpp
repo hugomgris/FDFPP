@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:42:55 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/12 11:49:31 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/12 16:50:41 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 
 # include <iostream>
 # include <stdexcept>
-# include  "../libs/mlx42/include/MLX42/MLX42.h"
+# include <cstring> 
+# include "../libs/mlx42/include/MLX42/MLX42.h"
+
+class FDF;
 
 class MLXHandler{
 	private:
@@ -28,6 +31,8 @@ class MLXHandler{
 		mlx_t *_mlx;
 		mlx_image_t *_img;
 
+		FDF *_fdf;
+
 	public:
 		//Constructors and destructor
 		MLXHandler(int width, int height, const char* title);
@@ -37,15 +42,21 @@ class MLXHandler{
 		//Operator overload
 		MLXHandler &operator=(const MLXHandler &other);
 
-		//Getters
+		//Getters & Setters
 		int &getHeight();
 		int &getWidth();
 		mlx_image_t *getImage() const;
 		mlx_t *getMLX() const;
 
+		void setFDF(FDF *fdf);
+
 		//Methods
 		void render() const;
 		void handleEvents();
+		void clearImage(mlx_image_t *img);
+
+		static void basicHooks(void *param);
+		static void perspectiveHooks(void *param);
 };
 
 #endif

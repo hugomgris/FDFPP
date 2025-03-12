@@ -6,15 +6,15 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 13:06:16 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/12 12:47:04 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/12 16:35:29 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/FDF.hpp"
 
 //Constructor and destructor
-FDF::FDF(std::vector<std::string> &map, IProjection *projection, MLXHandler &MLXHandler): 
-	_projection(projection), _MLXHandler(MLXHandler){
+FDF::FDF(std::vector<std::string> &map, Projector *projector, MLXHandler &MLXHandler): 
+	_projector(projector), _MLXHandler(MLXHandler){
 		for (const std::string & line : map){
 			std::istringstream iss(line);
 			std::vector<int> row;
@@ -38,6 +38,10 @@ std::vector<std::vector<int>> &FDF::getMatrix(){
 	return (_matrix);
 }
 
+Projector *FDF::getProjector(){
+    return (_projector);
+}
+
 //Methods
 int FDF::getZ(int x, int y) const{
     if (y < 0 || y >= _matrixHeight || x < 0 || x >= _matrixWidth)
@@ -59,7 +63,7 @@ void FDF::calculateOffset() {
             int drawX = x * _spacing;
             int drawY = y * _spacing;
             
-            std::pair<int, int> projectedPoint = _projection->project(drawX, drawY, z);
+            std::pair<int, int> projectedPoint = _projector->getProjection()->project(drawX, drawY, z);
             
             minX = std::min(minX, projectedPoint.first);
             maxX = std::max(maxX, projectedPoint.first);
@@ -94,7 +98,7 @@ void FDF::drawPoints() {
             int drawY = y * _spacing; // No offset here
             
             // Project first, then apply offset
-            std::pair<int, int> projectedPoint = _projection->project(drawX, drawY, z);
+            std::pair<int, int> projectedPoint = _projector->getProjection()->project(drawX, drawY, z);
             int finalX = projectedPoint.first + _horizontalOffset;
             int finalY = projectedPoint.second + _verticalOffset;
             
@@ -116,7 +120,7 @@ void FDF::drawLines() {
             int drawY = y * _spacing; // No offset here
             
             // Project first, then apply offset
-            std::pair<int, int> projectedPoint = _projection->project(drawX, drawY, z);
+            std::pair<int, int> projectedPoint = _projector->getProjection()->project(drawX, drawY, z);
             std::pair<int, int> finalPoint = {
                 projectedPoint.first + _horizontalOffset,
                 projectedPoint.second + _verticalOffset
@@ -128,7 +132,7 @@ void FDF::drawLines() {
                 int nextX = (x + 1) * _spacing;
                 int nextY = y * _spacing;
                 
-                std::pair<int, int> nextProjected = _projection->project(nextX, nextY, nextZ);
+                std::pair<int, int> nextProjected = _projector->getProjection()->project(nextX, nextY, nextZ);
                 std::pair<int, int> nextFinal = {
                     nextProjected.first + _horizontalOffset,
                     nextProjected.second + _verticalOffset
@@ -143,7 +147,7 @@ void FDF::drawLines() {
                 int nextX = x * _spacing;
                 int nextY = (y + 1) * _spacing;
                 
-                std::pair<int, int> nextProjected = _projection->project(nextX, nextY, nextZ);
+                std::pair<int, int> nextProjected = _projector->getProjection()->project(nextX, nextY, nextZ);
                 std::pair<int, int> nextFinal = {
                     nextProjected.first + _horizontalOffset,
                     nextProjected.second + _verticalOffset
