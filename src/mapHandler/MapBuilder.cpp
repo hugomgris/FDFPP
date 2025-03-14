@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 09:45:41 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/11 15:15:46 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/13 12:17:19 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void MapBuilder::feedDictionary(){
 
 void MapBuilder::buildMapFromString(std::string &str){
 	//Char maps are 12x28
-	if (str.size() > 10) {throw(StringTooLongException());}
+	if (str.size() > 100) {throw(StringTooLongException());}
 
 	std::transform(str.begin(), str.end(), str.begin(), ::toupper);
 
@@ -94,6 +94,12 @@ void MapBuilder::buildMapFromPath(std::string &str){
 //Helpers
 bool MapBuilder::checkInputType(std::string &input){
 	if (input.length() < 8) return false;
+	
+	if (!input.empty()){
+		size_t point = input.find('.');
+		if (point == std::string::npos)
+			return (false);
+	}
 
 	std::string prefix = "maps/";
 	std::string suffix = ".fdf";

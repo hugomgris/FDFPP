@@ -6,13 +6,14 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:13:14 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/12 16:25:52 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/14 09:36:09 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/mapHandler/MapBuilder.hpp"
 #include "../includes/mapHandler/MapParser.hpp"
 #include "../includes/projections/Projector.hpp"
+#include "../includes/VFX.hpp"
 #include "../includes/FDF.hpp"
 
 int main(int argc, char **argv){
@@ -48,6 +49,7 @@ int main(int argc, char **argv){
 	MLXHandler *mlx = NULL;
 	MapParser *parser = NULL;
 	Projector *projector = NULL;
+	VFX *vfx;
 	
 	FDF *fdf = NULL;
 	
@@ -58,8 +60,10 @@ int main(int argc, char **argv){
 
 		projector = new Projector();
 		projector->setType(std::atoi(argv[2]));
+
+		vfx = new VFX();
 		
-		fdf = new FDF(builder->getMap(), projector, *mlx);
+		fdf = new FDF(builder->getMap(), projector, *mlx, vfx);
 		mlx->setFDF(fdf);
 		
 		parser = new MapParser(fdf->getMatrix());
@@ -74,6 +78,7 @@ int main(int argc, char **argv){
 		delete mlx;
 		delete parser;
 		delete projector;
+		delete vfx;
 		delete fdf;
 	} catch (const std::exception &e){
 		if (builder != NULL)
@@ -84,6 +89,8 @@ int main(int argc, char **argv){
 			delete parser;
 		if (projector != NULL)
 			delete projector;
+		if (vfx != NULL)
+			delete vfx;
 		if (fdf != NULL)
 			delete fdf;
 		std::cout << "Exception caught: " << e.what() << std::endl;

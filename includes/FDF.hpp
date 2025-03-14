@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:06:36 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/12 16:34:55 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/14 09:59:04 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <sstream>
 # include <climits>
 # include "MLXHandler.hpp"
+# include "VFX.hpp"
 # include "projections/Projector.hpp"
 
 
@@ -27,30 +28,47 @@ class FDF{
 		int _matrixWidth;
 		int _matrixHeight;
 		
+		int _minHeight;
+		int _maxHeight;
+		
 		int _horizontalOffset;
 		int _verticalOffset;
 		int _spacing;
 		double _zFactor;
 
 		Projector *_projector;
-		MLXHandler _MLXHandler;		
+		MLXHandler _MLXHandler;
+		VFX *_vfx;	
 	
 	public:
 		//Constructor and destructor
-		FDF(std::vector<std::string> &map, Projector *projector, MLXHandler &MLXHandler);
+		FDF(std::vector<std::string> &map, Projector *projector, MLXHandler &MLXHandler, VFX *vfx);
 		~FDF();
 
 		//Methods
 		int getZ(int x, int y) const;
 		void calculateOffset();
+		void calculateInitialScale();
 		void draw();
 		void drawPoints();
 		void drawLines();
-		void drawLine(std::pair<int, int> start, std::pair<int, int> end, int color);
+		void drawLine(std::pair<int, int> start, std::pair<int, int> end, int z1, int z2);
+		void zoom(double factor);
+		void pan(int dx, int dy);
+
+		//Point color calculation
+		void calculateHeightExtremes();
+		float normalizeHeight(int z) const;
+		int getColor(int z) const;
+
+		//Line color calculation
+		int interpolateColor(int color1, int color2, float t);
+		int getColorFromHeight(int z);
 
 		//Getters & setters
 		std::vector<std::vector<int>> &getMatrix();
 		Projector *getProjector();
+		VFX *getVFX();
 		double getZFactor();
 
 		void setZFactor(double increase, int mode);
