@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:28:14 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/12 14:29:01 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:44:27 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,26 @@
 FishEyeProjection::~FishEyeProjection(){}
 
 std::pair<int, int> FishEyeProjection::project(int &x, int &y, int &z) const {
-    double strength = 100.0;
+    // Calculate distance from center
     double r = sqrt(x*x + y*y);
-    if (r < 0.001) return {x, y - z}; // Handle center point specially
-    
-    // Scale factor to make effect more visible
-    double scale = 10.0;
-    
-    // Modified formula with better scaling
-    double factor = scale * (1.0 / strength) * atan(r / (strength / scale));
-    
-    // Apply the distortion
-    int newX = x * (factor / r);
-    int newY = y * (factor / r) - z;
-    
+
+    // Avoid division by zero
+    if (r < 0.001) return {x, y - z};
+
+    // Use a more appropriate strength value (lower = stronger effect)
+    double strength = 200.0;
+
+    // Fish-eye equation: r_new = r * (1 - k*r²)
+    // where k controls the distortion amount
+    double k = 1.0 / (strength * strength);
+    double distortionFactor = 1.0 - k * r * r;
+
+    // Don't let the distortion go negative
+    distortionFactor = std::max(0.2, distortionFactor);
+
+    // Apply distortion to coordinates
+    int newX = x * distortionFactor;
+    int newY = y * distortionFactor - z;
+
     return {newX, newY};
 }

@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:06:36 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/14 09:59:04 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/14 18:01:30 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ class FDF{
 		int _spacing;
 		double _zFactor;
 
+		double _zoomLevel;
+		int _cameraX;
+		int _cameraY;
+
 		Projector *_projector;
 		MLXHandler _MLXHandler;
 		VFX *_vfx;	
@@ -53,8 +57,10 @@ class FDF{
 		void drawPoints();
 		void drawLines();
 		void drawLine(std::pair<int, int> start, std::pair<int, int> end, int z1, int z2);
-		void zoom(double factor);
+		void drawLineSafe(std::pair<int, int> start, std::pair<int, int> end, int color);
+		void zoom(double factor, int mouseX, int mouseY);
 		void pan(int dx, int dy);
+		void centerCamera();
 
 		//Point color calculation
 		void calculateHeightExtremes();

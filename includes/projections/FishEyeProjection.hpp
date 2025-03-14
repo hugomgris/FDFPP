@@ -13,7 +13,9 @@
 #ifndef FISHEYEPROJECTION_HPP
 # define FISHEYEPROJECTION_HPP
 
-#include "IProjection.hpp"
+# include <algorithm>
+
+# include "IProjection.hpp"
 
 class FishEyeProjection : public IProjection{
 	public:

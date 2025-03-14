@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:41:26 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/14 10:02:02 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/14 18:40:09 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void MLXHandler::clearImage(mlx_image_t *img){
     (void)img;
 	for (int y = 0; y < _height; y++) {
         for (int x = 0; x < _width; x++) {
-            mlx_put_pixel(_img, x, y, 0x000000);
+            mlx_put_pixel(_img, x, y, 0x000000FF);
         }
     }
 }
@@ -120,35 +120,35 @@ void MLXHandler::basicHooks(void *param){
 
 	else if (mlx_is_key_down(self->_mlx, MLX_KEY_KP_SUBTRACT)) {
         self->clearImage(self->_img);
-		self->_fdf->zoom(0.9);
+		self->_fdf->zoom(0.9, -1, -1);
 		self->_fdf->draw();
 	}
 
 	else if (mlx_is_key_down(self->_mlx, MLX_KEY_KP_ADD)) {
         self->clearImage(self->_img);
-		self->_fdf->zoom(1.1);
-		self->_fdf->draw();
-	}
-
-	else if (mlx_is_key_down(self->_mlx, MLX_KEY_W)) {
-        self->clearImage(self->_img);
-		self->_fdf->pan(10, 0);
-		self->_fdf->draw();
-	}
-
-	else if (mlx_is_key_down(self->_mlx, MLX_KEY_S)) {
-        self->clearImage(self->_img);
-		self->_fdf->pan(-10, 0);
+		self->_fdf->zoom(1.1, -1, -1);
 		self->_fdf->draw();
 	}
 
 	else if (mlx_is_key_down(self->_mlx, MLX_KEY_A)) {
         self->clearImage(self->_img);
-		self->_fdf->pan(0, 10);
+		self->_fdf->pan(10, 0);
 		self->_fdf->draw();
 	}
 
 	else if (mlx_is_key_down(self->_mlx, MLX_KEY_D)) {
+        self->clearImage(self->_img);
+		self->_fdf->pan(-10, 0);
+		self->_fdf->draw();
+	}
+
+	else if (mlx_is_key_down(self->_mlx, MLX_KEY_W)) {
+        self->clearImage(self->_img);
+		self->_fdf->pan(0, 10);
+		self->_fdf->draw();
+	}
+
+	else if (mlx_is_key_down(self->_mlx, MLX_KEY_S)) {
         self->clearImage(self->_img);
 		self->_fdf->pan(0, -10);
 		self->_fdf->draw();
