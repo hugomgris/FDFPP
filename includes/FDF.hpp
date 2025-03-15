@@ -57,7 +57,7 @@ class FDF{
 		void drawPoints();
 		void drawLines();
 		void drawLine(std::pair<int, int> start, std::pair<int, int> end, int z1, int z2);
-		void drawLineSafe(std::pair<int, int> start, std::pair<int, int> end, int color);
+		void drawLineSafeWithGradient(std::pair<int, int> start, std::pair<int, int> end, int startColor, int endColor);
 		void zoom(double factor, int mouseX, int mouseY);
 		void pan(int dx, int dy);
 		void centerCamera();

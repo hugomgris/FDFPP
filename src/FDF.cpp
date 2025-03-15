@@ -191,7 +191,9 @@ void FDF::drawPoints() {
                     
                     if (pixelX >= 0 && pixelX < _MLXHandler.getWidth() && 
                         pixelY >= 0 && pixelY < _MLXHandler.getHeight()) {
-                        mlx_put_pixel(_MLXHandler.getImage(), pixelX, pixelY, 0xFFFFFFFF);
+                        // Use the z value we already have
+                        int color = getColorFromHeight(z);
+                        mlx_put_pixel(_MLXHandler.getImage(), pixelX, pixelY, color);
                     }
                 }
             }
@@ -228,7 +230,6 @@ void FDF::drawLines() {
             int finalY = jitteredPoint.second;
             std::pair<int, int> finalPoint = {finalX, finalY};
             
-            // Draw horizontal line (if not at last column)
             if (x + 1 < _matrixWidth) {
                 int nextZ = getZ(x + 1, y);
                 int nextX = (x + 1) * _spacing;
@@ -240,6 +241,7 @@ void FDF::drawLines() {
                 int nextCenteredX = nextProjected.first + _horizontalOffset;
                 int nextCenteredY = nextProjected.second + _verticalOffset;
                 
+                // Use consistent variable notation (_cameraX or *cameraX, but be consistent)
                 int nextScreenX = screenCenterX + ((nextCenteredX - screenCenterX) - _cameraX) * _zoomLevel;
                 int nextScreenY = screenCenterY + ((nextCenteredY - screenCenterY) - _cameraY) * _zoomLevel;
                 
@@ -248,11 +250,13 @@ void FDF::drawLines() {
                 
                 std::pair<int, int> nextFinal = {nextJitteredPoint.first, nextJitteredPoint.second};
                 
-                // Only draw line if at least one endpoint is within bounds
+                // Make the bounds checking consistent
                 if ((finalX >= 0 && finalX < _MLXHandler.getWidth() && finalY >= 0 && finalY < _MLXHandler.getHeight()) ||
                     (nextFinal.first >= 0 && nextFinal.first < _MLXHandler.getWidth() && 
                      nextFinal.second >= 0 && nextFinal.second < _MLXHandler.getHeight())) {
-                    drawLineSafe(finalPoint, nextFinal, 0xFFFFFFFF);
+                    int color1 = getColorFromHeight(z);           // Use current z
+                    int color2 = getColorFromHeight(nextZ);       // Use next z
+                    drawLineSafeWithGradient(finalPoint, nextFinal, color1, color2);
                 }
             }
             
@@ -280,7 +284,9 @@ void FDF::drawLines() {
                 if ((finalX >= 0 && finalX < _MLXHandler.getWidth() && finalY >= 0 && finalY < _MLXHandler.getHeight()) ||
                     (nextFinal.first >= 0 && nextFinal.first < _MLXHandler.getWidth() && 
                      nextFinal.second >= 0 && nextFinal.second < _MLXHandler.getHeight())) {
-                    drawLineSafe(finalPoint, nextFinal, 0xFFFFFFFF);
+                    int startColor = getColorFromHeight(z);       // Use current z
+                    int endColor = getColorFromHeight(nextZ);     // Use next z
+                    drawLineSafeWithGradient(finalPoint, nextFinal, startColor, endColor);
                 }
             }
         }
@@ -299,15 +305,69 @@ void FDF::drawLine(std::pair<int, int> start, std::pair<int, int> end, int z1, i
 	double y = start.second;
 
     for (int i = 0; i <= steps; i++) {
-        (void)z1;
-        (void)z2;
-        //float t = static_cast<float>(i) / steps;
-        //int color = interpolateColor(getColorFromHeight(z1), getColorFromHeight(z2), t);
+        float t = static_cast<float>(i) / steps;
+        int color = interpolateColor(getColorFromHeight(z1), getColorFromHeight(z2), t);
         if (x >= 0 && x < _MLXHandler.getWidth() && y >= 0 && y < _MLXHandler.getHeight())
-		    mlx_put_pixel(_MLXHandler.getImage(), x, y, 0xFFFFFFFF);
+		    mlx_put_pixel(_MLXHandler.getImage(), x, y, color);
 		x += xInc;
 		y += yInc;
 	}
+}
+
+void FDF::drawLineSafeWithGradient(std::pair<int, int> start, std::pair<int, int> end, int startColor, int endColor) {
+    int x1 = start.first;
+    int y1 = start.second;
+    int x2 = end.first;
+    int y2 = end.second;
+    
+    int dx = abs(x2 - x1);
+    int dy = abs(y2 - y1);
+    int sx = (x1 < x2) ? 1 : -1;
+    int sy = (y1 < y2) ? 1 : -1;
+    int err = dx - dy;
+    int e2;
+    
+    // Calculate total distance for gradient
+    float totalDistance = sqrt(dx * dx + dy * dy);
+    float currentDistance = 0.0f;
+    
+    // Add this check for equal colors or very small distance
+    bool useGradient = (startColor != endColor) && (totalDistance > 0.001f);
+    
+    int x = x1;
+    int y = y1;
+    
+    while (true) {
+        if (x >= 0 && x < _MLXHandler.getWidth() && y >= 0 && y < _MLXHandler.getHeight()) {
+            int color;
+            if (useGradient) {
+                // Calculate gradient percentage
+                float t = currentDistance / totalDistance;
+                color = interpolateColor(startColor, endColor, t);
+            } else {
+                // Use start color for the entire line
+                color = startColor;
+            }
+            mlx_put_pixel(_MLXHandler.getImage(), x, y, color);
+        }
+        
+        if (x == x2 && y == y2) break;
+        
+        e2 = 2 * err;
+        if (e2 > -dy) {
+            err -= dy;
+            x += sx;
+        }
+        if (e2 < dx) {
+            err += dx;
+            y += sy;
+        }
+        
+        // Update current distance only if we're doing gradient
+        if (useGradient) {
+            currentDistance = sqrt((x - x1) * (x - x1) + (y - y1) * (y - y1));
+        }
+    }
 }
 
 void FDF::zoom(double factor, int mouseX, int mouseY){
@@ -332,29 +392,6 @@ void FDF::zoom(double factor, int mouseX, int mouseY){
 void FDF::pan(int dx, int dy){
     _cameraX += dx / _zoomLevel;
     _cameraY += dy / _zoomLevel;
-}
-
-void FDF::drawLineSafe(std::pair<int, int> start, std::pair<int, int> end, int color) {
-    double dx = end.first - start.first;
-    double dy = end.second - start.second;
-    double steps = std::max(std::abs(dx), std::abs(dy));
-    
-    if (steps < 1) return; // Don't draw extremely short lines
-    
-    double xInc = dx / steps;
-    double yInc = dy / steps;
-    
-    double x = start.first;
-    double y = start.second;
-    
-    for (int i = 0; i <= steps; i++) {
-        // Check if the pixel is within the window bounds
-        if (x >= 0 && x < _MLXHandler.getWidth() && y >= 0 && y < _MLXHandler.getHeight()) {
-            mlx_put_pixel(_MLXHandler.getImage(), x, y, color);
-        }
-        x += xInc;
-        y += yInc;
-    }
 }
 
 void FDF::centerCamera(){
@@ -396,53 +433,92 @@ void FDF::centerCamera(){
 
 //Point color calculations
 void FDF::calculateHeightExtremes(){
-	_minHeight = INT_MAX;
-	_maxHeight = INT_MIN;
+    _minHeight = INT_MAX;
+    _maxHeight = INT_MIN;
 
-	for (const auto &row : _matrix) {
-		for (int z : row) {
-			if (z < _minHeight)
-				_minHeight = z;
-			if (z > _maxHeight)
-				_maxHeight = z;
-		}
-	}
+    for (int y = 0; y < _matrixHeight; y++) {
+        for (int x = 0; x < _matrixWidth; x++) {
+            // Get the actual z value that will be used for rendering
+            int z = getZ(x, y);
+            if (z < _minHeight)
+                _minHeight = z;
+            if (z > _maxHeight)
+                _maxHeight = z;
+        }
+    }
 }
 
 float FDF::normalizeHeight(int z) const{
-    return (static_cast<float>((z - _minHeight) / (_maxHeight - _minHeight)));
+    // Ensure we don't divide by zero
+    if (_maxHeight == _minHeight) {
+        return 0.5f; // Return middle value if all heights are the same
+    }
+    
+    // Normalize z to a value between 0.0 and 1.0
+    return (static_cast<float>(z - _minHeight) / (_maxHeight - _minHeight));
 }
-
-int FDF::getColor(int z) const{
-    float t = normalizeHeight(z);
-
-	int r = (int)(255 * t);
-	int g = (int)(255 * t);
-	int b = (int)(255 * (1 - t));
-
-	return ((r << 16) | (g << 8) | b);
-}
-
 //Line color calculations
 int FDF::interpolateColor(int color1, int color2, float t) {
-	int red = ((color1 >> 16) & 0xFF) + t * (((color2 >> 16) & 0xFF) - ((color1 >> 16) & 0xFF));
-	int green = ((color1 >> 8) & 0xFF) + t * (((color2 >> 8) & 0xFF) - ((color1 >> 8) & 0xFF));
-	int blue = (color1 & 0xFF) + t * ((color2 & 0xFF) - (color1 & 0xFF));
+    // Clamp t to [0.0, 1.0] range
+    t = std::max(0.0f, std::min(1.0f, t));
+    
+    // Extract individual color channels
+    int a1 = (color1 >> 24) & 0xFF;
+    int r1 = (color1 >> 16) & 0xFF;
+    int g1 = (color1 >> 8) & 0xFF;
+    int b1 = color1 & 0xFF;
+    
+    int a2 = (color2 >> 24) & 0xFF;
+    int r2 = (color2 >> 16) & 0xFF;
+    int g2 = (color2 >> 8) & 0xFF;
+    int b2 = color2 & 0xFF;
+    
+    // Linear interpolation between colors
+    int a = static_cast<int>(a1 + t * (a2 - a1));
+    int r = static_cast<int>(r1 + t * (r2 - r1));
+    int g = static_cast<int>(g1 + t * (g2 - g1));
+    int b = static_cast<int>(b1 + t * (b2 - b1));
 
-	return (red << 16) | (green << 8) | blue;
+    a = std::max(0, std::min(255, a));
+    r = std::max(0, std::min(255, r));
+    g = std::max(0, std::min(255, g));
+    b = std::max(0, std::min(255, b));
+    
+    // Combine components into a single color
+    return (a << 24) | (r << 16) | (g << 8) | b;
 }
 
 int FDF::getColorFromHeight(int z){
     float normalized = normalizeHeight(z);
 
-	int lowColor = 0x0000FF;   // Blue
-	int midColor = 0xFFFFFF;  // White
-	int highColor = 0xFF0000; // Red
+    // 10-color gradient (from lowest to highest)
+    uint32_t colors[10] = {
+        0x2B3042ff, // Deep navy blue (lowest points, shadows)
+        0x495867ff, // Slate blue
+        0x748CABff, // Dusty sky blue
+        0xAFC1D6ff, // Pale periwinkle
+        0xD9E4F5ff, // Light cloud blue
+        0xF2E9E4ff, // Soft peach white
+        0xF4C095ff, // Warm sand
+        0xE57A44ff, // Terracotta orange
+        0xB85042ff, // Burnt coral
+        0x873D34ff  // Dark red clay (highest peaks)
+    };
 
-	if (normalized < 0.5)
-		return interpolateColor(lowColor, midColor, normalized * 2);
-	else
-		return interpolateColor(midColor, highColor, (normalized - 0.5) * 2);
+    // Ensure the normalized value is between 0 and 1
+    normalized = std::max(0.0f, std::min(1.0f, normalized));
+
+    // Determine the index in the gradient
+    int segment = (int)(normalized * (sizeof(colors) / sizeof(colors[0]) - 1));
+
+    // Get the two colors to interpolate between
+    int colorA = colors[segment];
+    int colorB = colors[std::min(segment + 1, (int)(sizeof(colors) / sizeof(colors[0]) - 1))];
+
+    // Interpolation factor between the two colors
+    float localT = (normalized * (sizeof(colors) / sizeof(colors[0]) - 1)) - segment;
+
+    return interpolateColor(colorA, colorB, localT);
 }
 
 //Debug methods
