@@ -6,13 +6,13 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 09:32:18 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/14 10:08:43 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/17 17:28:13 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/VFX.hpp"
 
-VFX::VFX(): _jitterIntensity(1.5f){}
+VFX::VFX(): _jitterIntensity(1.0f){}
 
 VFX::~VFX(){}
 

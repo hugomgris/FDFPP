@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:41:26 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/17 14:20:46 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/17 17:53:37 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void MLXHandler::render() const{
 
 void MLXHandler::handleEvents(){
 	mlx_loop_hook(_mlx, basicHooks, this);
+	mlx_scroll_hook(_mlx, &scrollHook, this);
 	mlx_loop_hook(_mlx, perspectiveHooks, this);
 }
 
@@ -156,21 +157,37 @@ void MLXHandler::basicHooks(void *param){
     }
 
     else if (mlx_is_key_down(self->_mlx, MLX_KEY_J)){
-        static bool keyPressed = false;
-        if (mlx_is_key_down(self->_mlx, MLX_KEY_J) && !keyPressed) {
             if (self->_fdf->getVFX()->getJitterIntensity() > 0)
                 self->_fdf->getVFX()->setJitterIntensity(.0f);
             else
-                self->_fdf->getVFX()->setJitterIntensity(1.5f);
-            needsRedraw = true;
-            keyPressed = true;
-        }
-        else if (!mlx_is_key_down(self->_mlx, MLX_KEY_J)) {
-            keyPressed = false;
-        }
+                self->_fdf->getVFX()->setJitterIntensity(1.0f);
+	}
+ 
+    if (needsRedraw || (self->_fdf->getVFX()->getJitterIntensity() > 0 && frameCount % 2 == 0)) {
+        self->clearImage(self->_img);
+        self->_fdf->draw();
     }
 
-    if (needsRedraw || (self->_fdf->getVFX()->getJitterIntensity() > 0 && frameCount % 2 == 0)) {
+    frameCount++;
+}
+
+void MLXHandler::scrollHook(double xdelta, double ydelta, void *param)
+{
+    MLXHandler *self = static_cast<MLXHandler *>(param);
+    static int frameCount = 0;
+    bool needsRedraw = false;
+	(void)xdelta;
+
+    if (ydelta > 0) {
+        self->_fdf->zoom(1.1, -1, -1);
+        needsRedraw = true;
+    }
+    else if (ydelta < 0) {
+        self->_fdf->zoom(0.9, -1, -1);
+        needsRedraw = true;
+    }
+
+    if (needsRedraw) {
         self->clearImage(self->_img);
         self->_fdf->draw();
     }

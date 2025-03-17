@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:42:55 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/17 14:18:57 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/17 17:48:44 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ class MLXHandler{
 		void cleanup();
 
 		static void basicHooks(void *param);
+		static void scrollHook(double xdelta, double ydelta, void *param);
 		static void perspectiveHooks(void *param);
 };
 
