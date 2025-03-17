@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:13:14 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/14 09:36:09 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/17 14:18:45 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int main(int argc, char **argv){
 		mlx->handleEvents();
 		mlx_loop(mlx->getMLX());
 
+		mlx->cleanup();
 		delete builder;
 		delete mlx;
 		delete parser;

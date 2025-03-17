@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:41:26 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/14 18:40:09 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/17 14:20:46 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,9 @@ MLXHandler::MLXHandler(const MLXHandler &other): _title(other._title){
 }
 
 MLXHandler::~MLXHandler(){
-    /*if (this->_mlx) {
-        if (this->_img) {
-            mlx_delete_image(this->_mlx, this->_img);
-            this->_img = nullptr;
-        }
-        mlx_terminate(this->_mlx);
-        this->_mlx = nullptr;
+   /* if (this->_img && this->_mlx) {
+        mlx_delete_image(this->_mlx, this->_img);
+        this->_img = nullptr;
     }*/
 }
 
@@ -99,73 +95,85 @@ void MLXHandler::clearImage(mlx_image_t *img){
     }
 }
 
+void MLXHandler::cleanup() {
+    if (this->_img && this->_mlx) {
+        mlx_delete_image(this->_mlx, this->_img);
+        this->_img = nullptr;
+    }
+    
+    if (this->_mlx) {
+        mlx_terminate(this->_mlx);
+        this->_mlx = nullptr;
+    }
+}
+
 void MLXHandler::basicHooks(void *param){
-	MLXHandler *self = static_cast<MLXHandler *>(param);
-	static int frameCount = 0;
+    MLXHandler *self = static_cast<MLXHandler *>(param);
+    static int frameCount = 0;
+    bool needsRedraw = false;
 
-	if (mlx_is_key_down(self->_mlx, MLX_KEY_ESCAPE)) 
-		mlx_close_window(self->_mlx);
+    if (mlx_is_key_down(self->_mlx, MLX_KEY_ESCAPE)) 
+        mlx_close_window(self->_mlx);
 
-	else if (mlx_is_key_down(self->_mlx, MLX_KEY_UP)){
-		self->clearImage(self->_img);
-		self->_fdf->setZFactor(0.1, 1);
-		self->_fdf->draw();
-	}
+    else if (mlx_is_key_down(self->_mlx, MLX_KEY_UP)){
+        self->_fdf->setZFactor(0.1, 1);
+        needsRedraw = true;
+    }
 
-	else if (mlx_is_key_down(self->_mlx, MLX_KEY_DOWN)){
-		self->clearImage(self->_img);
-		self->_fdf->setZFactor(0.1, -1);
-		self->_fdf->draw();
-	}
+    else if (mlx_is_key_down(self->_mlx, MLX_KEY_DOWN)){
+        self->_fdf->setZFactor(0.1, -1);
+        needsRedraw = true;
+    }
 
-	else if (mlx_is_key_down(self->_mlx, MLX_KEY_KP_SUBTRACT)) {
+    else if (mlx_is_key_down(self->_mlx, MLX_KEY_KP_SUBTRACT)) {
+        self->_fdf->zoom(0.9, -1, -1);
+        needsRedraw = true;
+    }
+
+    else if (mlx_is_key_down(self->_mlx, MLX_KEY_KP_ADD)) {
+        self->_fdf->zoom(1.1, -1, -1);
+        needsRedraw = true;
+    }
+
+    else if (mlx_is_key_down(self->_mlx, MLX_KEY_A)) {
+        self->_fdf->pan(10, 0);
+        needsRedraw = true;
+    }
+
+    else if (mlx_is_key_down(self->_mlx, MLX_KEY_D)) {
+        self->_fdf->pan(-10, 0);
+        needsRedraw = true;
+    }
+
+    else if (mlx_is_key_down(self->_mlx, MLX_KEY_W)) {
+        self->_fdf->pan(0, 10);
+        needsRedraw = true;
+    }
+
+    else if (mlx_is_key_down(self->_mlx, MLX_KEY_S)) {
+        self->_fdf->pan(0, -10);
+        needsRedraw = true;
+    }
+
+    else if (mlx_is_key_down(self->_mlx, MLX_KEY_J)){
+        static bool keyPressed = false;
+        if (mlx_is_key_down(self->_mlx, MLX_KEY_J) && !keyPressed) {
+            if (self->_fdf->getVFX()->getJitterIntensity() > 0)
+                self->_fdf->getVFX()->setJitterIntensity(.0f);
+            else
+                self->_fdf->getVFX()->setJitterIntensity(1.5f);
+            needsRedraw = true;
+            keyPressed = true;
+        }
+        else if (!mlx_is_key_down(self->_mlx, MLX_KEY_J)) {
+            keyPressed = false;
+        }
+    }
+
+    if (needsRedraw || (self->_fdf->getVFX()->getJitterIntensity() > 0 && frameCount % 2 == 0)) {
         self->clearImage(self->_img);
-		self->_fdf->zoom(0.9, -1, -1);
-		self->_fdf->draw();
-	}
-
-	else if (mlx_is_key_down(self->_mlx, MLX_KEY_KP_ADD)) {
-        self->clearImage(self->_img);
-		self->_fdf->zoom(1.1, -1, -1);
-		self->_fdf->draw();
-	}
-
-	else if (mlx_is_key_down(self->_mlx, MLX_KEY_A)) {
-        self->clearImage(self->_img);
-		self->_fdf->pan(10, 0);
-		self->_fdf->draw();
-	}
-
-	else if (mlx_is_key_down(self->_mlx, MLX_KEY_D)) {
-        self->clearImage(self->_img);
-		self->_fdf->pan(-10, 0);
-		self->_fdf->draw();
-	}
-
-	else if (mlx_is_key_down(self->_mlx, MLX_KEY_W)) {
-        self->clearImage(self->_img);
-		self->_fdf->pan(0, 10);
-		self->_fdf->draw();
-	}
-
-	else if (mlx_is_key_down(self->_mlx, MLX_KEY_S)) {
-        self->clearImage(self->_img);
-		self->_fdf->pan(0, -10);
-		self->_fdf->draw();
-	}
-
-	//This needs to be in renderHooks or something like that
-	else if (mlx_is_key_down(self->_mlx, MLX_KEY_J)){
-		if (self->_fdf->getVFX()->getJitterIntensity())
-			self->_fdf->getVFX()->setJitterIntensity(.0f);
-		else
-			self->_fdf->getVFX()->setJitterIntensity(1.5f);
-	}
-
-	if (frameCount % 2 == 0){
-    	self->clearImage(self->_img);
-		self->_fdf->draw();
-	}
+        self->_fdf->draw();
+    }
 
     frameCount++;
 }

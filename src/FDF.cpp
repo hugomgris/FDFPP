@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 13:06:16 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/14 18:35:04 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/17 14:21:33 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ void FDF::calculateInitialScale(){
 void FDF::draw() {
 	drawPoints();
 	drawLines();
-	mlx_image_to_window(_MLXHandler.getMLX(), _MLXHandler.getImage(), 0, 0);
+	//mlx_image_to_window(_MLXHandler.getMLX(), _MLXHandler.getImage(), 0, 0);
 }
 
 void FDF::drawPoints() {

@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:42:55 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/12 16:50:41 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/17 14:18:57 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ class MLXHandler{
 		void render() const;
 		void handleEvents();
 		void clearImage(mlx_image_t *img);
+		void cleanup();
 
 		static void basicHooks(void *param);
 		static void perspectiveHooks(void *param);
