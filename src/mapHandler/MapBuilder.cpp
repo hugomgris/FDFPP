@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 09:45:41 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/13 12:17:19 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/20 18:05:27 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <algorithm>
 
 //Constructor and destructor
-MapBuilder::MapBuilder(std::string &input): _dicPath("dictionary/dictionary.fdf"){
+MapBuilder::MapBuilder(std::string &input): _dicPath("dictionary/dictionary12.fdf"){
 	feedDictionary();
 
 	if (checkInputType(input))
@@ -31,49 +31,55 @@ std::vector<std::string> &MapBuilder::getMap(){
 }
 
 //Methods
-void MapBuilder::feedDictionary(){
-	std::ifstream dicFile(this->_dicPath.c_str());
-	
-	if (dicFile.fail() || dicFile.bad()){
-		throw (BadDicFileException());
-	}
+void MapBuilder::feedDictionary() {
+    std::ifstream dicFile(this->_dicPath.c_str());
+    
+    if (dicFile.fail() || dicFile.bad()) {
+        throw (BadDicFileException());
+    }
 
-	for (int i = 0; i < 36; i++){
-		std::string line;
-		std::vector<std::string> tmp;
-		std::getline(dicFile, line);
-		if (line.at(0) == '~'){
-			std::getline(dicFile,line);
-		}
-		for (int j = 0; j < 12; j++){
-			tmp.push_back(line);
-			std::getline(dicFile, line);
-		}
-		this->_mapDictionary[i] = tmp;
-	}
-	dicFile.close();
+    std::string line;
+    while (std::getline(dicFile, line)) {
+        if (line.size() >= 2 && line[0] == '~') {
+            char c = line[1];
+            
+            std::vector<std::string> charLines;
+            for (int j = 0; j < 12; j++) {
+                if (!std::getline(dicFile, line)) {
+                    throw BadDicFileException();
+                }
+                charLines.push_back(line);
+            }
+            
+            this->_mapDictionary[static_cast<int>(c)] = charLines;
+        }
+    }
+    dicFile.close();
 }
 
 void MapBuilder::buildMapFromString(std::string &str){
-	//Char maps are 12x28
-	if (str.size() > 100) {throw(StringTooLongException());}
+    // Char maps are 12x28
+    if (str.size() > 100) {throw(StringTooLongException());}
 
-	std::transform(str.begin(), str.end(), str.begin(), ::toupper);
+    std::transform(str.begin(), str.end(), str.begin(), ::toupper);
 
-	for (int i = 0; i < 12; i++){
-		std::string row;
-		for (size_t j = 0; j < str.length(); j++){
-			int idx = str.at(j) - 48;
-			std::vector<std::string> tmp;
-			if (idx > 9)
-				tmp = this->_mapDictionary[idx - 7];
-			else
-				tmp = this->_mapDictionary[idx];
-			row += tmp.at(i);
-			row += "  ";
-		}
-		this->_map.push_back(row);
-	}
+    for (int i = 0; i < 12; i++) {
+        std::string row;
+        for (size_t j = 0; j < str.length(); j++) {
+            char c = str.at(j);
+            
+            int charIdx = static_cast<int>(c);
+            
+            if (this->_mapDictionary.find(charIdx) != this->_mapDictionary.end() && 
+                !this->_mapDictionary[charIdx].empty()) {
+                row += this->_mapDictionary[charIdx].at(i);
+            } else {
+                row += "          ";
+            }
+            row += "  ";
+        }
+        this->_map.push_back(row);
+    }
 }
 
 void MapBuilder::buildMapFromPath(std::string &str){
@@ -115,6 +121,14 @@ void MapBuilder::mapPrinter(){
 	for (std::vector<std::string>::iterator it = this->_map.begin(); it != this->_map.end(); it++)
 		std::cout << *it <<  std::endl;
 }
+
+void MapBuilder::dictionaryPrinter(){
+	std::cout << "dictionary size is:" << _mapDictionary.size() << std::endl;
+	/*for (std::map<int, std::vector<std::string> >::iterator it = this->_mapDictionary.begin(); it != this->_mapDictionary.end(); it++) {
+
+	}*/
+}
+
 
 //Exception messages
 const char *MapBuilder::BadDicFileException::what() const throw(){

@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 17:42:29 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/18 17:47:15 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/20 17:15:59 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,11 +124,9 @@ void Camera::calculateOffset() {
 }
 
 void Camera::calculateInitialScale() {
-    // Calculate the initial scale factor based on window size and map dimensions
-    double maxWindowDimension = std::min(_MLXHandler.getWidth(), _MLXHandler.getHeight()) * 0.8; // Use 80% of window
+    double maxWindowDimension = std::min(_MLXHandler.getWidth(), _MLXHandler.getHeight()) * 0.8;
     double mapDimension = std::max(_heightMap.getMatrixWidth(), _heightMap.getMatrixHeight());
     
-    // Calculate initial spacing
     _spacing = maxWindowDimension / mapDimension;
     
     int minZ = INT_MAX;
@@ -136,7 +134,7 @@ void Camera::calculateInitialScale() {
     
     for (int y = 0; y < _heightMap.getMatrixHeight(); y++) {
         for (int x = 0; x < _heightMap.getMatrixWidth(); x++) {
-            int z = _heightMap.getMatrix()[y][x]; // Direct access to raw matrix values
+            int z = _heightMap.getMatrix()[y][x];
             minZ = std::min(minZ, z);
             maxZ = std::max(maxZ, z);
         }
@@ -146,31 +144,27 @@ void Camera::calculateInitialScale() {
     if (zRange > 0) {
         double mapSize = std::max(_heightMap.getMatrixWidth(), _heightMap.getMatrixHeight());
         
-        double scaleFactor;
-        if (mapSize > 200) {
-            // For extremely large maps
-            scaleFactor = 10.0 + (mapSize - 200) * 0.05;
-        } else if (mapSize > 100) {
-            // For large maps
-            scaleFactor = 7.0 + (mapSize - 100) * 0.03;
-        } else {
-            // For smaller maps
-            scaleFactor = 5.0;
+        double zToMapRatio = static_cast<double>(zRange) / mapSize;
+        
+        double baseFactor = 5.0;
+        
+        if (mapSize > 100) {
+            baseFactor += log10(mapSize / 100.0) * 3.0;
         }
         
-        double zFactor = (_spacing * mapSize) / (scaleFactor * zRange);
-        
-        // Apply a logarithmic dampening for very large z-ranges
-        if (zRange > 50) {
-            zFactor *= (1.0 + log10(50.0 / zRange));
+        double adaptiveFactor = 1.0;
+        if (zToMapRatio > 1.0) {
+            adaptiveFactor = 1.0 + log10(zToMapRatio) * 2.0;
         }
         
-        zFactor = std::max(0.5, std::min(zFactor, 20.0));
+        double zFactor = (_spacing * mapSize) / (baseFactor * adaptiveFactor * zRange);
         
-        // We need to update the heightMap's zFactor
-        // Ideally, this would be done via a proper setter
-        // but for the initial setup we'll allow this tight coupling
-        // In a full refactoring, you might want to revisit this design
+        if (mapSize > 500) {
+            zFactor *= 1 + (0.5 * (500.0 / mapSize));
+        }
+        
+        zFactor = std::max(0.1, std::min(zFactor, 10.0));
+        
         _heightMap.setZFactor(zFactor - _heightMap.getZFactor(), 1);
     }
 }

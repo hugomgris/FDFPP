@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 17:43:26 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/18 17:47:40 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/20 17:17:42 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,10 @@ Renderer::~Renderer() {
 void Renderer::draw() {
     drawPoints();
     drawLines();
-    //mlx_image_to_window(_MLXHandler.getMLX(), _MLXHandler.getImage(), 0, 0);
 }
 
 void Renderer::drawPoints() {
-    int pointSize = 2;
+    int pointSize = 0;
     
     for (int y = 0; y < _heightMap.getMatrixHeight(); y++) {
         for (int x = 0; x < _heightMap.getMatrixWidth(); x++) {

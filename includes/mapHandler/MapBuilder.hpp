@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 09:39:17 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/11 15:13:52 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/20 17:47:56 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ class MapBuilder{
 
 		//Debuggers
 		void mapPrinter();
+		void dictionaryPrinter();
 };
 
 #endif
