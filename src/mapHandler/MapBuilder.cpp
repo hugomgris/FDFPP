@@ -14,7 +14,7 @@
 #include <algorithm>
 
 //Constructor and destructor
-MapBuilder::MapBuilder(std::string &input): _dicPath("dictionary/dictionary12.fdf"){
+MapBuilder::MapBuilder(std::string &input): _dicPath("dictionary/dictionary24.fdf"){
 	feedDictionary();
 
 	if (checkInputType(input))
@@ -44,7 +44,7 @@ void MapBuilder::feedDictionary() {
             char c = line[1];
             
             std::vector<std::string> charLines;
-            for (int j = 0; j < 12; j++) {
+            for (int j = 0; j < 24; j++) {
                 if (!std::getline(dicFile, line)) {
                     throw BadDicFileException();
                 }
@@ -63,7 +63,7 @@ void MapBuilder::buildMapFromString(std::string &str){
 
     std::transform(str.begin(), str.end(), str.begin(), ::toupper);
 
-    for (int i = 0; i < 12; i++) {
+    for (int i = 0; i < 24; i++) {
         std::string row;
         for (size_t j = 0; j < str.length(); j++) {
             char c = str.at(j);
