@@ -15,7 +15,7 @@
 #include <iostream>
 
 Camera::Camera(MLXHandler &MLXHandler, Projector *projector, HeightMap &heightMap)
-    : _MLXHandler(MLXHandler), _projector(projector), _heightMap(heightMap) {
+    : _rotationAngle(0.0), _MLXHandler(MLXHandler), _projector(projector), _heightMap(heightMap) {
     _zoomLevel = 1.0;
     _cameraX = 0;
     _cameraY = 0;
@@ -30,6 +30,33 @@ Camera::Camera(MLXHandler &MLXHandler, Projector *projector, HeightMap &heightMa
 
 Camera::~Camera() {}
 
+// Getters and Setters
+
+double Camera::getZoomLevel() const {
+    return _zoomLevel;
+}
+
+int Camera::getCameraX() const {
+    return _cameraX;
+}
+
+int Camera::getCameraY() const {
+    return _cameraY;
+}
+
+int Camera::getHorizontalOffset() const {
+    return _horizontalOffset;
+}
+
+int Camera::getVerticalOffset() const {
+    return _verticalOffset;
+}
+
+double Camera::getSpacing() const {
+    return _spacing;
+}
+
+// Methods
 void Camera::zoom(double factor, int mouseX, int mouseY) {
     double oldZoom = _zoomLevel;
     _zoomLevel *= factor;
@@ -173,44 +200,42 @@ std::pair<int, int> Camera::worldToScreen(int x, int y, int z) const {
     int drawX = x * _spacing;
     int drawY = y * _spacing;
     
-    // Project the point
+    if (_rotationAngle != 0.0) {
+        int centerX = _heightMap.getMatrixWidth() / 2 * _spacing;
+        int centerY = _heightMap.getMatrixHeight() / 2 * _spacing;
+        
+        int tempX = drawX - centerX;
+        int tempY = drawY - centerY;
+        
+        double cos_rot = cos(_rotationAngle);
+        double sin_rot = sin(_rotationAngle);
+        int rotatedX = tempX * cos_rot - tempY * sin_rot + centerX;
+        int rotatedY = tempX * sin_rot + tempY * cos_rot + centerY;
+        
+        drawX = rotatedX;
+        drawY = rotatedY;
+    }
+    
     std::pair<int, int> projectedPoint = _projector->getProjection()->project(drawX, drawY, z);
     
-    // Apply horizontal and vertical offsets first (for centering)
     int centeredX = projectedPoint.first + _horizontalOffset;
     int centeredY = projectedPoint.second + _verticalOffset;
     
-    // Calculate screen center
     int screenCenterX = _MLXHandler.getWidth() / 2;
     int screenCenterY = _MLXHandler.getHeight() / 2;
     
-    // Then apply camera position and zoom relative to screen center
     int screenX = screenCenterX + ((centeredX - screenCenterX) - _cameraX) * _zoomLevel;
     int screenY = screenCenterY + ((centeredY - screenCenterY) - _cameraY) * _zoomLevel;
     
     return {screenX, screenY};
 }
 
-double Camera::getZoomLevel() const {
-    return _zoomLevel;
+void Camera::rotate(double angle) {
+    _rotationAngle += angle;
+    while (_rotationAngle >= 2 * M_PI) _rotationAngle -= 2 * M_PI;
+    while (_rotationAngle < 0) _rotationAngle += 2 * M_PI;
 }
 
-int Camera::getCameraX() const {
-    return _cameraX;
-}
-
-int Camera::getCameraY() const {
-    return _cameraY;
-}
-
-int Camera::getHorizontalOffset() const {
-    return _horizontalOffset;
-}
-
-int Camera::getVerticalOffset() const {
-    return _verticalOffset;
-}
-
-double Camera::getSpacing() const {
-    return _spacing;
+double Camera::getRotationAngle() const {
+    return _rotationAngle;
 }

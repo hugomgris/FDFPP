@@ -24,6 +24,24 @@ FDF::FDF(std::vector<std::string> &map, Projector *projector, MLXHandler &MLXHan
 FDF::~FDF() {
 }
 
+// Getters
+Projector *FDF::getProjector() {
+    return _projector;
+}
+
+VFX *FDF::getVFX() {
+    return _vfx;
+}
+
+double FDF::getZFactor() {
+    return _heightMap.getZFactor();
+}
+
+std::vector<std::vector<int>> &FDF::getMatrix() {
+    return _heightMap.getMatrix();
+}
+
+// Methods
 void FDF::draw() {
     _renderer.draw();
 }
@@ -44,18 +62,6 @@ void FDF::setZFactor(double increase, int mode) {
     _heightMap.setZFactor(increase, mode);
 }
 
-Projector *FDF::getProjector() {
-    return _projector;
-}
-
-VFX *FDF::getVFX() {
-    return _vfx;
-}
-
-double FDF::getZFactor() {
-    return _heightMap.getZFactor();
-}
-
-std::vector<std::vector<int>> &FDF::getMatrix() {
-    return _heightMap.getMatrix();
+void FDF::rotate(double angle) {
+    _camera.rotate(angle);
 }

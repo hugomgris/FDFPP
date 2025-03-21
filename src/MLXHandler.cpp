@@ -162,6 +162,16 @@ void MLXHandler::basicHooks(void *param){
             else
                 self->_fdf->getVFX()->setJitterIntensity(1.0f);
 	}
+
+    else if (mlx_is_key_down(self->_mlx, MLX_KEY_Q)) {
+        self->_fdf->rotate(-0.05);
+        needsRedraw = true;
+    }
+
+    else if (mlx_is_key_down(self->_mlx, MLX_KEY_E)) {
+        self->_fdf->rotate(0.05);
+        needsRedraw = true;
+    }
  
     if (needsRedraw || (self->_fdf->getVFX()->getJitterIntensity() > 0 && frameCount % 2 == 0)) {
         self->clearImage(self->_img);
