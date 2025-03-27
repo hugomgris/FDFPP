@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:41:26 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/17 17:53:37 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/27 16:08:18 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,31 @@ MLXHandler::MLXHandler(int width, int height, const char *title): _width(width),
 	
 	if (!this->_mlx->window) {
 	throw std::runtime_error("MLX initialized but window is NULL! Check OpenGL support.");
-}
+    }
 	
+    _uiWidth = _width / 5;
+    _uiHeight = _height;
+
+
 	this->_img = mlx_new_image(this->_mlx, this->_width, this->_height);
 	if (!this->_img){
 		throw std::runtime_error("Failed to create image buffer");
 	}
 
-	mlx_image_to_window(this->_mlx, this->_img, 0, 0);
+    this->_ui = mlx_new_image(this->_mlx, this->_uiWidth, this->_uiHeight);
+	if (!this->_ui){
+		throw std::runtime_error("Failed to create UI buffer");
+	}
+
+    mlx_image_to_window(this->_mlx, this->_img, 0, 0);
+    mlx_image_to_window(this->_mlx, this->_ui, 0, 0);
 }
 
 MLXHandler::MLXHandler(const MLXHandler &other): _title(other._title){
 	*this = other;
 }
 
-MLXHandler::~MLXHandler(){
-   /* if (this->_img && this->_mlx) {
-        mlx_delete_image(this->_mlx, this->_img);
-        this->_img = nullptr;
-    }*/
-}
+MLXHandler::~MLXHandler() {}
 
 //Operator overload
 MLXHandler &MLXHandler::operator=(const MLXHandler &other){
@@ -64,8 +69,20 @@ int &MLXHandler::getWidth(){
 	return (_width);
 }
 
+int &MLXHandler::getUIWidth(){
+	return (_uiWidth);
+}
+
+int &MLXHandler::getUIHeight(){
+	return (_uiHeight);
+}
+
 mlx_image_t *MLXHandler::getImage() const{
 	return (_img);
+}
+
+mlx_image_t *MLXHandler::getUI() const{
+    return (_ui);
 }
 
 mlx_t *MLXHandler::getMLX() const{

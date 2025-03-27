@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:13:14 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/27 12:24:06 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/27 16:45:37 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "../includes/projections/Projector.hpp"
 #include "../includes/VFX.hpp"
 #include "../includes/FDF.hpp"
+#include "../includes/UI.hpp"
 
 int main(int argc, char **argv){
 	if (argc == 2){
@@ -50,6 +51,7 @@ int main(int argc, char **argv){
 	MapParser *parser = NULL;
 	Projector *projector = NULL;
 	VFX *vfx;
+	UI *ui;
 	
 	FDF *fdf = NULL;
 	
@@ -63,8 +65,13 @@ int main(int argc, char **argv){
 
 		vfx = new VFX();
 		
+		
 		fdf = new FDF(builder->getMap(), projector, *mlx, vfx);
 		mlx->setFDF(fdf);
+
+		ui = new UI(mlx->getMLX(), mlx->getUI(), mlx->getUIWidth(), mlx->getUIHeight());
+		ui->fillBackground();
+		ui->outputControls();
 		
 		parser = new MapParser(fdf->getMatrix());
 		parser->parseMap();
@@ -80,10 +87,13 @@ int main(int argc, char **argv){
 		delete parser;
 		delete projector;
 		delete vfx;
+		delete ui;
 		delete fdf;
 	} catch (const std::exception &e){
 		if (builder != NULL)
 			delete builder;
+		if (ui != NULL)
+			delete ui;
 		if (mlx != NULL)
 			delete mlx;
 		if (parser != NULL)
