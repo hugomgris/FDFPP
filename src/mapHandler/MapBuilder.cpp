@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 09:45:41 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/20 18:05:27 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/27 12:23:57 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,9 +124,6 @@ void MapBuilder::mapPrinter(){
 
 void MapBuilder::dictionaryPrinter(){
 	std::cout << "dictionary size is:" << _mapDictionary.size() << std::endl;
-	/*for (std::map<int, std::vector<std::string> >::iterator it = this->_mapDictionary.begin(); it != this->_mapDictionary.end(); it++) {
-
-	}*/
 }
 
 

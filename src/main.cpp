@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:13:14 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/20 17:51:16 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/27 12:24:06 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int main(int argc, char **argv){
 		exit (1);
 }
 	
-	if (argc < 3){
+	if (argc != 3){
 		std::cerr << "Bad arguments!!(Try ./FDF++ <string/map> <projection type: 1-9>, or run with 'help' argument for further instructions)" << std::endl;
 		exit (1);
 	}

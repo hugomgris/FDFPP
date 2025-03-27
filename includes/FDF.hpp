@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:06:36 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/18 17:47:00 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/27 12:20:40 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ public:
     VFX *getVFX();
     double getZFactor();
     std::vector<std::vector<int>> &getMatrix();
+
+    void rotate(double angle);
 };
 
 #endif
