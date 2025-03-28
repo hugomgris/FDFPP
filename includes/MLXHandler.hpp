@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:42:55 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/27 15:37:49 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/28 15:54:42 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ class MLXHandler{
 		mlx_t *_mlx;
 		mlx_image_t *_img;
 		mlx_image_t *_ui;
+		mlx_image_t *_text1;
+		mlx_image_t *_text2;
 
 		FDF *_fdf;
 
@@ -52,6 +54,8 @@ class MLXHandler{
 		int &getUIWidth();
 		mlx_image_t *getImage() const;
 		mlx_image_t *getUI() const;
+		mlx_image_t *getText1() const;
+		mlx_image_t *getText2() const;
 		mlx_t *getMLX() const;
 
 		void setFDF(FDF *fdf);

@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:41:26 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/27 16:08:18 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/28 15:54:38 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,14 @@ mlx_image_t *MLXHandler::getImage() const{
 
 mlx_image_t *MLXHandler::getUI() const{
     return (_ui);
+}
+
+mlx_image_t *MLXHandler::getText1() const{
+    return (_text1);
+}
+
+mlx_image_t *MLXHandler::getText2() const{
+    return (_text2);
 }
 
 mlx_t *MLXHandler::getMLX() const{

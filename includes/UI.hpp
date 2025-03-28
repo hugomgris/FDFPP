@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:19:41 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/27 16:45:37 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/28 16:03:37 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,14 @@
 
 class UI {
 	private:
-		mlx_t *_mlx;
-		mlx_image_t *_ui;
+		MLXHandler *_MLXHandler;
+		std::vector<mlx_image_t*> _textImages;
 		int _uiWidth;
 		int _uiHeight;
-		std::vector<mlx_image_t*> _textImages;
 
 	public:
 		// Constructor and destructor
-		UI(mlx_t *mlx, mlx_image_t *ui, int uiWidth, int uiHeight);
+		UI(MLXHandler *mlxhandler, int uiWidth, int uiHeight);
 		~UI();
 
 		// Getters
@@ -35,6 +34,7 @@ class UI {
 
 		// Methods
 		void fillBackground();
+		void RedText(mlx_image_t *img);
 		void outputControls();
 		void clearTexts();
 };

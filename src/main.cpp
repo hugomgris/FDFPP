@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:13:14 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/27 16:45:37 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/28 15:15:06 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int main(int argc, char **argv){
 		fdf = new FDF(builder->getMap(), projector, *mlx, vfx);
 		mlx->setFDF(fdf);
 
-		ui = new UI(mlx->getMLX(), mlx->getUI(), mlx->getUIWidth(), mlx->getUIHeight());
+		ui = new UI(mlx, mlx->getUIWidth(), mlx->getUIHeight());
 		ui->fillBackground();
 		ui->outputControls();
 		
