@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/Renderer.hpp"
+#include "../includes/FDF.hpp"
 #include <cmath>
 
 Renderer::Renderer(MLXHandler &MLXHandler, HeightMap &heightMap, Camera &camera, 

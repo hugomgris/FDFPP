@@ -13,7 +13,62 @@
 #include "../includes/UI.hpp"
 
 // Constructor and destructor
-UI::UI(MLXHandler *mlxhandler, int uiWidth, int uiHeight): _MLXHandler(mlxhandler), _uiWidth(uiWidth), _uiHeight(uiHeight) {}
+UI::UI(MLXHandler *mlxhandler, int uiWidth, int uiHeight)
+	: _MLXHandler(mlxhandler), _uiWidth(uiWidth), _uiHeight(uiHeight) {
+	
+	_controlsOffset = _uiHeight * 0.05;  // 5% from the top
+	_interlineSpacing = 30;  // Small, consistent spacing between lines
+
+	_controls = {
+		"----CONTROLS----",
+		"MOVEMENT:  , , , ",
+		"ROTATION:  , ",
+		"ZOOM:  ,  /        ",
+		"HEIGHT:   ,",
+		" ",
+		" ",
+		"----EFFECTS (ON/OFF)----",
+		"JITTERING: ",
+		"AUTOROTATE: ",
+		" ",
+		" ",
+		"----PROJECTIONS----",
+		"ISOMETRIC: ",
+		"OPP: ",
+		"ORTHOGRAPHIC: ",
+		"TRIMETRIC: ",
+		"DIMETRIC: ",
+		"CABINET: ",
+		"CAVALIER: ",
+		"MILITARY: ",
+		"FISHEYE: "
+	};
+
+	_controls2 = {
+		" ",
+		"          W A S D",
+		"          Q E",
+		"      - +   Scroll",
+		"        UP DOWN",
+		" ",
+		" ",
+		" ",
+		"           J",
+		"            R",
+		" ",
+		" ",
+		" ",
+		"           1",
+		"     2",
+		"              3",
+		"           4",
+		"          5",
+		"         6",
+		"          7",
+		"          8",
+		"         9"
+	};
+}
 
 UI::~UI() {}
 
@@ -44,36 +99,14 @@ void UI::outputControls() {
 	// Clear any existing texts first
 	clearTexts();
 
-	// Define control texts
-	std::vector<std::string> placeholders = {
-		"----CONTROLS----",
-		"MOVEMENT:  , , , ",
-		"ROTATION:  , ",
-		"ZOOM:  ,          ",
-		"HEIGHT: "
-	};
-
-	std::vector<std::string> placeholders2 = {
-		" ",
-		"          W A S D",
-		"          Q E",
-		"      - + / Scroll",
-		"        arrows UP, DOWN"
-	};
-
-
-	// Calculate vertical positioning
-	int topOffset = _uiHeight * 0.05;  // 5% from the top
-	int interlineSpacing = 30;  // Small, consistent spacing between lines
-
 	// Add texts
-	for (size_t i = 0; i < placeholders.size(); ++i) {
+	for (size_t i = 0; i < _controls.size(); ++i) {
 		mlx_image_t *textImage1 = _MLXHandler->getText1();
-		textImage1 = mlx_put_string(_MLXHandler->getMLX(), placeholders[i].c_str(), 20, topOffset + (interlineSpacing * i));
+		textImage1 = mlx_put_string(_MLXHandler->getMLX(), _controls[i].c_str(), 20, _controlsOffset + (_interlineSpacing * i));
 
 		mlx_image_t *textImage2 = _MLXHandler->getText2();
-		textImage2 = mlx_put_string(_MLXHandler->getMLX(), placeholders2[i].c_str(), 20, topOffset + (interlineSpacing * i));
-		RedText(textImage2);
+		textImage2 = mlx_put_string(_MLXHandler->getMLX(), _controls2[i].c_str(), 20, _controlsOffset + (_interlineSpacing * i));
+		ColorText(textImage2, 160, 235, 255);
 		
 		if (textImage1) {
 			_textImages.push_back(textImage1);
@@ -85,27 +118,32 @@ void UI::outputControls() {
 	}
 }
 
-void UI::RedText(mlx_image_t *img) {
+/*
+Pastel pink: (203, 192, 255)
+Pastel blue: (230, 216, 173)
+Pastel green: (170, 240, 170)
+Pastel purple: (230, 190, 230)
+Pastel orange: (160, 200, 255)
+*/
+
+void UI::ColorText(mlx_image_t *img, uint8_t targetR, uint8_t targetG, uint8_t targetB) {
     if (!img) return;
+
     uint32_t *pixels = reinterpret_cast<uint32_t*>(img->pixels);
-    
+	
     for (uint32_t y = 0; y < img->height; y++) {
         for (uint32_t x = 0; x < img->width; x++) {
             uint32_t idx = y * img->width + x;
             uint32_t pixel = pixels[idx];
-            uint8_t a = (pixel >> 24) & 0xFF; // Alpha
-            
+            uint8_t a = (pixel >> 24) & 0xFF;
+           
             if (a > 0) {
-                // Extract original brightness (R=G=B in grayscale)
-                uint8_t brightness = pixel & 0xFF;
-                
-                // Create red pixel
-                uint32_t new_pixel = 
-                    (a << 24)     |   // Alpha
-                    (brightness << 0) | // Red channel
-                    (0x00 << 8)   |   // Green channel
-                    (0x00);            // Blue channel
-                
+                uint32_t new_pixel =
+                    (a << 24) |       // Alpha
+                    (targetR << 16) | // Red
+                    (targetG << 8) |  // Green
+                    (targetB);        // Blue
+               
                 pixels[idx] = new_pixel;
             }
         }

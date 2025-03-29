@@ -14,7 +14,7 @@
 #include "../includes/FDF.hpp"
 
 //Constructors and destructor
-MLXHandler::MLXHandler(int width, int height, const char *title): _width(width), _height(height), _title(title){
+MLXHandler::MLXHandler(int width, int height, const char *title): _width(width), _height(height), _title(title), _autoRotate(false){
 	this->_mlx = mlx_init(this->_width, this->_height, this->_title, true);
 
 	if (!this->_mlx)
@@ -97,6 +97,15 @@ mlx_t *MLXHandler::getMLX() const{
 	return (_mlx);
 }
 
+FDF *MLXHandler::getFDF() const{
+    return (_fdf);
+}
+
+bool &MLXHandler::getAutoRotate(){
+    return (_autoRotate);
+}
+void MLXHandler::setAutoRotate(bool autoRotate) { _autoRotate = autoRotate; }
+
 void MLXHandler::setFDF(FDF *fdf){
 	_fdf = fdf;
 }
@@ -133,72 +142,93 @@ void MLXHandler::cleanup() {
     }
 }
 
-void MLXHandler::basicHooks(void *param){
+void MLXHandler::basicHooks(void *param) {
     MLXHandler *self = static_cast<MLXHandler *>(param);
     static int frameCount = 0;
+    static bool jKeyWasPressed = false;
+    static bool rKeyWasPressed = false; 
     bool needsRedraw = false;
 
-    if (mlx_is_key_down(self->_mlx, MLX_KEY_ESCAPE)) 
+    // Check for window close
+    if (mlx_is_key_down(self->_mlx, MLX_KEY_ESCAPE))
         mlx_close_window(self->_mlx);
 
-    else if (mlx_is_key_down(self->_mlx, MLX_KEY_UP)){
+    // Z-factor adjustment
+    if (mlx_is_key_down(self->_mlx, MLX_KEY_UP)) {
         self->_fdf->setZFactor(0.1, 1);
         needsRedraw = true;
     }
-
-    else if (mlx_is_key_down(self->_mlx, MLX_KEY_DOWN)){
+    if (mlx_is_key_down(self->_mlx, MLX_KEY_DOWN)) {
         self->_fdf->setZFactor(0.1, -1);
         needsRedraw = true;
     }
 
-    else if (mlx_is_key_down(self->_mlx, MLX_KEY_KP_SUBTRACT)) {
+    // Zoom controls
+    if (mlx_is_key_down(self->_mlx, MLX_KEY_KP_SUBTRACT)) {
         self->_fdf->zoom(0.9, -1, -1);
         needsRedraw = true;
     }
-
-    else if (mlx_is_key_down(self->_mlx, MLX_KEY_KP_ADD)) {
+    if (mlx_is_key_down(self->_mlx, MLX_KEY_KP_ADD)) {
         self->_fdf->zoom(1.1, -1, -1);
         needsRedraw = true;
     }
 
-    else if (mlx_is_key_down(self->_mlx, MLX_KEY_A)) {
+    // Panning controls
+    if (mlx_is_key_down(self->_mlx, MLX_KEY_A)) {
         self->_fdf->pan(10, 0);
         needsRedraw = true;
     }
-
-    else if (mlx_is_key_down(self->_mlx, MLX_KEY_D)) {
+    if (mlx_is_key_down(self->_mlx, MLX_KEY_D)) {
         self->_fdf->pan(-10, 0);
         needsRedraw = true;
     }
-
-    else if (mlx_is_key_down(self->_mlx, MLX_KEY_W)) {
+    if (mlx_is_key_down(self->_mlx, MLX_KEY_W)) {
         self->_fdf->pan(0, 10);
         needsRedraw = true;
     }
-
-    else if (mlx_is_key_down(self->_mlx, MLX_KEY_S)) {
+    if (mlx_is_key_down(self->_mlx, MLX_KEY_S)) {
         self->_fdf->pan(0, -10);
         needsRedraw = true;
     }
 
-    else if (mlx_is_key_down(self->_mlx, MLX_KEY_J)){
-            if (self->_fdf->getVFX()->getJitterIntensity() > 0)
-                self->_fdf->getVFX()->setJitterIntensity(.0f);
-            else
-                self->_fdf->getVFX()->setJitterIntensity(1.0f);
-	}
-
-    else if (mlx_is_key_down(self->_mlx, MLX_KEY_Q)) {
+    // Rotation controls
+    if (mlx_is_key_down(self->_mlx, MLX_KEY_Q)) {
         self->_fdf->rotate(-0.05);
         needsRedraw = true;
     }
-
-    else if (mlx_is_key_down(self->_mlx, MLX_KEY_E)) {
+    if (mlx_is_key_down(self->_mlx, MLX_KEY_E)) {
         self->_fdf->rotate(0.05);
         needsRedraw = true;
     }
- 
-    if (needsRedraw || (self->_fdf->getVFX()->getJitterIntensity() > 0 && frameCount % 2 == 0)) {
+
+    // Jitter toggle - improved to prevent multiple toggles
+    bool jKeyIsPressed = mlx_is_key_down(self->_mlx, MLX_KEY_J);
+    if (jKeyIsPressed && !jKeyWasPressed) {
+        // Only toggle when key is first pressed
+        if (self->_fdf->getVFX()->getJitterIntensity() > 0)
+            self->_fdf->getVFX()->setJitterIntensity(.0f);
+        else
+            self->_fdf->getVFX()->setJitterIntensity(1.0f);
+        
+        needsRedraw = true;
+    }
+    jKeyWasPressed = jKeyIsPressed;  // Update previous state
+
+    bool rKeyIsPressed = mlx_is_key_down(self->_mlx, MLX_KEY_R);
+    if (rKeyIsPressed && !rKeyWasPressed) {
+        // Toggle auto-rotate
+        self->setAutoRotate(!self->getAutoRotate());
+        needsRedraw = true;
+    }
+    rKeyWasPressed = rKeyIsPressed;
+
+    if (self->getAutoRotate()) {
+        self->_fdf->rotate(0.02f);
+        needsRedraw = true;
+    }
+
+     // Redraw if needed or if jittering is active
+     if (needsRedraw || (self->_fdf->getVFX()->getJitterIntensity() > 0 && frameCount % 2 == 0)) {
         self->clearImage(self->_img);
         self->_fdf->draw();
     }

@@ -12,7 +12,7 @@
 
 #include "../includes/VFX.hpp"
 
-VFX::VFX(): _jitterIntensity(1.0f){}
+VFX::VFX(): _jitterIntensity(0.0f){}
 
 VFX::~VFX(){}
 

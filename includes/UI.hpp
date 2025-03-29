@@ -24,6 +24,13 @@ class UI {
 		int _uiWidth;
 		int _uiHeight;
 
+		int _interlineSpacing;
+
+		std::vector<std::string> _controls;
+		std::vector<std::string> _controls2;
+		int _controlsOffset;
+		
+
 	public:
 		// Constructor and destructor
 		UI(MLXHandler *mlxhandler, int uiWidth, int uiHeight);
@@ -34,7 +41,7 @@ class UI {
 
 		// Methods
 		void fillBackground();
-		void RedText(mlx_image_t *img);
+		void ColorText(mlx_image_t *img, uint8_t targetR, uint8_t targetG, uint8_t targetB);
 		void outputControls();
 		void clearTexts();
 };

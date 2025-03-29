@@ -37,6 +37,7 @@ class MLXHandler{
 		mlx_image_t *_text2;
 
 		FDF *_fdf;
+		bool _autoRotate;
 
 	public:
 		//Constructors and destructor
@@ -57,7 +58,10 @@ class MLXHandler{
 		mlx_image_t *getText1() const;
 		mlx_image_t *getText2() const;
 		mlx_t *getMLX() const;
+		FDF *getFDF() const;
+		bool &getAutoRotate();
 
+		void setAutoRotate(bool autoRotate);
 		void setFDF(FDF *fdf);
 
 		//Methods
