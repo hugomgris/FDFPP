@@ -12,7 +12,10 @@
 
 #include "../includes/VFX.hpp"
 
-VFX::VFX(): _jitterIntensity(0.0f){}
+VFX::VFX(): _jitterIntensity(1.0f){
+    _jitterStatus = false;
+    _waveStatus = false;
+}
 
 VFX::~VFX(){}
 
@@ -21,8 +24,24 @@ float &VFX::getJitterIntensity(){
     return (_jitterIntensity);
 }
 
+bool &VFX::getJitterStatus() {
+    return (_jitterStatus);
+}
+
+bool &VFX::getWaveStatus() {
+    return (_waveStatus);
+}
+
 void VFX::setJitterIntensity(float intensity){
     _jitterIntensity = intensity;
+}
+
+void VFX::setJitterStatus(bool status) {
+    _jitterStatus = status;
+}
+
+void VFX::setWaveStatus(bool status) {
+    _waveStatus = status;
 }
 
 //Effects
@@ -34,4 +53,10 @@ std::pair<int, int> VFX::jitter(std::pair <int, int> point){
     int jitterY = point.second + distribution(generator);
 
     return {jitterX, jitterY};
+}
+
+std::pair<int, int> VFX::waveDistortion(std::pair<int, int> point, float time) {
+    int waveX = point.first + sin(time + point.second * 0.1) * 5;
+    int waveY = point.second + cos(time + point.first * 0.1) * 5;
+    return {waveX, waveY};
 }

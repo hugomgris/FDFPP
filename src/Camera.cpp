@@ -22,6 +22,14 @@ Camera::Camera(MLXHandler &MLXHandler, Projector *projector, HeightMap &heightMa
     _horizontalOffset = 0;
     _verticalOffset = 0;
     _spacing = 1.0;
+
+    _OriginalZoomLevel = _zoomLevel;
+    _OriginalCameraX = _cameraX;
+    _OriginalCameraY = _cameraY;
+    _OriginalHorizontalOffset = _horizontalOffset;
+    _OriginalVerticalOffset = _verticalOffset;
+    _OriginalSpacing = _spacing;
+    _OriginalRotationAngle = _rotationAngle;
     
     calculateInitialScale();
     calculateOffset();
@@ -238,4 +246,14 @@ void Camera::rotate(double angle) {
 
 double Camera::getRotationAngle() const {
     return _rotationAngle;
+}
+
+void Camera::reset(){
+    _zoomLevel = _OriginalZoomLevel;
+    _cameraX = _OriginalCameraX;
+    _cameraY = _OriginalCameraY;
+    _horizontalOffset = _OriginalHorizontalOffset;
+    _verticalOffset = _OriginalVerticalOffset;
+    _spacing = _OriginalSpacing;
+    _rotationAngle = _OriginalRotationAngle;
 }

@@ -30,6 +30,15 @@ class Camera {
         Projector *_projector;
         HeightMap &_heightMap;
 
+        // Original levels for reset
+        double _OriginalZoomLevel;
+        int _OriginalCameraX;
+        int _OriginalCameraY;
+        int _OriginalHorizontalOffset;
+        int _OriginalVerticalOffset;
+        double _OriginalSpacing;
+        double _OriginalRotationAngle;
+
     public:
         Camera(MLXHandler &MLXHandler, Projector *projector, HeightMap &heightMap);
         ~Camera();
@@ -53,6 +62,9 @@ class Camera {
         
         // Coordinate transformation
         std::pair<int, int> worldToScreen(int x, int y, int z) const;
+
+        // RESET
+        void reset();
 };
 
 #endif

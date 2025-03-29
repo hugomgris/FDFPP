@@ -20,6 +20,8 @@
 class VFX{
 	private:
 		float _jitterIntensity;
+		bool _jitterStatus;
+		bool _waveStatus;
 
 	public:
 		VFX();
@@ -27,10 +29,17 @@ class VFX{
 
 	//Getters & seters
 	float &getJitterIntensity();
+	bool &getJitterStatus();
+	bool &getWaveStatus();
+
 	void setJitterIntensity(float intensity);
+	void setJitterStatus(bool status);
+	void setWaveStatus(bool status);
+	
 
 	//Effects
 	std::pair<int, int> jitter(std::pair<int, int> point);
+	std::pair<int, int> waveDistortion(std::pair<int, int> point, float time);
 };
 
 #endif

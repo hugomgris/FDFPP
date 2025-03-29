@@ -145,8 +145,9 @@ void MLXHandler::cleanup() {
 void MLXHandler::basicHooks(void *param) {
     MLXHandler *self = static_cast<MLXHandler *>(param);
     static int frameCount = 0;
-    static bool jKeyWasPressed = false;
-    static bool rKeyWasPressed = false; 
+    static bool oneKeyWasPressed = false; 
+    static bool twoKeyWasPressed = false;
+    static bool threeKeyWasPressed = false;
     bool needsRedraw = false;
 
     // Check for window close
@@ -201,33 +202,42 @@ void MLXHandler::basicHooks(void *param) {
         needsRedraw = true;
     }
 
-    // Jitter toggle - improved to prevent multiple toggles
-    bool jKeyIsPressed = mlx_is_key_down(self->_mlx, MLX_KEY_J);
-    if (jKeyIsPressed && !jKeyWasPressed) {
-        // Only toggle when key is first pressed
-        if (self->_fdf->getVFX()->getJitterIntensity() > 0)
-            self->_fdf->getVFX()->setJitterIntensity(.0f);
-        else
-            self->_fdf->getVFX()->setJitterIntensity(1.0f);
-        
+    // RESET
+    if (mlx_is_key_down(self->_mlx, MLX_KEY_R)) {
+        self->_fdf->getCamera()->reset();
+        self->_fdf->getCamera()->calculateInitialScale();
+        self->_fdf->getCamera()->calculateOffset();
+        self->_fdf->getCamera()->centerCamera();
         needsRedraw = true;
     }
-    jKeyWasPressed = jKeyIsPressed;  // Update previous state
 
-    bool rKeyIsPressed = mlx_is_key_down(self->_mlx, MLX_KEY_R);
-    if (rKeyIsPressed && !rKeyWasPressed) {
-        // Toggle auto-rotate
+    // Effects
+    bool oneKeyIsPressed = mlx_is_key_down(self->_mlx, MLX_KEY_1);
+    if (oneKeyIsPressed && !oneKeyWasPressed) {
         self->setAutoRotate(!self->getAutoRotate());
         needsRedraw = true;
     }
-    rKeyWasPressed = rKeyIsPressed;
+    oneKeyWasPressed = oneKeyIsPressed;
+
+    bool twoKeyIsPressed = mlx_is_key_down(self->_mlx, MLX_KEY_2);
+    if (twoKeyIsPressed && !twoKeyWasPressed) {
+        self->_fdf->getVFX()->setJitterStatus(!self->_fdf->getVFX()->getJitterStatus());
+        needsRedraw = true;
+    }
+    twoKeyWasPressed = twoKeyIsPressed;
+
+    bool threeKeyIsPressed = mlx_is_key_down(self->_mlx, MLX_KEY_3);
+    if (threeKeyIsPressed && !threeKeyWasPressed) {
+        self->_fdf->getVFX()->setWaveStatus(!self->_fdf->getVFX()->getWaveStatus());
+        needsRedraw = true;
+    }
+    threeKeyWasPressed = threeKeyIsPressed;
 
     if (self->getAutoRotate()) {
         self->_fdf->rotate(0.02f);
         needsRedraw = true;
     }
 
-     // Redraw if needed or if jittering is active
      if (needsRedraw || (self->_fdf->getVFX()->getJitterIntensity() > 0 && frameCount % 2 == 0)) {
         self->clearImage(self->_img);
         self->_fdf->draw();
@@ -263,57 +273,73 @@ void MLXHandler::scrollHook(double xdelta, double ydelta, void *param)
 void MLXHandler::perspectiveHooks(void *param){
 	MLXHandler *self = static_cast<MLXHandler *>(param);
 
-	if (mlx_is_key_down(self->_mlx, MLX_KEY_1)){
+	if (mlx_is_key_down(self->_mlx, MLX_KEY_F1)){
 		self->clearImage(self->_img);
 		self->_fdf->getProjector()->setType(1);
+        self->_fdf->centerCamera();
 		self->_fdf->draw();
 	}
 
-	if (mlx_is_key_down(self->_mlx, MLX_KEY_2)){
+	if (mlx_is_key_down(self->_mlx, MLX_KEY_F2)){
 		self->clearImage(self->_img);
 		self->_fdf->getProjector()->setType(2);
+        self->_fdf->centerCamera();
 		self->_fdf->draw();
 	}
 
-	if (mlx_is_key_down(self->_mlx, MLX_KEY_3)){
+	if (mlx_is_key_down(self->_mlx, MLX_KEY_F3)){
 		self->clearImage(self->_img);
 		self->_fdf->getProjector()->setType(3);
+        self->_fdf->centerCamera();
 		self->_fdf->draw();
 	}
 
-	if (mlx_is_key_down(self->_mlx, MLX_KEY_4)){
+	if (mlx_is_key_down(self->_mlx, MLX_KEY_F4)){
 		self->clearImage(self->_img);
 		self->_fdf->getProjector()->setType(4);
+        self->_fdf->centerCamera();
 		self->_fdf->draw();
 	}
 
-	if (mlx_is_key_down(self->_mlx, MLX_KEY_5)){
+	if (mlx_is_key_down(self->_mlx, MLX_KEY_F5)){
 		self->clearImage(self->_img);
 		self->_fdf->getProjector()->setType(5);
+        self->_fdf->centerCamera();
 		self->_fdf->draw();
 	}
 
-	if (mlx_is_key_down(self->_mlx, MLX_KEY_6)){
+	if (mlx_is_key_down(self->_mlx, MLX_KEY_F6)){
 		self->clearImage(self->_img);
 		self->_fdf->getProjector()->setType(6);
+        self->_fdf->centerCamera();
 		self->_fdf->draw();
 	}
 
-	if (mlx_is_key_down(self->_mlx, MLX_KEY_7)){
+	if (mlx_is_key_down(self->_mlx, MLX_KEY_F7)){
 		self->clearImage(self->_img);
 		self->_fdf->getProjector()->setType(7);
+        self->_fdf->centerCamera();
 		self->_fdf->draw();
 	}
 
-	if (mlx_is_key_down(self->_mlx, MLX_KEY_8)){
+	if (mlx_is_key_down(self->_mlx, MLX_KEY_F8)){
 		self->clearImage(self->_img);
 		self->_fdf->getProjector()->setType(8);
+        self->_fdf->centerCamera();
 		self->_fdf->draw();
 	}
 
-	if (mlx_is_key_down(self->_mlx, MLX_KEY_9)){
+	if (mlx_is_key_down(self->_mlx, MLX_KEY_F9)){
 		self->clearImage(self->_img);
 		self->_fdf->getProjector()->setType(9);
+        self->_fdf->centerCamera();
+		self->_fdf->draw();
+	}
+
+    if (mlx_is_key_down(self->_mlx, MLX_KEY_F10)){
+		self->clearImage(self->_img);
+		self->_fdf->getProjector()->setType(10);
+        self->_fdf->centerCamera();
 		self->_fdf->draw();
 	}
 }

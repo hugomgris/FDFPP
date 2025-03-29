@@ -45,6 +45,7 @@ public:
     
     // Getters
     Projector *getProjector();
+    Camera *getCamera();
     VFX *getVFX();
     double getZFactor();
     std::vector<std::vector<int>> &getMatrix();

@@ -29,6 +29,10 @@ Projector *FDF::getProjector() {
     return _projector;
 }
 
+Camera *FDF::getCamera() {
+    return &_camera;
+}
+
 VFX *FDF::getVFX() {
     return _vfx;
 }

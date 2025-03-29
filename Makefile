@@ -62,7 +62,8 @@ SRC         := src/main.cpp \
 				src/projections/CabinetProjection.cpp \
 				src/projections/CavalierProjection.cpp \
 				src/projections/MilitaryProjection.cpp \
-				src/projections/FishEyeProjection.cpp 
+				src/projections/RecursiveDepth.cpp \
+				src/projections/HyperbolicProjection.cpp \
 
 OBJS        = $(addprefix $(OBJ_DIR)/, $(SRC:.cpp=.o))
 DEPS        = $(addprefix $(DEP_DIR)/, $(SRC:.cpp=.d))

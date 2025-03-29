@@ -17,13 +17,14 @@
 Renderer::Renderer(MLXHandler &MLXHandler, HeightMap &heightMap, Camera &camera, 
                    ColorManager &colorManager, VFX *vfx)
     : _MLXHandler(MLXHandler), _heightMap(heightMap), _camera(camera), 
-      _colorManager(colorManager), _vfx(vfx) {
+      _colorManager(colorManager), _vfx(vfx), _time(0.0f) {
 }
 
 Renderer::~Renderer() {
 }
 
 void Renderer::draw() {
+    _time += 0.1f;
     drawPoints();
     drawLines();
 }
@@ -38,11 +39,22 @@ void Renderer::drawPoints() {
             // Get screen coordinates
             std::pair<int, int> screenPoint = _camera.worldToScreen(x, y, z);
             
-            // Apply jittering effect
-            auto jitteredPoint = _vfx->jitter(screenPoint);
-            
-            int finalX = jitteredPoint.first;
-            int finalY = jitteredPoint.second;
+            // Apply effects 
+            int finalX;
+            int finalY;
+            if (_vfx->getJitterStatus()) {
+                auto jitteredPoint = _vfx->jitter(screenPoint);
+                
+                finalX = jitteredPoint.first;
+                finalY = jitteredPoint.second;
+            }
+
+            if (_vfx->getWaveStatus()) {
+                auto wavedPoint = _vfx->waveDistortion(screenPoint,  _time);
+
+                finalX = wavedPoint.first;
+                finalY = wavedPoint.second;
+            }
             
             // Draw point only if it's within bounds
             for (int i = -pointSize / 2; i <= pointSize / 2; i++) {
@@ -70,23 +82,31 @@ void Renderer::drawLines() {
             // Get screen coordinates
             std::pair<int, int> screenPoint = _camera.worldToScreen(x, y, z);
             
-            // Apply jittering effect
-            auto jitteredPoint = _vfx->jitter(screenPoint);
-            
-            std::pair<int, int> finalPoint = {jitteredPoint.first, jitteredPoint.second};
-            
+            // Apply effects
+            if (_vfx->getJitterStatus()) {
+                screenPoint = _vfx->jitter(screenPoint);
+            }
+            if (_vfx->getWaveStatus()) {
+                screenPoint = _vfx->waveDistortion(screenPoint, _time);
+            }
+
+            std::pair<int, int> finalPoint = screenPoint;
+
             // Draw horizontal line (if not at last column)
             if (x + 1 < _heightMap.getMatrixWidth()) {
                 int nextZ = _heightMap.getZ(x + 1, y);
-                
-                // Get screen coordinates for next point
                 std::pair<int, int> nextScreenPoint = _camera.worldToScreen(x + 1, y, nextZ);
                 
-                // Apply jittering
-                auto nextJitteredPoint = _vfx->jitter(nextScreenPoint);
-                
-                std::pair<int, int> nextFinal = {nextJitteredPoint.first, nextJitteredPoint.second};
-                
+                // Apply effects
+                if (_vfx->getJitterStatus()) {
+                    nextScreenPoint = _vfx->jitter(nextScreenPoint);
+                }
+                if (_vfx->getWaveStatus()) {
+                    nextScreenPoint = _vfx->waveDistortion(nextScreenPoint, _time);
+                }
+
+                std::pair<int, int> nextFinal = nextScreenPoint;
+
                 // Only draw line if at least one endpoint is within bounds
                 if ((finalPoint.first >= 0 && finalPoint.first < _MLXHandler.getWidth() && 
                      finalPoint.second >= 0 && finalPoint.second < _MLXHandler.getHeight()) ||
@@ -97,19 +117,22 @@ void Renderer::drawLines() {
                     drawLineSafeWithGradient(finalPoint, nextFinal, color1, color2);
                 }
             }
-            
+
             // Draw vertical line (if not at last row)
             if (y + 1 < _heightMap.getMatrixHeight()) {
                 int nextZ = _heightMap.getZ(x, y + 1);
-                
-                // Get screen coordinates for next point
                 std::pair<int, int> nextScreenPoint = _camera.worldToScreen(x, y + 1, nextZ);
                 
-                // Apply jittering
-                auto nextJitteredPoint = _vfx->jitter(nextScreenPoint);
-                
-                std::pair<int, int> nextFinal = {nextJitteredPoint.first, nextJitteredPoint.second};
-                
+                // Apply effects
+                if (_vfx->getJitterStatus()) {
+                    nextScreenPoint = _vfx->jitter(nextScreenPoint);
+                }
+                if (_vfx->getWaveStatus()) {
+                    nextScreenPoint = _vfx->waveDistortion(nextScreenPoint, _time);
+                }
+
+                std::pair<int, int> nextFinal = nextScreenPoint;
+
                 // Only draw line if at least one endpoint is within bounds
                 if ((finalPoint.first >= 0 && finalPoint.first < _MLXHandler.getWidth() && 
                      finalPoint.second >= 0 && finalPoint.second < _MLXHandler.getHeight()) ||
@@ -123,6 +146,7 @@ void Renderer::drawLines() {
         }
     }
 }
+
 
 void Renderer::drawLineSafeWithGradient(std::pair<int, int> start, std::pair<int, int> end, 
                                         int startColor, int endColor) {

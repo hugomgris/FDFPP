@@ -23,7 +23,8 @@
 # include "../../includes/projections/CabinetProjection.hpp"
 # include "../../includes/projections/CavalierProjection.hpp"
 # include "../../includes/projections/MilitaryProjection.hpp"
-# include "../../includes/projections/FishEyeProjection.hpp"
+# include "../../includes/projections/RecursiveDepth.hpp"
+# include "../../includes/projections/HyperbolicProjection.hpp"
 
 class Projector{
 	private:
@@ -37,7 +38,8 @@ class Projector{
 		DimetricProjection *_dimetric;
 		CavalierProjection *_cavalier;
 		MilitaryProjection *_military;
-		FishEyeProjection *_fisheye;
+		RecursiveDepth *_fisheye;
+		HyperbolicProjection *_hyperbolic;
 
 	public:
 		class BadProjectionException : public std::exception{

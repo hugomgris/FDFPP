@@ -26,6 +26,7 @@ private:
     Camera &_camera;
     ColorManager &_colorManager;
     VFX *_vfx;
+    float _time;
     
 public:
     Renderer(MLXHandler &MLXHandler, HeightMap &heightMap, Camera &camera, 
