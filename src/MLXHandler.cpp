@@ -148,6 +148,9 @@ void MLXHandler::basicHooks(void *param) {
     static bool oneKeyWasPressed = false; 
     static bool twoKeyWasPressed = false;
     static bool threeKeyWasPressed = false;
+    static bool fourKeyWasPressed = false;
+    static bool fiveKeyWasPressed = false;
+    static bool sixKeyWasPressed = false;
     bool needsRedraw = false;
 
     // Check for window close
@@ -208,6 +211,12 @@ void MLXHandler::basicHooks(void *param) {
         self->_fdf->getCamera()->calculateInitialScale();
         self->_fdf->getCamera()->calculateOffset();
         self->_fdf->getCamera()->centerCamera();
+        self->setAutoRotate(false);
+        self->_fdf->getVFX()->setJitterStatus(false);
+        self->_fdf->getVFX()->setWaveStatus(false);
+        self->_fdf->getVFX()->setGlitchStatus(false);
+        self->_fdf->getVFX()->setPulseWaveStatus(false);
+        self->_fdf->getVFX()->setVortexDistortionStatus(false);
         needsRedraw = true;
     }
 
@@ -232,6 +241,27 @@ void MLXHandler::basicHooks(void *param) {
         needsRedraw = true;
     }
     threeKeyWasPressed = threeKeyIsPressed;
+
+    bool fourKeyIsPressed = mlx_is_key_down(self->_mlx, MLX_KEY_4);
+    if (fourKeyIsPressed && !fourKeyWasPressed) {
+        self->_fdf->getVFX()->setGlitchStatus(!self->_fdf->getVFX()->getGlitchStatus());
+        needsRedraw = true;
+    }
+    fourKeyWasPressed = fourKeyIsPressed;
+
+    bool fiveKeyIsPressed = mlx_is_key_down(self->_mlx, MLX_KEY_5);
+    if (fiveKeyIsPressed && !fiveKeyWasPressed) {
+        self->_fdf->getVFX()->setPulseWaveStatus(!self->_fdf->getVFX()->getPulseWaveStatus());
+        needsRedraw = true;
+    }
+    fiveKeyWasPressed = fiveKeyIsPressed;
+
+    bool sixKeyIsPressed = mlx_is_key_down(self->_mlx, MLX_KEY_6);
+    if (sixKeyIsPressed && !sixKeyWasPressed) {
+        self->_fdf->getVFX()->setVortexDistortionStatus(!self->_fdf->getVFX()->getVortexDistortionStatus());
+        needsRedraw = true;
+    }
+    sixKeyWasPressed = sixKeyIsPressed;
 
     if (self->getAutoRotate()) {
         self->_fdf->rotate(0.02f);

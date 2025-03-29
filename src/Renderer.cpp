@@ -55,6 +55,27 @@ void Renderer::drawPoints() {
                 finalX = wavedPoint.first;
                 finalY = wavedPoint.second;
             }
+
+            if (_vfx->getGlitchStatus()) {
+                auto glitchedPoint = _vfx->glitch(screenPoint);
+                
+                finalX = glitchedPoint.first;
+                finalY = glitchedPoint.second;
+            }
+
+            if (_vfx->getPulseWaveStatus()) {
+                auto PulseWavedPoint = _vfx->pulseWave(screenPoint, _time, _MLXHandler.getWidth() / 2, _MLXHandler.getHeight() / 2);
+                
+                finalX = PulseWavedPoint.first;
+                finalY = PulseWavedPoint.second;
+            }
+
+            if (_vfx->getVortexDistortionStatus()) {
+                auto VortexDistortionedPoint = _vfx->vortexDistortion(screenPoint, _time, _MLXHandler.getWidth() / 2, _MLXHandler.getHeight() / 2);
+                
+                finalX = VortexDistortionedPoint.first;
+                finalY = VortexDistortionedPoint.second;
+            }
             
             // Draw point only if it's within bounds
             for (int i = -pointSize / 2; i <= pointSize / 2; i++) {
@@ -89,6 +110,15 @@ void Renderer::drawLines() {
             if (_vfx->getWaveStatus()) {
                 screenPoint = _vfx->waveDistortion(screenPoint, _time);
             }
+            if (_vfx->getGlitchStatus()) {
+                screenPoint = _vfx->glitch(screenPoint);
+            }
+            if (_vfx->getPulseWaveStatus()) {
+                screenPoint = _vfx->pulseWave(screenPoint, _time, _MLXHandler.getWidth() / 2, _MLXHandler.getHeight() / 2);
+            }
+            if (_vfx->getVortexDistortionStatus()) {
+                screenPoint = _vfx->vortexDistortion(screenPoint, _time, _MLXHandler.getWidth() / 2, _MLXHandler.getHeight() / 2);
+            }
 
             std::pair<int, int> finalPoint = screenPoint;
 
@@ -103,6 +133,15 @@ void Renderer::drawLines() {
                 }
                 if (_vfx->getWaveStatus()) {
                     nextScreenPoint = _vfx->waveDistortion(nextScreenPoint, _time);
+                }
+                if (_vfx->getGlitchStatus()) {
+                    screenPoint = _vfx->glitch(screenPoint);
+                }
+                if (_vfx->getPulseWaveStatus()) {
+                    screenPoint = _vfx->pulseWave(screenPoint, _time, _MLXHandler.getWidth() / 2, _MLXHandler.getHeight() / 2);
+                }
+                if (_vfx->getVortexDistortionStatus()) {
+                    screenPoint = _vfx->vortexDistortion(screenPoint, _time, _MLXHandler.getWidth() / 2, _MLXHandler.getHeight() / 2);
                 }
 
                 std::pair<int, int> nextFinal = nextScreenPoint;
@@ -129,6 +168,15 @@ void Renderer::drawLines() {
                 }
                 if (_vfx->getWaveStatus()) {
                     nextScreenPoint = _vfx->waveDistortion(nextScreenPoint, _time);
+                }
+                if (_vfx->getGlitchStatus()) {
+                    screenPoint = _vfx->glitch(screenPoint);
+                }
+                if (_vfx->getPulseWaveStatus()) {
+                    screenPoint = _vfx->pulseWave(screenPoint, _time, _MLXHandler.getWidth() / 2, _MLXHandler.getHeight() / 2);
+                }
+                if (_vfx->getVortexDistortionStatus()) {
+                    screenPoint = _vfx->vortexDistortion(screenPoint, _time, _MLXHandler.getWidth() / 2, _MLXHandler.getHeight() / 2);
                 }
 
                 std::pair<int, int> nextFinal = nextScreenPoint;
