@@ -66,21 +66,25 @@ double Camera::getSpacing() const {
 
 // Methods
 void Camera::zoom(double factor, int mouseX, int mouseY) {
-    double oldZoom = _zoomLevel;
-    _zoomLevel *= factor;
-    
-    // Enforce min/max zoom levels to prevent issues
-    _zoomLevel = std::max(0.1, std::min(_zoomLevel, 10.0));
-    
     // If mouse position is provided, zoom toward that point
     if (mouseX >= 0 && mouseY >= 0) {
-        // Calculate the offset from screen center
-        int centerX = _MLXHandler.getWidth() / 2;
-        int centerY = _MLXHandler.getHeight() / 2;
+        // Calculate the world coordinates under the mouse before zooming
+        double worldX = (mouseX - _MLXHandler.getWidth() / 2) / _zoomLevel + _cameraX;
+        double worldY = (mouseY - _MLXHandler.getHeight() / 2) / _zoomLevel + _cameraY;
         
-        // Adjust camera position based on mouse position and zoom change
-        _cameraX += (mouseX - centerX) * (1.0 / oldZoom - 1.0 / _zoomLevel);
-        _cameraY += (mouseY - centerY) * (1.0 / oldZoom - 1.0 / _zoomLevel);
+        // Apply zoom
+        _zoomLevel *= factor;
+        
+        // Enforce min/max zoom levels
+        _zoomLevel = std::max(0.1, std::min(_zoomLevel, 10.0));
+        
+        // Calculate new camera position to keep mouse over same world position
+        _cameraX = worldX - (mouseX - _MLXHandler.getWidth() / 2) / _zoomLevel;
+        _cameraY = worldY - (mouseY - _MLXHandler.getHeight() / 2) / _zoomLevel;
+    } else {
+        // Just zoom without adjusting camera position
+        _zoomLevel *= factor;
+        _zoomLevel = std::max(0.1, std::min(_zoomLevel, 10.0));
     }
 }
 

@@ -281,22 +281,25 @@ void MLXHandler::scrollHook(double xdelta, double ydelta, void *param)
     MLXHandler *self = static_cast<MLXHandler *>(param);
     static int frameCount = 0;
     bool needsRedraw = false;
-	(void)xdelta;
-
+    (void)xdelta;
+    
+    // Get current mouse position
+    int32_t mouseX, mouseY;
+    mlx_get_mouse_pos(self->_mlx, &mouseX, &mouseY);
+    
     if (ydelta > 0) {
-        self->_fdf->zoom(1.1, -1, -1);
+        self->_fdf->zoom(1.1, mouseX, mouseY);
         needsRedraw = true;
     }
     else if (ydelta < 0) {
-        self->_fdf->zoom(0.9, -1, -1);
+        self->_fdf->zoom(0.9, mouseX, mouseY);
         needsRedraw = true;
     }
-
+    
     if (needsRedraw) {
         self->clearImage(self->_img);
         self->_fdf->draw();
     }
-
     frameCount++;
 }
 

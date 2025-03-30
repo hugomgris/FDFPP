@@ -39,7 +39,7 @@ UI::UI(MLXHandler *mlxhandler, int uiWidth, int uiHeight)
 		" ",
 		"----PROJECTIONS----",
 		"ISOMETRIC: ",
-		"OPP: ",
+		"ONEPOINT: ",
 		"ORTHOGRAPHIC: ",
 		"TRIMETRIC: ",
 		"DIMETRIC: ",
@@ -70,7 +70,7 @@ UI::UI(MLXHandler *mlxhandler, int uiWidth, int uiHeight)
 		" ",
 		" ",
 		"           F1",
-		"     F2",
+		"          F2",
 		"              F3",
 		"           F4",
 		"          F5",
@@ -89,14 +89,13 @@ mlx_image_t *UI::getUI() const{ return (_MLXHandler->getUI()); }
 
 // Methods
 void UI::fillBackground() {
-	// Calculate 25% opacity (64 out of 255)
-	uint8_t greyValue = 128;  // Mid-grey value
-	uint8_t opacity = 64;     // 25% opacity
+	uint8_t greyValue = 128; 
+	uint8_t opacity = 120;
 
 	// Iterate through each pixel of the image
 	for (int y = 0; y < _uiHeight; ++y) {
 		for (int x = 0; x < _uiWidth; ++x) {
-			// Set pixel color to grey with 25% opacity
+
 			mlx_put_pixel(_MLXHandler->getUI(), x, y, 
 				(greyValue << 24) |  // Red component 
 				(greyValue << 16) |  // Green component
