@@ -66,6 +66,14 @@ void FDF::setZFactor(double increase, int mode) {
     _heightMap.setZFactor(increase, mode);
 }
 
-void FDF::rotate(double angle) {
-    _camera.rotate(angle);
+void FDF::rotateX(double angle) {
+    _camera.rotateX(angle);
+}
+
+void FDF::rotateY(double angle) {
+    _camera.rotateY(angle);
+}
+
+void FDF::rotateZ(double angle) {
+    _camera.rotateZ(angle);
 }

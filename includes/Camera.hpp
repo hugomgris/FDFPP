@@ -25,7 +25,9 @@ class Camera {
         int _horizontalOffset;
         int _verticalOffset;
         double _spacing;
-        double _rotationAngle;
+        double _rotationAngleX;
+        double _rotationAngleY;
+        double _rotationAngleZ;
         MLXHandler &_MLXHandler;
         Projector *_projector;
         HeightMap &_heightMap;
@@ -37,7 +39,9 @@ class Camera {
         int _OriginalHorizontalOffset;
         int _OriginalVerticalOffset;
         double _OriginalSpacing;
-        double _OriginalRotationAngle;
+        double _OriginalRotationAngleX;
+        double _OriginalRotationAngleY;
+        double _OriginalRotationAngleZ;
 
     public:
         Camera(MLXHandler &MLXHandler, Projector *projector, HeightMap &heightMap);
@@ -49,7 +53,9 @@ class Camera {
         void centerCamera();
         void calculateOffset();
         void calculateInitialScale();
-        void rotate(double angle);
+        void rotateX(double angle);
+        void rotateY(double angle);
+        void rotateZ(double angle);
         
         // Getters
         double getZoomLevel() const;
@@ -58,7 +64,9 @@ class Camera {
         int getHorizontalOffset() const;
         int getVerticalOffset() const;
         double getSpacing() const;
-        double getRotationAngle() const;
+        double getRotationAngleX() const;
+        double getRotationAngleY() const;
+        double getRotationAngleZ() const;
         
         // Coordinate transformation
         std::pair<int, int> worldToScreen(int x, int y, int z) const;

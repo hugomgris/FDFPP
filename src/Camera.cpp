@@ -15,7 +15,7 @@
 #include <iostream>
 
 Camera::Camera(MLXHandler &MLXHandler, Projector *projector, HeightMap &heightMap)
-    : _rotationAngle(0.0), _MLXHandler(MLXHandler), _projector(projector), _heightMap(heightMap) {
+    : _rotationAngleX(0.0), _rotationAngleY(0.0), _rotationAngleZ(0.0), _MLXHandler(MLXHandler), _projector(projector), _heightMap(heightMap) {
     _zoomLevel = 1.0;
     _cameraX = 0;
     _cameraY = 0;
@@ -29,7 +29,9 @@ Camera::Camera(MLXHandler &MLXHandler, Projector *projector, HeightMap &heightMa
     _OriginalHorizontalOffset = _horizontalOffset;
     _OriginalVerticalOffset = _verticalOffset;
     _OriginalSpacing = _spacing;
-    _OriginalRotationAngle = _rotationAngle;
+    _OriginalRotationAngleX = _rotationAngleX;
+    _OriginalRotationAngleY = _rotationAngleY;
+    _OriginalRotationAngleZ = _rotationAngleZ;
     
     calculateInitialScale();
     calculateOffset();
@@ -209,27 +211,69 @@ void Camera::calculateInitialScale() {
 }
 
 std::pair<int, int> Camera::worldToScreen(int x, int y, int z) const {
+    // Scale coordinates based on spacing
     int drawX = x * _spacing;
     int drawY = y * _spacing;
+    int drawZ = z;  // You might want to scale Z too based on your requirements
     
-    if (_rotationAngle != 0.0) {
-        int centerX = _heightMap.getMatrixWidth() / 2 * _spacing;
-        int centerY = _heightMap.getMatrixHeight() / 2 * _spacing;
+    // Calculate the center point of the heightmap for rotation
+    int centerX = _heightMap.getMatrixWidth() / 2 * _spacing;
+    int centerY = _heightMap.getMatrixHeight() / 2 * _spacing;
+    int centerZ = 0;  // Adjust if needed
+    
+    // Translate to origin for rotation
+    drawX -= centerX;
+    drawY -= centerY;
+    drawZ -= centerZ;
+    
+    // Store original values for rotation calculations
+    int originalX = drawX;
+    int originalY = drawY;
+    int originalZ = drawZ;
+    
+    // Apply rotations using temporary variables to avoid precision loss
+    // The trig functions return doubles, so we'll cast back to int at the end
+    
+    // Apply X-axis rotation (pitch)
+    if (_rotationAngleX != 0.0) {
+        double cosX = cos(_rotationAngleX);
+        double sinX = sin(_rotationAngleX);
+        drawY = round(originalY * cosX - originalZ * sinX);
+        drawZ = round(originalY * sinX + originalZ * cosX);
         
-        int tempX = drawX - centerX;
-        int tempY = drawY - centerY;
-        
-        double cos_rot = cos(_rotationAngle);
-        double sin_rot = sin(_rotationAngle);
-        int rotatedX = tempX * cos_rot - tempY * sin_rot + centerX;
-        int rotatedY = tempX * sin_rot + tempY * cos_rot + centerY;
-        
-        drawX = rotatedX;
-        drawY = rotatedY;
+        // Update for next rotation
+        originalY = drawY;
+        originalZ = drawZ;
     }
     
-    std::pair<int, int> projectedPoint = _projector->getProjection()->project(drawX, drawY, z);
+    // Apply Y-axis rotation (yaw)
+    if (_rotationAngleY != 0.0) {
+        double cosY = cos(_rotationAngleY);
+        double sinY = sin(_rotationAngleY);
+        drawX = round(originalX * cosY + originalZ * sinY);
+        drawZ = round(-originalX * sinY + originalZ * cosY);
+        
+        // Update for next rotation
+        originalX = drawX;
+    }
     
+    // Apply Z-axis rotation (roll)
+    if (_rotationAngleZ != 0.0) {
+        double cosZ = cos(_rotationAngleZ);
+        double sinZ = sin(_rotationAngleZ);
+        drawX = round(originalX * cosZ - originalY * sinZ);
+        drawY = round(originalX * sinZ + originalY * cosZ);
+    }
+    
+    // Translate back from origin
+    drawX += centerX;
+    drawY += centerY;
+    drawZ += centerZ;
+    
+    // Project the 3D coordinates to 2D using the selected projection
+    std::pair<int, int> projectedPoint = _projector->getProjection()->project(drawX, drawY, drawZ);
+    
+    // Apply offset, camera position, and zoom
     int centeredX = projectedPoint.first + _horizontalOffset;
     int centeredY = projectedPoint.second + _verticalOffset;
     
@@ -242,14 +286,34 @@ std::pair<int, int> Camera::worldToScreen(int x, int y, int z) const {
     return {screenX, screenY};
 }
 
-void Camera::rotate(double angle) {
-    _rotationAngle += angle;
-    while (_rotationAngle >= 2 * M_PI) _rotationAngle -= 2 * M_PI;
-    while (_rotationAngle < 0) _rotationAngle += 2 * M_PI;
+void Camera::rotateX(double angle) {
+    _rotationAngleX += angle;
+    while (_rotationAngleX >= 2 * M_PI) _rotationAngleX -= 2 * M_PI;
+    while (_rotationAngleX < 0) _rotationAngleX += 2 * M_PI;
 }
 
-double Camera::getRotationAngle() const {
-    return _rotationAngle;
+void Camera::rotateY(double angle) {
+    _rotationAngleY += angle;
+    while (_rotationAngleY >= 2 * M_PI) _rotationAngleY -= 2 * M_PI;
+    while (_rotationAngleY < 0) _rotationAngleY += 2 * M_PI;
+}
+
+void Camera::rotateZ(double angle) {
+    _rotationAngleZ += angle;
+    while (_rotationAngleZ >= 2 * M_PI) _rotationAngleZ -= 2 * M_PI;
+    while (_rotationAngleZ < 0) _rotationAngleZ += 2 * M_PI;
+}
+
+double Camera::getRotationAngleX() const {
+    return _rotationAngleX;
+}
+
+double Camera::getRotationAngleY() const {
+    return _rotationAngleY;
+}
+
+double Camera::getRotationAngleZ() const {
+    return _rotationAngleZ;
 }
 
 void Camera::reset(){
@@ -259,5 +323,7 @@ void Camera::reset(){
     _horizontalOffset = _OriginalHorizontalOffset;
     _verticalOffset = _OriginalVerticalOffset;
     _spacing = _OriginalSpacing;
-    _rotationAngle = _OriginalRotationAngle;
+    _rotationAngleX = _OriginalRotationAngleX;
+    _rotationAngleY = _OriginalRotationAngleY;
+    _rotationAngleZ = _OriginalRotationAngleZ;
 }

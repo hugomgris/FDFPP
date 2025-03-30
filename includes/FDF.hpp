@@ -50,7 +50,9 @@ public:
     double getZFactor();
     std::vector<std::vector<int>> &getMatrix();
 
-    void rotate(double angle);
+    void rotateX(double angle);
+    void rotateY(double angle);
+    void rotateZ(double angle);
 };
 
 #endif

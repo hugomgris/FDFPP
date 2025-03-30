@@ -22,7 +22,7 @@ UI::UI(MLXHandler *mlxhandler, int uiWidth, int uiHeight)
 	_controls = {
 		"----CONTROLS----",
 		"MOVEMENT:  , , , ",
-		"ROTATION:  , ",
+		"ROTATION:  ,  /  ,  /  , ",
 		"ZOOM:  ,  /        ",
 		"HEIGHT:   ,",
 		"RESET: ",
@@ -53,7 +53,7 @@ UI::UI(MLXHandler *mlxhandler, int uiWidth, int uiHeight)
 	_controls2 = {
 		" ",
 		"          W A S D",
-		"          Q E",
+		"          Q E   I J   K L",
 		"      - +   Scroll",
 		"        UP DOWN",
 		"       R",

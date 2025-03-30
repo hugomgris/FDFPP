@@ -197,11 +197,27 @@ void MLXHandler::basicHooks(void *param) {
 
     // Rotation controls
     if (mlx_is_key_down(self->_mlx, MLX_KEY_Q)) {
-        self->_fdf->rotate(-0.05);
+        self->_fdf->rotateZ(-0.05);
         needsRedraw = true;
     }
     if (mlx_is_key_down(self->_mlx, MLX_KEY_E)) {
-        self->_fdf->rotate(0.05);
+        self->_fdf->rotateZ(0.05);
+        needsRedraw = true;
+    }
+    if (mlx_is_key_down(self->_mlx, MLX_KEY_I)) {
+        self->_fdf->rotateX(0.05);
+        needsRedraw = true;
+    }
+    if (mlx_is_key_down(self->_mlx, MLX_KEY_J)) {
+        self->_fdf->rotateX(-0.05);
+        needsRedraw = true;
+    }
+    if (mlx_is_key_down(self->_mlx, MLX_KEY_K)) {
+        self->_fdf->rotateY(0.05);
+        needsRedraw = true;
+    }
+    if (mlx_is_key_down(self->_mlx, MLX_KEY_L)) {
+        self->_fdf->rotateY(-0.05);
         needsRedraw = true;
     }
 
@@ -264,7 +280,7 @@ void MLXHandler::basicHooks(void *param) {
     sixKeyWasPressed = sixKeyIsPressed;
 
     if (self->getAutoRotate()) {
-        self->_fdf->rotate(0.02f);
+        self->_fdf->rotateZ(0.02f);
         needsRedraw = true;
     }
 
