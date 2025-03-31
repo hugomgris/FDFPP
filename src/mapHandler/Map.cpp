@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 12:34:25 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/27 14:21:52 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/31 10:19:56 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,6 @@
 Map::Map() {}
 
 Map::~Map() {}
-
-// Getters
-std::vector<Map::MapLine>& Map::getMapData() { 
-    return _mapData; 
-}
-
-const std::vector<Map::MapLine>& Map::getMapData() const { 
-    return _mapData; 
-}
 
 // Utility methods
 int Map::getWidth() const {
@@ -48,4 +39,11 @@ int Map::getColor(int x, int y) const {
         throw std::out_of_range("Coordinates out of map bounds");
     }
     return _mapData[y][x].color;
+}
+
+bool Map::hasCustomColor(int x, int y) const {
+    if (y < 0 || y >= getHeight() || x < 0 || x >= getWidth()) {
+        return false;
+    }
+    return _mapData[y][x].hasCustomColor;
 }

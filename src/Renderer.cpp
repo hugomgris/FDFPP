@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 17:43:26 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/20 17:17:42 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/31 09:49:11 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,39 +40,35 @@ void Renderer::drawPoints() {
             std::pair<int, int> screenPoint = _camera.worldToScreen(x, y, z);
             
             // Apply effects 
-            int finalX;
-            int finalY;
+            int finalX = screenPoint.first;
+            int finalY = screenPoint.second;
+            
             if (_vfx->getJitterStatus()) {
                 auto jitteredPoint = _vfx->jitter(screenPoint);
-                
                 finalX = jitteredPoint.first;
                 finalY = jitteredPoint.second;
             }
 
             if (_vfx->getWaveStatus()) {
-                auto wavedPoint = _vfx->waveDistortion(screenPoint,  _time);
-
+                auto wavedPoint = _vfx->waveDistortion(screenPoint, _time);
                 finalX = wavedPoint.first;
                 finalY = wavedPoint.second;
             }
 
             if (_vfx->getGlitchStatus()) {
                 auto glitchedPoint = _vfx->glitch(screenPoint);
-                
                 finalX = glitchedPoint.first;
                 finalY = glitchedPoint.second;
             }
 
             if (_vfx->getPulseWaveStatus()) {
                 auto PulseWavedPoint = _vfx->pulseWave(screenPoint, _time, _MLXHandler.getWidth() / 2, _MLXHandler.getHeight() / 2);
-                
                 finalX = PulseWavedPoint.first;
                 finalY = PulseWavedPoint.second;
             }
 
             if (_vfx->getVortexDistortionStatus()) {
                 auto VortexDistortionedPoint = _vfx->vortexDistortion(screenPoint, _time, _MLXHandler.getWidth() / 2, _MLXHandler.getHeight() / 2);
-                
                 finalX = VortexDistortionedPoint.first;
                 finalY = VortexDistortionedPoint.second;
             }
@@ -85,8 +81,8 @@ void Renderer::drawPoints() {
                     
                     if (pixelX >= 0 && pixelX < _MLXHandler.getWidth() && 
                         pixelY >= 0 && pixelY < _MLXHandler.getHeight()) {
-                        // Get color based on height
-                        int color = _colorManager.getColorFromHeight(z);
+                        // Get color based on height and custom color if available
+                        int color = _colorManager.getColorFromHeight(x, y, z);
                         mlx_put_pixel(_MLXHandler.getImage(), pixelX, pixelY, color);
                     }
                 }
@@ -104,55 +100,56 @@ void Renderer::drawLines() {
             std::pair<int, int> screenPoint = _camera.worldToScreen(x, y, z);
             
             // Apply effects
+            std::pair<int, int> finalPoint = screenPoint;
+            
             if (_vfx->getJitterStatus()) {
-                screenPoint = _vfx->jitter(screenPoint);
+                finalPoint = _vfx->jitter(finalPoint);
             }
             if (_vfx->getWaveStatus()) {
-                screenPoint = _vfx->waveDistortion(screenPoint, _time);
+                finalPoint = _vfx->waveDistortion(finalPoint, _time);
             }
             if (_vfx->getGlitchStatus()) {
-                screenPoint = _vfx->glitch(screenPoint);
+                finalPoint = _vfx->glitch(finalPoint);
             }
             if (_vfx->getPulseWaveStatus()) {
-                screenPoint = _vfx->pulseWave(screenPoint, _time, _MLXHandler.getWidth() / 2, _MLXHandler.getHeight() / 2);
+                finalPoint = _vfx->pulseWave(finalPoint, _time, _MLXHandler.getWidth() / 2, _MLXHandler.getHeight() / 2);
             }
             if (_vfx->getVortexDistortionStatus()) {
-                screenPoint = _vfx->vortexDistortion(screenPoint, _time, _MLXHandler.getWidth() / 2, _MLXHandler.getHeight() / 2);
+                finalPoint = _vfx->vortexDistortion(finalPoint, _time, _MLXHandler.getWidth() / 2, _MLXHandler.getHeight() / 2);
             }
-
-            std::pair<int, int> finalPoint = screenPoint;
 
             // Draw horizontal line (if not at last column)
             if (x + 1 < _heightMap.getMatrixWidth()) {
                 int nextZ = _heightMap.getZ(x + 1, y);
                 std::pair<int, int> nextScreenPoint = _camera.worldToScreen(x + 1, y, nextZ);
                 
-                // Apply effects
+                // Apply effects to next point
+                std::pair<int, int> nextFinal = nextScreenPoint;
+                
                 if (_vfx->getJitterStatus()) {
-                    nextScreenPoint = _vfx->jitter(nextScreenPoint);
+                    nextFinal = _vfx->jitter(nextFinal);
                 }
                 if (_vfx->getWaveStatus()) {
-                    nextScreenPoint = _vfx->waveDistortion(nextScreenPoint, _time);
+                    nextFinal = _vfx->waveDistortion(nextFinal, _time);
                 }
                 if (_vfx->getGlitchStatus()) {
-                    screenPoint = _vfx->glitch(screenPoint);
+                    nextFinal = _vfx->glitch(nextFinal);
                 }
                 if (_vfx->getPulseWaveStatus()) {
-                    screenPoint = _vfx->pulseWave(screenPoint, _time, _MLXHandler.getWidth() / 2, _MLXHandler.getHeight() / 2);
+                    nextFinal = _vfx->pulseWave(nextFinal, _time, _MLXHandler.getWidth() / 2, _MLXHandler.getHeight() / 2);
                 }
                 if (_vfx->getVortexDistortionStatus()) {
-                    screenPoint = _vfx->vortexDistortion(screenPoint, _time, _MLXHandler.getWidth() / 2, _MLXHandler.getHeight() / 2);
+                    nextFinal = _vfx->vortexDistortion(nextFinal, _time, _MLXHandler.getWidth() / 2, _MLXHandler.getHeight() / 2);
                 }
-
-                std::pair<int, int> nextFinal = nextScreenPoint;
 
                 // Only draw line if at least one endpoint is within bounds
                 if ((finalPoint.first >= 0 && finalPoint.first < _MLXHandler.getWidth() && 
                      finalPoint.second >= 0 && finalPoint.second < _MLXHandler.getHeight()) ||
                     (nextFinal.first >= 0 && nextFinal.first < _MLXHandler.getWidth() && 
                      nextFinal.second >= 0 && nextFinal.second < _MLXHandler.getHeight())) {
-                    int color1 = _colorManager.getColorFromHeight(z);
-                    int color2 = _colorManager.getColorFromHeight(nextZ);
+                    // Get colors for both endpoints, considering custom colors
+                    int color1 = _colorManager.getColorFromHeight(x, y, z);
+                    int color2 = _colorManager.getColorFromHeight(x + 1, y, nextZ);
                     drawLineSafeWithGradient(finalPoint, nextFinal, color1, color2);
                 }
             }
@@ -162,39 +159,39 @@ void Renderer::drawLines() {
                 int nextZ = _heightMap.getZ(x, y + 1);
                 std::pair<int, int> nextScreenPoint = _camera.worldToScreen(x, y + 1, nextZ);
                 
-                // Apply effects
+                // Apply effects to next point
+                std::pair<int, int> nextFinal = nextScreenPoint;
+                
                 if (_vfx->getJitterStatus()) {
-                    nextScreenPoint = _vfx->jitter(nextScreenPoint);
+                    nextFinal = _vfx->jitter(nextFinal);
                 }
                 if (_vfx->getWaveStatus()) {
-                    nextScreenPoint = _vfx->waveDistortion(nextScreenPoint, _time);
+                    nextFinal = _vfx->waveDistortion(nextFinal, _time);
                 }
                 if (_vfx->getGlitchStatus()) {
-                    screenPoint = _vfx->glitch(screenPoint);
+                    nextFinal = _vfx->glitch(nextFinal);
                 }
                 if (_vfx->getPulseWaveStatus()) {
-                    screenPoint = _vfx->pulseWave(screenPoint, _time, _MLXHandler.getWidth() / 2, _MLXHandler.getHeight() / 2);
+                    nextFinal = _vfx->pulseWave(nextFinal, _time, _MLXHandler.getWidth() / 2, _MLXHandler.getHeight() / 2);
                 }
                 if (_vfx->getVortexDistortionStatus()) {
-                    screenPoint = _vfx->vortexDistortion(screenPoint, _time, _MLXHandler.getWidth() / 2, _MLXHandler.getHeight() / 2);
+                    nextFinal = _vfx->vortexDistortion(nextFinal, _time, _MLXHandler.getWidth() / 2, _MLXHandler.getHeight() / 2);
                 }
-
-                std::pair<int, int> nextFinal = nextScreenPoint;
 
                 // Only draw line if at least one endpoint is within bounds
                 if ((finalPoint.first >= 0 && finalPoint.first < _MLXHandler.getWidth() && 
                      finalPoint.second >= 0 && finalPoint.second < _MLXHandler.getHeight()) ||
                     (nextFinal.first >= 0 && nextFinal.first < _MLXHandler.getWidth() && 
                      nextFinal.second >= 0 && nextFinal.second < _MLXHandler.getHeight())) {
-                    int startColor = _colorManager.getColorFromHeight(z);
-                    int endColor = _colorManager.getColorFromHeight(nextZ);
+                    // Get colors for both endpoints, considering custom colors
+                    int startColor = _colorManager.getColorFromHeight(x, y, z);
+                    int endColor = _colorManager.getColorFromHeight(x, y + 1, nextZ);
                     drawLineSafeWithGradient(finalPoint, nextFinal, startColor, endColor);
                 }
             }
         }
     }
 }
-
 
 void Renderer::drawLineSafeWithGradient(std::pair<int, int> start, std::pair<int, int> end, 
                                         int startColor, int endColor) {

@@ -6,47 +6,52 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 12:11:32 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/27 14:21:32 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/31 10:01:34 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP_HPP
 # define MAP_HPP
 
-#include <vector>
-#include <string>
+# include <iostream>
+# include <vector>
+# include <array>
+# include <stdexcept>
+
+# define MODE2D 0
+# define MODE3D 1
 
 class Map {
-public:
-    // Nested struct to represent each point in the map
-    struct Point {
-        int z;          // height/z value
-        int color;      // color value (-1 if not specified)
-        
-        // Constructor with default color
-        Point(int height = 0, int pointColor = -1) 
-            : z(height), color(pointColor) {}
-    };
+	public:
+		// Structs and type definition
+		struct MapPoint {
+			int z;
+			int color;
+			bool hasCustomColor;
+			
+			MapPoint(int z_val = 0, int color_val = 0, bool custom = false)
+				: z(z_val), color(color_val), hasCustomColor(custom) {}
+		};
+		
+		typedef std::vector<MapPoint> MapLine;
+		
+		// Constructor and destructor
+		Map();
+		~Map();
+		
+		// Getters
+		std::vector<MapLine> &getMapData() { return _mapData; }
+		const std::vector<MapLine> &getMapData() const { return _mapData; }		
+		int getWidth() const;
+		int getHeight() const;
+		int getZ(int x, int y) const;
+		int getColor(int x, int y) const;
 
-    // Type alias for readability
-    using MapLine = std::vector<Point>;
-
-    // Constructor and Destructor
-    Map();
-    ~Map();
-
-    // Getters and Setters
-    std::vector<MapLine>& getMapData();
-    const std::vector<MapLine>& getMapData() const;
-    
-    // Utility methods
-    int getWidth() const;
-    int getHeight() const;
-    int getZ(int x, int y) const;
-    int getColor(int x, int y) const;
-
-private:
-    std::vector<MapLine> _mapData;
+		// Methods
+		bool hasCustomColor(int x, int y) const;
+	
+	private:
+		std::vector<MapLine> _mapData;
 };
 
 #endif

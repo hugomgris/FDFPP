@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 17:41:05 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/18 17:41:08 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/31 09:51:22 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,18 @@
 #include "HeightMap.hpp"
 
 class ColorManager {
+public:
+    ColorManager(HeightMap &heightMap);
+    ~ColorManager();
+    
+    int getColorFromHeight(int x, int y, int z);
+    int interpolateColor(int color1, int color2, float t);
+    
 private:
     HeightMap &_heightMap;
-    // Color palette
-    uint32_t _colors[10] = {
+    
+    // Define your color gradient here
+    static constexpr uint32_t _colors[] = {
         0x2B3042ff, // Deep navy blue (lowest points, shadows)
         0x495867ff, // Slate blue
         0x748CABff, // Dusty sky blue
@@ -33,13 +41,6 @@ private:
         0xB85042ff, // Burnt coral
         0x873D34ff  // Dark red clay (highest peaks)
     };
-
-public:
-    ColorManager(HeightMap &heightMap);
-    ~ColorManager();
-    
-    int getColorFromHeight(int z);
-    int interpolateColor(int color1, int color2, float t);
 };
 
 #endif

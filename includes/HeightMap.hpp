@@ -6,47 +6,46 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 17:40:25 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/18 17:40:36 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/31 10:32:26 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEIGHTMAP_HPP
-#define HEIGHTMAP_HPP
+# define HEIGHTMAP_HPP
 
-#include <vector>
-#include <string>
-#include <sstream>
-#include <climits>
-#include <algorithm>
+# include <vector>
+# include <string>
+# include <sstream>
+# include <climits>
+# include <algorithm>
+# include "mapHandler/Map.hpp"
 
 class HeightMap {
-private:
-    std::vector<std::vector<int>> _matrix;
-    int _matrixWidth;
-    int _matrixHeight;
-    double _zFactor;
-    int _minHeight;
-    int _maxHeight;
-
 public:
-    // Constructor
     HeightMap(std::vector<std::string> &map);
     ~HeightMap();
-
-    // Getters and setters
-    std::vector<std::vector<int>> &getMatrix();
+    
+    std::vector<std::vector<int>> &getMatrix() { return _matrix; }
     int getMatrixWidth() const;
     int getMatrixHeight() const;
-    double getZFactor() const;
-    void setZFactor(double increase, int mode);
-    
-    // Height methods
     int getZ(int x, int y) const;
-    void calculateHeightExtremes();
+    int getColor(int x, int y) const;
+    bool hasCustomColor(int x, int y) const;
     float normalizeHeight(int z) const;
+    void setZFactor(double factor, int mode);
+    double getZFactor() const;
     
-    // Debug
-    void printMatrix() const;
+private:
+    Map _map;
+    std::vector<std::vector<int>> _matrix;
+    int _matrixHeight;
+    int _matrixWidth;
+    int _minHeight;
+    int _maxHeight;
+    double _zFactor;
+    
+    void parseMapLine(const std::string &line, std::vector<Map::MapPoint> &points);
+    void calculateMinMaxHeight();
 };
 
 #endif

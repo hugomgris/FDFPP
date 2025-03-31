@@ -6,66 +6,95 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 17:42:05 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/18 17:47:24 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/31 10:32:28 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/HeightMap.hpp"
-#include <iostream>
 
-HeightMap::HeightMap(std::vector<std::string> &map) {
-    for (const std::string & line : map){
-        std::istringstream iss(line);
-        std::vector<int> row;
-
-        int value;
-        while (iss >> value){
-            row.push_back(value);
+HeightMap::HeightMap(std::vector<std::string> &map) : _zFactor(1.0) {
+    _map.getMapData().clear();
+    _minHeight = INT_MAX;
+    _maxHeight = INT_MIN;
+    
+    for (const auto &line : map) {
+        if (!line.empty()) {
+            std::vector<Map::MapPoint> mapLine;
+            parseMapLine(line, mapLine);
+            _map.getMapData().push_back(mapLine);
         }
-        _matrix.push_back(row);
+    }
+    
+    // Make sure all rows have the same width
+    size_t maxWidth = 0;
+    for (const auto &row : _map.getMapData()) {
+        maxWidth = std::max(maxWidth, row.size());
+    }
+    
+    for (auto &row : _map.getMapData()) {
+        row.resize(maxWidth, Map::MapPoint(0));
+    }
+    
+    // Calculate min and max height for normalization
+    calculateMinMaxHeight();
+    
+    // For compatibility, populate the old matrix format
+    _matrix.resize(_map.getMapData().size());
+    for (size_t y = 0; y < _map.getMapData().size(); y++) {
+        _matrix[y].resize(_map.getMapData()[y].size());
+        for (size_t x = 0; x < _map.getMapData()[y].size(); x++) {
+            _matrix[y][x] = _map.getMapData()[y][x].z;
+        }
     }
 
     _zFactor = 1.0;
     _matrixHeight = _matrix.size();
     _matrixWidth = _matrix[0].size();
-    calculateHeightExtremes();
 }
 
-HeightMap::~HeightMap() {}
-
-std::vector<std::vector<int>> &HeightMap::getMatrix() {
-    return _matrix;
+HeightMap::~HeightMap() {
 }
 
-int HeightMap::getMatrixWidth() const {
-    return _matrixWidth;
-}
-
-int HeightMap::getMatrixHeight() const {
-    return _matrixHeight;
-}
-
-double HeightMap::getZFactor() const {
-    return _zFactor;
-}
-
-void HeightMap::setZFactor(double increase, int mode) {
-    if (mode > 0)
-        _zFactor += increase;
-    if (mode < 0)
-        _zFactor -= increase;
+void HeightMap::parseMapLine(const std::string &line, std::vector<Map::MapPoint> &points) {
+    std::istringstream iss(line);
+    std::string token;
+    
+    while (iss >> token) {
+        int z = 0;
+        int color = 0;
+        bool hasCustomColor = false;
         
-    // Recalculate height extremes after changing z factor
-    calculateHeightExtremes();
+        // Check if token contains a comma (indicating color)
+        size_t commaPos = token.find(',');
+        if (commaPos != std::string::npos) {
+            // Extract z-value
+            std::string zStr = token.substr(0, commaPos);
+            z = std::stoi(zStr);
+            
+            // Extract color value
+            std::string colorStr = token.substr(commaPos + 1);
+            if (colorStr.substr(0, 2) == "0x" || colorStr.substr(0, 2) == "0X") {
+                // Parse hex color
+                std::stringstream ss;
+                ss << std::hex << colorStr.substr(2);
+                ss >> color;
+                hasCustomColor = true;
+            }
+        } else {
+            // Just a z-value
+            z = std::stoi(token);
+        }
+        
+        // Add point to the line
+        points.push_back(Map::MapPoint(z, color, hasCustomColor));
+        
+        // Update min and max height
+        _minHeight = std::min(_minHeight, z);
+        _maxHeight = std::max(_maxHeight, z);
+    }
 }
 
-int HeightMap::getZ(int x, int y) const {
-    if (y < 0 || y >= _matrixHeight || x < 0 || x >= _matrixWidth)
-        return (0);
-    return (_matrix[y][x] * _zFactor);
-}
-
-void HeightMap::calculateHeightExtremes() {
+void HeightMap::calculateMinMaxHeight() {
     _minHeight = INT_MAX;
     _maxHeight = INT_MIN;
 
@@ -80,21 +109,43 @@ void HeightMap::calculateHeightExtremes() {
     }
 }
 
-float HeightMap::normalizeHeight(int z) const {
-    // Ensure we don't divide by zero
-    if (_maxHeight == _minHeight) {
-        return 0.5f; // Return middle value if all heights are the same
-    }
-    
-    // Normalize z to a value between 0.0 and 1.0
-    return (static_cast<float>(z - _minHeight) / (_maxHeight - _minHeight));
+int HeightMap::getMatrixWidth() const {
+    return _map.getWidth();
 }
 
-void HeightMap::printMatrix() const {
-    for (int y = 0; y < _matrixHeight; y++) {
-        for (int x = 0; x < _matrixWidth; x++) {
-            std::cout << getZ(x, y) << " ";
-        }
-        std::cout << std::endl;
+int HeightMap::getMatrixHeight() const {
+    return _map.getHeight();
+}
+
+int HeightMap::getZ(int x, int y) const {
+    return _map.getZ(x, y) * _zFactor;
+}
+
+int HeightMap::getColor(int x, int y) const {
+    return _map.getColor(x, y);
+}
+
+bool HeightMap::hasCustomColor(int x, int y) const {
+    return _map.hasCustomColor(x, y);
+}
+
+float HeightMap::normalizeHeight(int z) const {
+    if (_maxHeight == _minHeight) {
+        return 0.5f;
     }
+    return static_cast<float>(z - _minHeight) / (_maxHeight - _minHeight);
+}
+
+void HeightMap::setZFactor(double factor, int mode) {
+    if (mode > 0)
+        _zFactor += factor;
+    if (mode < 0)
+        _zFactor -= factor;
+        
+    // Recalculate height extremes after changing z factor
+    calculateMinMaxHeight();
+}
+
+double HeightMap::getZFactor() const {
+    return _zFactor;
 }

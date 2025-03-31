@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:27:00 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/28 17:08:16 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/03/31 09:25:47 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void UI::outputControls() {
 
 		mlx_image_t *textImage2 = _MLXHandler->getText2();
 		textImage2 = mlx_put_string(_MLXHandler->getMLX(), _controls2[i].c_str(), 20, _controlsOffset + (_interlineSpacing * i));
-		ColorText(textImage2, 160, 235, 255);
+		ColorText(textImage2, 140, 200, 255);
 		
 		if (textImage1) {
 			_textImages.push_back(textImage1);
