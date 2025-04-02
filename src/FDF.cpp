@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 13:06:16 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/27 12:20:18 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/04/02 15:11:19 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ Camera *FDF::getCamera() {
 
 VFX *FDF::getVFX() {
     return _vfx;
+}
+
+HeightMap *FDF::getHeightMap() {
+    return &_heightMap;
 }
 
 double FDF::getZFactor() {

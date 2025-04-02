@@ -6,18 +6,21 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:27:00 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/31 09:25:47 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/04/02 15:14:51 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/UI.hpp"
 
 // Constructor and destructor
-UI::UI(MLXHandler *mlxhandler, int uiWidth, int uiHeight)
-	: _MLXHandler(mlxhandler), _uiWidth(uiWidth), _uiHeight(uiHeight) {
+UI::UI(HeightMap *heightMap, MLXHandler *mlxhandler, int uiWidth, int uiHeight)
+	: _heightMap(heightMap), _MLXHandler(mlxhandler), _uiWidth(uiWidth), _uiHeight(uiHeight) {
 	
-	_controlsOffset = _uiHeight * 0.05;  // 5% from the top
-	_interlineSpacing = 30;  // Small, consistent spacing between lines
+	_nPoints = std::to_string(_heightMap->getNPoints());
+	_nEdges = std::to_string(_heightMap->getNEdges());
+
+	_controlsOffset = _uiHeight * 0.05;
+	_interlineSpacing = 30;
 
 	_controls = {
 		"----CONTROLS----",
@@ -48,6 +51,11 @@ UI::UI(MLXHandler *mlxhandler, int uiWidth, int uiHeight)
 		"MILITARY: ",
 		"RECURSIVE-DEPTH: ",
 		"HYPERBOLIC: ",
+		" ",
+		" ",
+		"----INFO----",
+		"POINTS:",
+		"EDGES:",
 	};
 
 	_controls2 = {
@@ -79,6 +87,11 @@ UI::UI(MLXHandler *mlxhandler, int uiWidth, int uiHeight)
 		"          F8",
 		"                 F9",
 		"            F10",
+		" ",
+		" ",
+		" ",
+		"        " + _nPoints,
+		"       " + _nEdges,
 	};
 }
 

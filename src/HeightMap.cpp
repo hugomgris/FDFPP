@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 17:42:05 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/31 10:32:28 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/04/02 15:04:42 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ HeightMap::HeightMap(std::vector<std::string> &map) : _zFactor(1.0) {
     _zFactor = 1.0;
     _matrixHeight = _matrix.size();
     _matrixWidth = _matrix[0].size();
+
+    _nPoints = getNPoints();
+    _nEdges = getNEdges();
 }
 
 HeightMap::~HeightMap() {
@@ -148,4 +151,29 @@ void HeightMap::setZFactor(double factor, int mode) {
 
 double HeightMap::getZFactor() const {
     return _zFactor;
+}
+
+int HeightMap::getNPoints() const {
+    int totalPoints = 0;
+    const std::vector<Map::MapLine>& mapData = _map.getMapData();
+
+    for (const Map::MapLine &line : mapData){
+        totalPoints += line.size();
+    }
+
+    std::cout << totalPoints << std::endl;
+    return (totalPoints);
+}
+
+int HeightMap::getNEdges() const {
+    int rows;
+    int cols;
+    int totalEdges;
+
+    const std::vector<Map::MapLine>& mapData = _map.getMapData();
+    rows = mapData.size();
+    cols = mapData[0].size();
+
+    totalEdges = (rows * (cols - 1) + (cols * (rows - 1)));
+    return (totalEdges);
 }
