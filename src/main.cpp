@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:13:14 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/04/02 15:11:22 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:12:06 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,31 +18,8 @@
 #include "../includes/UI.hpp"
 
 int main(int argc, char **argv){
-	if (argc == 2){
-		std::string help(argv[1]);
-		if (help == "help"){
-			std::cout << "Usage:" << std::endl
-				<< "./FDF++ <string/map> <type>" << std::endl
-				<< "To convert a string into a map, just input a string argument." << std::endl
-				<< "To use an available map, use map path as argument." << std::endl
-				<< "Projection types go from 1 to 9:" << std::endl
-				<< "	1 - Isometric" << std::endl
-				<< "	2 - Perspective" << std::endl
-				<< "	3 - Orthographic" << std::endl
-				<< "	4 - Trimetric" << std::endl
-				<< "	5 - Dimetric" << std::endl
-				<< "	6 - Cabinet" << std::endl
-				<< "	7 - Cavalier" << std::endl
-				<< "	8 - Military" << std::endl
-				<< "	9 - FishEye" << std::endl;
-			exit (0);
-		} 
-		std::cerr << "Bad arguments!!(Try ./FDF++ <string/map> <projection type: 1-9>, or run with 'help' argument for further instructions)" << std::endl;
-		exit (1);
-}
-	
-	if (argc != 3){
-		std::cerr << "Bad arguments!!(Try ./FDF++ <string/map> <projection type: 1-9>, or run with 'help' argument for further instructions)" << std::endl;
+	if (argc != 2){
+		std::cerr << "Bad arguments!!(Try ./FDF++ <string/map>)" << std::endl;
 		exit (1);
 	}
 	
@@ -61,7 +38,7 @@ int main(int argc, char **argv){
 		mlx = new MLXHandler(1920, 1080, "FDF++");
 
 		projector = new Projector();
-		projector->setType(std::atoi(argv[2]));
+		projector->setType(1);
 
 		vfx = new VFX();
 		
@@ -75,7 +52,6 @@ int main(int argc, char **argv){
 		
 		parser = new MapParser(fdf->getMatrix());
 		parser->parseMap();
-		//fdf->printMatrix();
 
 		fdf->draw();
 		mlx->handleEvents();

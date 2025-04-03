@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 13:06:16 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/04/02 15:11:19 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:33:23 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ VFX *FDF::getVFX() {
 
 HeightMap *FDF::getHeightMap() {
     return &_heightMap;
+}
+
+ColorManager *FDF::getColorManager() {
+    return &_colorManager;
 }
 
 double FDF::getZFactor() {

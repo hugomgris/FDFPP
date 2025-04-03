@@ -6,14 +6,14 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 17:43:10 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/31 09:48:47 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:27:17 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ColorManager.hpp"
 
-ColorManager::ColorManager(HeightMap &heightMap) : _heightMap(heightMap) {
-}
+ColorManager::ColorManager(HeightMap &heightMap) 
+    : _heightMap(heightMap), _selectedColors(_colors1), _currentColorSet(0) {}
 
 ColorManager::~ColorManager() {
 }
@@ -30,15 +30,15 @@ int ColorManager::getColorFromHeight(int x, int y, int z) {
     // Ensure the normalized value is between 0 and 1
     normalized = std::max(0.0f, std::min(1.0f, normalized));
     
-    // Determine the index in the gradient
-    int segment = (int)(normalized * (sizeof(_colors) / sizeof(_colors[0]) - 1));
+    // Determine the index in the gradient - use COLOR_COUNT instead of sizeof
+    int segment = static_cast<int>(normalized * (COLOR_COUNT - 1));
     
     // Get the two colors to interpolate between
-    int colorA = _colors[segment];
-    int colorB = _colors[std::min(segment + 1, (int)(sizeof(_colors) / sizeof(_colors[0]) - 1))];
+    uint32_t colorA = _selectedColors[segment];
+    uint32_t colorB = _selectedColors[std::min(segment + 1, COLOR_COUNT - 1)];
     
     // Interpolation factor between the two colors
-    float localT = (normalized * (sizeof(_colors) / sizeof(_colors[0]) - 1)) - segment;
+    float localT = (normalized * (COLOR_COUNT - 1)) - segment;
     
     return interpolateColor(colorA, colorB, localT);
 }

@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 17:42:05 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/04/02 15:04:42 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:02:59 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,8 +160,7 @@ int HeightMap::getNPoints() const {
     for (const Map::MapLine &line : mapData){
         totalPoints += line.size();
     }
-
-    std::cout << totalPoints << std::endl;
+    
     return (totalPoints);
 }
 

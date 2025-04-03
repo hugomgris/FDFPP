@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:06:36 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/04/02 15:10:59 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:33:21 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ class FDF {
         Camera *getCamera();
         VFX *getVFX();
         HeightMap *getHeightMap();
+        ColorManager *getColorManager();
         double getZFactor();
         std::vector<std::vector<int>> &getMatrix();
 

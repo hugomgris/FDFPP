@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:41:26 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/28 15:54:38 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:36:18 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,12 +145,19 @@ void MLXHandler::cleanup() {
 void MLXHandler::basicHooks(void *param) {
     MLXHandler *self = static_cast<MLXHandler *>(param);
     static int frameCount = 0;
+    
     static bool oneKeyWasPressed = false; 
     static bool twoKeyWasPressed = false;
     static bool threeKeyWasPressed = false;
     static bool fourKeyWasPressed = false;
     static bool fiveKeyWasPressed = false;
     static bool sixKeyWasPressed = false;
+
+    static bool PadOneKeyWasPressed = false;
+    static bool PadTwoKeyWasPressed = false;
+    static bool PadThreeKeyWasPressed = false;
+    static bool PadFourKeyWasPressed = false;
+
     bool needsRedraw = false;
 
     // Check for window close
@@ -236,7 +243,36 @@ void MLXHandler::basicHooks(void *param) {
         needsRedraw = true;
     }
 
-    // Effects
+    // COLORS
+    bool PadOneKeyIsPressed = mlx_is_key_down(self->_mlx, MLX_KEY_KP_1);
+    if (PadOneKeyIsPressed && !PadOneKeyWasPressed) {
+        self->_fdf->getColorManager()->setColorSet(0);
+        needsRedraw = true;
+    }
+    PadOneKeyWasPressed = PadOneKeyIsPressed;
+
+    bool PadTwoKeyIsPressed = mlx_is_key_down(self->_mlx, MLX_KEY_KP_2);
+    if (PadTwoKeyIsPressed && !PadTwoKeyWasPressed) {
+        self->_fdf->getColorManager()->setColorSet(1);
+        needsRedraw = true;
+    }
+    PadTwoKeyWasPressed = PadTwoKeyIsPressed;
+
+    bool PadThreeKeyIsPressed = mlx_is_key_down(self->_mlx, MLX_KEY_KP_3);
+    if (PadThreeKeyIsPressed && !PadThreeKeyWasPressed) {
+        self->_fdf->getColorManager()->setColorSet(2);
+        needsRedraw = true;
+    }
+    PadThreeKeyWasPressed = PadThreeKeyIsPressed;
+
+    bool PadFourKeyIsPressed = mlx_is_key_down(self->_mlx, MLX_KEY_KP_4);
+    if (PadFourKeyIsPressed && !PadFourKeyWasPressed) {
+        self->_fdf->getColorManager()->setColorSet(3);
+        needsRedraw = true;
+    }
+    PadFourKeyWasPressed = PadFourKeyIsPressed;
+
+    // EFFECTS
     bool oneKeyIsPressed = mlx_is_key_down(self->_mlx, MLX_KEY_1);
     if (oneKeyIsPressed && !oneKeyWasPressed) {
         self->setAutoRotate(!self->getAutoRotate());
