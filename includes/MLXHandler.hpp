@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:42:55 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/28 15:54:42 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/04/03 17:55:12 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ class MLXHandler{
 
 		FDF *_fdf;
 		bool _autoRotate;
+
+		bool _leftMousePressed;
+		bool _rightMousePressed;
+		int _lastMouseX;
+		int _lastMouseY;
 
 	public:
 		//Constructors and destructor
@@ -73,6 +78,8 @@ class MLXHandler{
 		static void basicHooks(void *param);
 		static void scrollHook(double xdelta, double ydelta, void *param);
 		static void perspectiveHooks(void *param);
+
+		static void mouseHook(mouse_key_t button, action_t action, modifier_key_t mods, void *param);
 };
 
 #endif

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/10 14:41:26 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/04/03 14:36:18 by hmunoz-g         ###   ########.fr       */
+/*   Created: 2025/04/03 17:54:44 by hmunoz-g          #+#    #+#             */
+/*   Updated: 2025/04/03 18:00:28 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 #include "../includes/FDF.hpp"
 
 //Constructors and destructor
-MLXHandler::MLXHandler(int width, int height, const char *title): _width(width), _height(height), _title(title), _autoRotate(false){
+MLXHandler::MLXHandler(int width, int height, const char *title)
+    : _width(width), _height(height), _title(title), _autoRotate(false),
+      _leftMousePressed(false), _rightMousePressed(false), _lastMouseX(0), _lastMouseY(0) {
 	this->_mlx = mlx_init(this->_width, this->_height, this->_title, true);
 
 	if (!this->_mlx)
@@ -119,6 +121,7 @@ void MLXHandler::handleEvents(){
 	mlx_loop_hook(_mlx, basicHooks, this);
 	mlx_scroll_hook(_mlx, &scrollHook, this);
 	mlx_loop_hook(_mlx, perspectiveHooks, this);
+    mlx_mouse_hook(_mlx, &mouseHook, this);
 }
 
 void MLXHandler::clearImage(mlx_image_t *img){
@@ -142,6 +145,33 @@ void MLXHandler::cleanup() {
     }
 }
 
+void MLXHandler::mouseHook(mouse_key_t button, action_t action, modifier_key_t mods, void *param) {
+    MLXHandler *self = static_cast<MLXHandler *>(param);
+    (void)mods; // Suppress unused parameter warning
+    
+    int32_t mouseX, mouseY;
+    mlx_get_mouse_pos(self->_mlx, &mouseX, &mouseY);
+    
+    // Track mouse button state
+    if (button == MLX_MOUSE_BUTTON_LEFT) {
+        if (action == MLX_PRESS) {
+            self->_leftMousePressed = true;
+            self->_lastMouseX = mouseX;
+            self->_lastMouseY = mouseY;
+        } else if (action == MLX_RELEASE) {
+            self->_leftMousePressed = false;
+        }
+    } else if (button == MLX_MOUSE_BUTTON_RIGHT) {
+        if (action == MLX_PRESS) {
+            self->_rightMousePressed = true;
+            self->_lastMouseX = mouseX;
+            self->_lastMouseY = mouseY;
+        } else if (action == MLX_RELEASE) {
+            self->_rightMousePressed = false;
+        }
+    }
+}
+
 void MLXHandler::basicHooks(void *param) {
     MLXHandler *self = static_cast<MLXHandler *>(param);
     static int frameCount = 0;
@@ -159,6 +189,29 @@ void MLXHandler::basicHooks(void *param) {
     static bool PadFourKeyWasPressed = false;
 
     bool needsRedraw = false;
+
+    // Handle mouse movement
+    if (self->_leftMousePressed || self->_rightMousePressed) {
+        int32_t mouseX, mouseY;
+        mlx_get_mouse_pos(self->_mlx, &mouseX, &mouseY);
+        
+        int deltaX = mouseX - self->_lastMouseX;
+        int deltaY = mouseY - self->_lastMouseY;
+        
+        if (self->_leftMousePressed && (deltaX != 0 || deltaY != 0)) {
+            self->_fdf->pan(-deltaX, -deltaY);
+            needsRedraw = true;
+        }
+        
+        if (self->_rightMousePressed && (deltaX != 0 || deltaY != 0)) {
+            self->_fdf->rotateY(deltaX * 0.01);
+            self->_fdf->rotateX(deltaY * -0.01);
+            needsRedraw = true;
+        }
+        
+        self->_lastMouseX = mouseX;
+        self->_lastMouseY = mouseY;
+    }
 
     // Check for window close
     if (mlx_is_key_down(self->_mlx, MLX_KEY_ESCAPE))

@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:27:00 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/04/03 15:02:25 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/04/03 18:02:20 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ UI::UI(HeightMap *heightMap, MLXHandler *mlxhandler, int uiWidth, int uiHeight)
 
 	_controls = {
 		" ",
-		"			MOVEMENT:  , , , ",
-		"			ROTATION:  ,  /  ,  /  , ",
+		"			MOVEMENT:  , , ,  /",
+		"			ROTATION:  ,  /  ,  /  ,  /",
 		"			ZOOM:  ,  /        ",
 		"			HEIGHT:   ,",
 		"			RESET: ",
@@ -61,8 +61,8 @@ UI::UI(HeightMap *heightMap, MLXHandler *mlxhandler, int uiWidth, int uiHeight)
 
 	_controls2 = {
 		"CONTROLS:",
-		"			          W A S D",
-		"			          Q E   I J   K L",
+		"			          W A S D   LMB",
+		"			          Q E   I J   K L   RMB",
 		"			      - +   Scroll",
 		"		        UP DOWN",
 		"			       R",
