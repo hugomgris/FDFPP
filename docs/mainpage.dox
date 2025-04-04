@@ -1,0 +1,23 @@
+/** 
+ * @mainpage FDF++ Documentation
+ * 
+ * @section intro Introduction
+ * Welcome to the documentation for **FDF++**. This project is a 3D wireframe renderer that supports various transformations and effects.
+ * 
+ * @section features Features
+ * - 3D rendering of heightmaps
+ * - Camera controls (pan, zoom, rotate)
+ * - Color management and visual effects
+ * 
+ * @section usage How to Use
+ * - Run `./fdf <map_file>` to render a heightmap.
+ * - Use the arrow keys to pan, scroll to zoom, and `R` to reset the camera.
+ * 
+ * @section structure Project Structure
+ * - `src/` - Contains the source code
+ * - `includes/` - Header files
+ * - `assets/` - Example maps
+ * 
+ * @section links Additional Resources
+ * - [GitHub Repository](https://github.com/yourrepo)
+ */

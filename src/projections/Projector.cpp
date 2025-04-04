@@ -21,7 +21,7 @@ Projector::Projector(){
 	_cabinet = new CabinetProjection();
 	_cavalier = new CavalierProjection();
 	_military = new MilitaryProjection();
-	_fisheye = new RecursiveDepth();
+	_recursive = new RecursiveDepth();
 	_hyperbolic = new HyperbolicProjection();
 }
 
@@ -34,7 +34,7 @@ Projector::~Projector(){
     delete _cabinet;
     delete _cavalier;
     delete _military;
-    delete _fisheye;
+    delete _recursive;
 	delete _hyperbolic;
 }
 
@@ -69,7 +69,7 @@ void Projector::setType(int type){
 			_selectedProjection = _military;
 			break;
 		case 9:
-			_selectedProjection = _fisheye;
+			_selectedProjection = _recursive;
 			break;
 		case 10:
 			_selectedProjection = _hyperbolic;

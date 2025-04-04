@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FishEyeProjection.cpp                              :+:      :+:    :+:   */
+/*   RecursiveDepth.cpp                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/projections/RecursiveDepth.hpp"
+#include "../../includes/projections/RecursiveDepthProjection.hpp"
 
 RecursiveDepth::~RecursiveDepth(){}
 

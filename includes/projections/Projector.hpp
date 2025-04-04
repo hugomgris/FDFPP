@@ -23,7 +23,7 @@
 # include "../../includes/projections/CabinetProjection.hpp"
 # include "../../includes/projections/CavalierProjection.hpp"
 # include "../../includes/projections/MilitaryProjection.hpp"
-# include "../../includes/projections/RecursiveDepth.hpp"
+# include "../../includes/projections/RecursiveDepthProjection.hpp"
 # include "../../includes/projections/HyperbolicProjection.hpp"
 
 class Projector{
@@ -38,7 +38,7 @@ class Projector{
 		DimetricProjection *_dimetric;
 		CavalierProjection *_cavalier;
 		MilitaryProjection *_military;
-		RecursiveDepth *_fisheye;
+		RecursiveDepth *_recursive;
 		HyperbolicProjection *_hyperbolic;
 
 	public:

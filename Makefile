@@ -63,7 +63,7 @@ SRC         := src/main.cpp \
 				src/projections/CabinetProjection.cpp \
 				src/projections/CavalierProjection.cpp \
 				src/projections/MilitaryProjection.cpp \
-				src/projections/RecursiveDepth.cpp \
+				src/projections/RecursiveDepthProjection.cpp \
 				src/projections/HyperbolicProjection.cpp \
 
 OBJS        = $(addprefix $(OBJ_DIR)/, $(SRC:.cpp=.o))
@@ -100,6 +100,14 @@ $(NAME): $(OBJS) Makefile
 	@echo "$(GREEN)$(NAME) compiled!$(DEF_COLOR)"
 	@echo "$(RED)So preoccupied with whether or not I could, I didn't stop to think if I should.$(DEF_COLOR)"
 
+doxy:
+	doxygen Doxyfile
+	@echo "$(GREEN)Doxy documentation generated in docs/index.html$< $(DEF_COLOR)"
+
+doxyclean:
+	rm -rf docs/html/ docs/latex/ docs/xml/ docs/rtf/ docs/man/ docs/docbook/
+	@echo "$(RED)Cleaned doxy files and documentation$(DEF_COLOR)"
+
 clean:
 	@$(RM) $(OBJ_DIR) $(DEP_DIR)
 	@echo "$(RED)Cleaned object files and dependencies$(DEF_COLOR)"
@@ -112,4 +120,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re directories
+.PHONY: all clean fclean re directories doxy index

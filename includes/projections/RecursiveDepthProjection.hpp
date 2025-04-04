@@ -10,16 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FISHEYEPROJECTION_HPP
-# define FISHEYEPROJECTION_HPP
+#ifndef RECURSIVEDEPTHPROJECTION_HPP
+# define RECURSIVEDEPTHPROJECTION_HPP
 
 # include <algorithm>
 
 # include "IProjection.hpp"
 
-class FishEyeProjection : public IProjection{
+class RecursiveDepth : public IProjection{
 	public:
-		~FishEyeProjection();
+		~RecursiveDepth();
 		virtual std::pair<int, int> project(int &x, int &y, int &z) const;
 };
 

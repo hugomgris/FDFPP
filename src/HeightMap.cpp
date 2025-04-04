@@ -25,7 +25,6 @@ HeightMap::HeightMap(std::vector<std::string> &map) : _zFactor(1.0) {
         }
     }
     
-    // Make sure all rows have the same width
     size_t maxWidth = 0;
     for (const auto &row : _map.getMapData()) {
         maxWidth = std::max(maxWidth, row.size());
@@ -35,10 +34,8 @@ HeightMap::HeightMap(std::vector<std::string> &map) : _zFactor(1.0) {
         row.resize(maxWidth, Map::MapPoint(0));
     }
     
-    // Calculate min and max height for normalization
     calculateMinMaxHeight();
     
-    // For compatibility, populate the old matrix format
     _matrix.resize(_map.getMapData().size());
     for (size_t y = 0; y < _map.getMapData().size(); y++) {
         _matrix[y].resize(_map.getMapData()[y].size());
@@ -55,8 +52,7 @@ HeightMap::HeightMap(std::vector<std::string> &map) : _zFactor(1.0) {
     _nEdges = getNEdges();
 }
 
-HeightMap::~HeightMap() {
-}
+HeightMap::~HeightMap() {}
 
 void HeightMap::parseMapLine(const std::string &line, std::vector<Map::MapPoint> &points) {
     std::istringstream iss(line);

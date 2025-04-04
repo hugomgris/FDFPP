@@ -64,7 +64,7 @@ UI::UI(HeightMap *heightMap, MLXHandler *mlxhandler, int uiWidth, int uiHeight)
 		"			          W A S D   LMB",
 		"			          Q E   I J   K L   RMB",
 		"			      - +   Scroll",
-		"		        UP DOWN",
+		"		         UP DOWN",
 		"			       R",
 		"			      ESC",
 		"EFFECTS:",

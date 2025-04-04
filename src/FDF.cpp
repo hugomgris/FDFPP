@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   FDF.cpp                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/07 13:06:16 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/04/03 14:33:23 by hmunoz-g         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../includes/FDF.hpp"
 
 FDF::FDF(std::vector<std::string> &map, Projector *projector, MLXHandler &MLXHandler, VFX *vfx)
@@ -53,7 +41,9 @@ std::vector<std::vector<int>> &FDF::getMatrix() {
     return _heightMap.getMatrix();
 }
 
-// Methods
+/**
+ * @brief Renders the heightmap with current transformations.
+ */
 void FDF::draw() {
     _renderer.draw();
 }
