@@ -10,6 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+ * @class Camera
+ * @brief Handles user interaction and controls the viewing transformation.
+ * 
+ * The Camera class manages panning, zooming, and rotating the 3D view. It works
+ * together with the Projector and Renderer to adjust how the heightmap is displayed.
+ */
+
 #ifndef CAMERA_HPP
 #define CAMERA_HPP
 

@@ -18,9 +18,6 @@
 # include <array>
 # include <stdexcept>
 
-# define MODE2D 0
-# define MODE3D 1
-
 class Map {
 	public:
 		// Structs and type definition
