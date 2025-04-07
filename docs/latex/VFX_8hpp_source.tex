@@ -1,0 +1,71 @@
+\doxysection{VFX.\+hpp}
+\hypertarget{VFX_8hpp_source}{}\label{VFX_8hpp_source}\index{includes/VFX.hpp@{includes/VFX.hpp}}
+\mbox{\hyperlink{VFX_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ **************************************************************************\ */}}
+\DoxyCodeLine{00002\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00003\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :::\ \ \ \ \ \ ::::::::\ \ \ */}}
+\DoxyCodeLine{00004\ \textcolor{comment}{/*\ \ \ VFX.hpp\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :+:\ \ \ \ \ \ :+:\ \ \ \ :+:\ \ \ */}}
+\DoxyCodeLine{00005\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +:+\ +:+\ \ \ \ \ \ \ \ \ +:+\ \ \ \ \ */}}
+\DoxyCodeLine{00006\ \textcolor{comment}{/*\ \ \ By:\ hmunoz-\/g\ <hmunoz-\/g@student.42.fr>\ \ \ \ \ \ \ \ \ \ +\#+\ \ +:+\ \ \ \ \ \ \ +\#+\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00007\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +\#+\#+\#+\#+\#+\ \ \ +\#+\ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00008\ \textcolor{comment}{/*\ \ \ Created:\ 2025/03/14\ 09:20:41\ by\ hmunoz-\/g\ \ \ \ \ \ \ \ \ \ \#+\#\ \ \ \ \#+\#\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00009\ \textcolor{comment}{/*\ \ \ Updated:\ 2025/03/14\ 10:01:38\ by\ hmunoz-\/g\ \ \ \ \ \ \ \ \ \#\#\#\ \ \ \#\#\#\#\#\#\#\#.fr\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00010\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*\ **************************************************************************\ */}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#ifndef\ VFX\_HPP}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#\ define\ VFX\_HPP}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#\ include\ <utility>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#\ include\ <cmath>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#\ include\ <random>}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classVFX}{VFX}}\{}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \_jitterIntensity;}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \_vortexDistortionIntensity;}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_jitterStatus;}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_waveStatus;}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_glitchStatus;}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_pulseWaveStatus;}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_vortexDistortionStatus;}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_chromaticAberrationStatus;}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classVFX_a43f53af993f7fbdbeb93be8f46cd7f06}{VFX}}();}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classVFX_a8aa930a7549c4468b889eda23efeb35b}{\string~VFX}}();}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{comment}{//Getters\ \&\ seters}}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{float}\ \&\mbox{\hyperlink{classVFX_a5c34ae7596b70d44d219ed65ebf15fd8}{getJitterIntensity}}();}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{float}\ \&\mbox{\hyperlink{classVFX_ae9ccf0b39b284f840c7bf297201328fe}{getvortexDistortionIntensity}}();}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{bool}\ \&\mbox{\hyperlink{classVFX_a17c998d247536ab074bb48c555543226}{getJitterStatus}}();}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{bool}\ \&\mbox{\hyperlink{classVFX_af7328e8b8044eeb2ee33cab60a5d5d51}{getWaveStatus}}();}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{bool}\ \&\mbox{\hyperlink{classVFX_ac8796c6af92e6ea41995e74d275f4f69}{getGlitchStatus}}();}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{bool}\ \&\mbox{\hyperlink{classVFX_a2df1ed3623a5a0ccc20b1e3e3e9e009f}{getPulseWaveStatus}}();}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{bool}\ \&\mbox{\hyperlink{classVFX_a2f47951d9758abc5555ec94a4f42c49b}{getVortexDistortionStatus}}();}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{bool}\ \&\mbox{\hyperlink{classVFX_afcfbd6ee72ede74f9e56f62e65863f41}{getChromaticAberrationStatus}}();}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classVFX_a5561ba20bf47c39d8a2ee1bcb6885aea}{setJitterIntensity}}(\textcolor{keywordtype}{float}\ intensity);}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classVFX_a2fbfb15c018719e087086571955a743a}{setvortexDistortionIntensity}}(\textcolor{keywordtype}{float}\ intensity);}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classVFX_a68ef23f5e1d8ec074b4e32ae9a0c0ae4}{setJitterStatus}}(\textcolor{keywordtype}{bool}\ status);}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classVFX_a51cfc700374badef2e0d775abbd0949b}{setWaveStatus}}(\textcolor{keywordtype}{bool}\ status);}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classVFX_ab49670cb99c8b23a7161e34e7f814748}{setGlitchStatus}}(\textcolor{keywordtype}{bool}\ status);}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classVFX_a7d057fb9786a57d1aceeb116ddfa6264}{setPulseWaveStatus}}(\textcolor{keywordtype}{bool}\ status);}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classVFX_a7df862c62651b02ecc51d835b7f5739e}{setVortexDistortionStatus}}(\textcolor{keywordtype}{bool}\ status);}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classVFX_aea21a47b11d9d8f93daed6c7ba7f42b0}{setChromaticAberrationStatus}}(\textcolor{keywordtype}{bool}\ status);}
+\DoxyCodeLine{00054\ \ \ \ \ }
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{comment}{//Effects}}
+\DoxyCodeLine{00057\ \ \ \ \ std::pair<int,\ int>\ \mbox{\hyperlink{classVFX_ae145ee08c5671c764e696ac0c36bf266}{jitter}}(std::pair<int,\ int>\ point);}
+\DoxyCodeLine{00058\ \ \ \ \ std::pair<int,\ int>\ \mbox{\hyperlink{classVFX_accf04f8f9f24856b86577ab2a244372d}{waveDistortion}}(std::pair<int,\ int>\ point,\ \textcolor{keywordtype}{float}\ time);}
+\DoxyCodeLine{00059\ \ \ \ \ std::pair<int,\ int>\ \mbox{\hyperlink{classVFX_a73a9e4723d8f0262ebd2468bea4d4143}{glitch}}(std::pair<int,\ int>\ point);}
+\DoxyCodeLine{00060\ \ \ \ \ std::pair<int,\ int>\ \mbox{\hyperlink{classVFX_a55e1b09c0e95c904b086a4208dd3a1d2}{pulseWave}}(std::pair<int,\ int>\ point,\ \textcolor{keywordtype}{float}\ time,\ \textcolor{keywordtype}{int}\ centerX,\ \textcolor{keywordtype}{int}\ centerY);}
+\DoxyCodeLine{00061\ \ \ \ \ std::pair<int,\ int>\ \mbox{\hyperlink{classVFX_a68e250a3c2ba297a5b285dbd60de6435}{vortexDistortion}}(std::pair<int,\ int>\ point,\ \textcolor{keywordtype}{float}\ time,\ \textcolor{keywordtype}{int}\ centerX,\ \textcolor{keywordtype}{int}\ centerY);}
+\DoxyCodeLine{00062\ \ \ \ \ std::pair<int,\ int>\ \mbox{\hyperlink{classVFX_a7d0fa10ace5cd88148519e84e051a370}{chromaticAberration}}(std::pair<int,\ int>\ point,\ \textcolor{keywordtype}{int}\ channelOffset);}
+\DoxyCodeLine{00063\ \};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,93 @@
+\doxysection{Color\+Manager Class Reference}
+\hypertarget{classColorManager}{}\label{classColorManager}\index{ColorManager@{ColorManager}}
+
+
+{\ttfamily \#include $<$Color\+Manager.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classColorManager_a3fa8aaec91a172677dfb787c3fa7e978}{Color\+Manager}} (\mbox{\hyperlink{classHeightMap}{Height\+Map}} \&height\+Map)
+\item 
+\mbox{\hyperlink{classColorManager_a356376e5991e44728e1737cca2486489}{\texorpdfstring{$\sim$}{\string~}\+Color\+Manager}} ()
+\item 
+void \mbox{\hyperlink{classColorManager_a30951fce6d823453073d1d82c7f3b3ee}{set\+Color\+Set}} (int color\+Set\+Index)
+\item 
+int \mbox{\hyperlink{classColorManager_ac99e80d33c20cb0b81140af7903273f3}{get\+Current\+Color\+Set}} () const
+\item 
+int \mbox{\hyperlink{classColorManager_a4796cfcece655f3abb27fdc513974a38}{get\+Color\+From\+Height}} (int x, int y, int z)
+\item 
+int \mbox{\hyperlink{classColorManager_a4ed153173638d354111ff066eb27e086}{interpolate\+Color}} (int color1, int color2, float t)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classColorManager_a3fa8aaec91a172677dfb787c3fa7e978}\label{classColorManager_a3fa8aaec91a172677dfb787c3fa7e978} 
+\index{ColorManager@{ColorManager}!ColorManager@{ColorManager}}
+\index{ColorManager@{ColorManager}!ColorManager@{ColorManager}}
+\doxysubsubsection{\texorpdfstring{ColorManager()}{ColorManager()}}
+{\footnotesize\ttfamily Color\+Manager\+::\+Color\+Manager (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classHeightMap}{Height\+Map}} \&}]{height\+Map }\end{DoxyParamCaption})}
+
+\Hypertarget{classColorManager_a356376e5991e44728e1737cca2486489}\label{classColorManager_a356376e5991e44728e1737cca2486489} 
+\index{ColorManager@{ColorManager}!````~ColorManager@{\texorpdfstring{$\sim$}{\string~}ColorManager}}
+\index{````~ColorManager@{\texorpdfstring{$\sim$}{\string~}ColorManager}!ColorManager@{ColorManager}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ColorManager()}{\string~ColorManager()}}
+{\footnotesize\ttfamily Color\+Manager\+::\texorpdfstring{$\sim$}{\string~}\+Color\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classColorManager_a4796cfcece655f3abb27fdc513974a38}\label{classColorManager_a4796cfcece655f3abb27fdc513974a38} 
+\index{ColorManager@{ColorManager}!getColorFromHeight@{getColorFromHeight}}
+\index{getColorFromHeight@{getColorFromHeight}!ColorManager@{ColorManager}}
+\doxysubsubsection{\texorpdfstring{getColorFromHeight()}{getColorFromHeight()}}
+{\footnotesize\ttfamily int Color\+Manager\+::get\+Color\+From\+Height (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{int}]{z }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classColorManager_a4796cfcece655f3abb27fdc513974a38_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classColorManager_ac99e80d33c20cb0b81140af7903273f3}\label{classColorManager_ac99e80d33c20cb0b81140af7903273f3} 
+\index{ColorManager@{ColorManager}!getCurrentColorSet@{getCurrentColorSet}}
+\index{getCurrentColorSet@{getCurrentColorSet}!ColorManager@{ColorManager}}
+\doxysubsubsection{\texorpdfstring{getCurrentColorSet()}{getCurrentColorSet()}}
+{\footnotesize\ttfamily int Color\+Manager\+::get\+Current\+Color\+Set (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classColorManager_a4ed153173638d354111ff066eb27e086}\label{classColorManager_a4ed153173638d354111ff066eb27e086} 
+\index{ColorManager@{ColorManager}!interpolateColor@{interpolateColor}}
+\index{interpolateColor@{interpolateColor}!ColorManager@{ColorManager}}
+\doxysubsubsection{\texorpdfstring{interpolateColor()}{interpolateColor()}}
+{\footnotesize\ttfamily int Color\+Manager\+::interpolate\+Color (\begin{DoxyParamCaption}\item[{int}]{color1,  }\item[{int}]{color2,  }\item[{float}]{t }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classColorManager_a4ed153173638d354111ff066eb27e086_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classColorManager_a30951fce6d823453073d1d82c7f3b3ee}\label{classColorManager_a30951fce6d823453073d1d82c7f3b3ee} 
+\index{ColorManager@{ColorManager}!setColorSet@{setColorSet}}
+\index{setColorSet@{setColorSet}!ColorManager@{ColorManager}}
+\doxysubsubsection{\texorpdfstring{setColorSet()}{setColorSet()}}
+{\footnotesize\ttfamily void Color\+Manager\+::set\+Color\+Set (\begin{DoxyParamCaption}\item[{int}]{color\+Set\+Index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classColorManager_a30951fce6d823453073d1d82c7f3b3ee_icgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/\mbox{\hyperlink{ColorManager_8hpp}{Color\+Manager.\+hpp}}\item 
+src/\mbox{\hyperlink{ColorManager_8cpp}{Color\+Manager.\+cpp}}\end{DoxyCompactItemize}

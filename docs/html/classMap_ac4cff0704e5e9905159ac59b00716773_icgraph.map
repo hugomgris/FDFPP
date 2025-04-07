@@ -1,0 +1,7 @@
+<map id="Map::hasCustomColor" name="Map::hasCustomColor">
+<area shape="rect" id="Node000001" title=" " alt="" coords="519,13,684,38"/>
+<area shape="rect" id="Node000002" href="$classHeightMap.html#a1fdb8909cd8f71931958cab46942f350" title=" " alt="" coords="263,13,471,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="505,28,471,28,471,23,505,23"/>
+<area shape="rect" id="Node000003" href="$classColorManager.html#a4796cfcece655f3abb27fdc513974a38" title=" " alt="" coords="5,5,215,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="249,28,215,28,215,23,249,23"/>
+</map>

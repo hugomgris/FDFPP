@@ -1,0 +1,301 @@
+\doxysection{VFX Class Reference}
+\hypertarget{classVFX}{}\label{classVFX}\index{VFX@{VFX}}
+
+
+{\ttfamily \#include $<$VFX.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classVFX_a43f53af993f7fbdbeb93be8f46cd7f06}{VFX}} ()
+\item 
+\mbox{\hyperlink{classVFX_a8aa930a7549c4468b889eda23efeb35b}{\texorpdfstring{$\sim$}{\string~}\+VFX}} ()
+\item 
+float \& \mbox{\hyperlink{classVFX_a5c34ae7596b70d44d219ed65ebf15fd8}{get\+Jitter\+Intensity}} ()
+\item 
+float \& \mbox{\hyperlink{classVFX_ae9ccf0b39b284f840c7bf297201328fe}{getvortex\+Distortion\+Intensity}} ()
+\item 
+bool \& \mbox{\hyperlink{classVFX_a17c998d247536ab074bb48c555543226}{get\+Jitter\+Status}} ()
+\item 
+bool \& \mbox{\hyperlink{classVFX_af7328e8b8044eeb2ee33cab60a5d5d51}{get\+Wave\+Status}} ()
+\item 
+bool \& \mbox{\hyperlink{classVFX_ac8796c6af92e6ea41995e74d275f4f69}{get\+Glitch\+Status}} ()
+\item 
+bool \& \mbox{\hyperlink{classVFX_a2df1ed3623a5a0ccc20b1e3e3e9e009f}{get\+Pulse\+Wave\+Status}} ()
+\item 
+bool \& \mbox{\hyperlink{classVFX_a2f47951d9758abc5555ec94a4f42c49b}{get\+Vortex\+Distortion\+Status}} ()
+\item 
+bool \& \mbox{\hyperlink{classVFX_afcfbd6ee72ede74f9e56f62e65863f41}{get\+Chromatic\+Aberration\+Status}} ()
+\item 
+void \mbox{\hyperlink{classVFX_a5561ba20bf47c39d8a2ee1bcb6885aea}{set\+Jitter\+Intensity}} (float intensity)
+\item 
+void \mbox{\hyperlink{classVFX_a2fbfb15c018719e087086571955a743a}{setvortex\+Distortion\+Intensity}} (float intensity)
+\item 
+void \mbox{\hyperlink{classVFX_a68ef23f5e1d8ec074b4e32ae9a0c0ae4}{set\+Jitter\+Status}} (bool status)
+\item 
+void \mbox{\hyperlink{classVFX_a51cfc700374badef2e0d775abbd0949b}{set\+Wave\+Status}} (bool status)
+\item 
+void \mbox{\hyperlink{classVFX_ab49670cb99c8b23a7161e34e7f814748}{set\+Glitch\+Status}} (bool status)
+\item 
+void \mbox{\hyperlink{classVFX_a7d057fb9786a57d1aceeb116ddfa6264}{set\+Pulse\+Wave\+Status}} (bool status)
+\item 
+void \mbox{\hyperlink{classVFX_a7df862c62651b02ecc51d835b7f5739e}{set\+Vortex\+Distortion\+Status}} (bool status)
+\item 
+void \mbox{\hyperlink{classVFX_aea21a47b11d9d8f93daed6c7ba7f42b0}{set\+Chromatic\+Aberration\+Status}} (bool status)
+\item 
+std\+::pair$<$ int, int $>$ \mbox{\hyperlink{classVFX_ae145ee08c5671c764e696ac0c36bf266}{jitter}} (std\+::pair$<$ int, int $>$ point)
+\item 
+std\+::pair$<$ int, int $>$ \mbox{\hyperlink{classVFX_accf04f8f9f24856b86577ab2a244372d}{wave\+Distortion}} (std\+::pair$<$ int, int $>$ point, float time)
+\item 
+std\+::pair$<$ int, int $>$ \mbox{\hyperlink{classVFX_a73a9e4723d8f0262ebd2468bea4d4143}{glitch}} (std\+::pair$<$ int, int $>$ point)
+\item 
+std\+::pair$<$ int, int $>$ \mbox{\hyperlink{classVFX_a55e1b09c0e95c904b086a4208dd3a1d2}{pulse\+Wave}} (std\+::pair$<$ int, int $>$ point, float time, int centerX, int centerY)
+\item 
+std\+::pair$<$ int, int $>$ \mbox{\hyperlink{classVFX_a68e250a3c2ba297a5b285dbd60de6435}{vortex\+Distortion}} (std\+::pair$<$ int, int $>$ point, float time, int centerX, int centerY)
+\item 
+std\+::pair$<$ int, int $>$ \mbox{\hyperlink{classVFX_a7d0fa10ace5cd88148519e84e051a370}{chromatic\+Aberration}} (std\+::pair$<$ int, int $>$ point, int channel\+Offset)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classVFX_a43f53af993f7fbdbeb93be8f46cd7f06}\label{classVFX_a43f53af993f7fbdbeb93be8f46cd7f06} 
+\index{VFX@{VFX}!VFX@{VFX}}
+\index{VFX@{VFX}!VFX@{VFX}}
+\doxysubsubsection{\texorpdfstring{VFX()}{VFX()}}
+{\footnotesize\ttfamily VFX\+::\+VFX (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classVFX_a8aa930a7549c4468b889eda23efeb35b}\label{classVFX_a8aa930a7549c4468b889eda23efeb35b} 
+\index{VFX@{VFX}!````~VFX@{\texorpdfstring{$\sim$}{\string~}VFX}}
+\index{````~VFX@{\texorpdfstring{$\sim$}{\string~}VFX}!VFX@{VFX}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}VFX()}{\string~VFX()}}
+{\footnotesize\ttfamily VFX\+::\texorpdfstring{$\sim$}{\string~}\+VFX (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classVFX_a7d0fa10ace5cd88148519e84e051a370}\label{classVFX_a7d0fa10ace5cd88148519e84e051a370} 
+\index{VFX@{VFX}!chromaticAberration@{chromaticAberration}}
+\index{chromaticAberration@{chromaticAberration}!VFX@{VFX}}
+\doxysubsubsection{\texorpdfstring{chromaticAberration()}{chromaticAberration()}}
+{\footnotesize\ttfamily std\+::pair$<$ int, int $>$ VFX\+::chromatic\+Aberration (\begin{DoxyParamCaption}\item[{std\+::pair$<$ int, int $>$}]{point,  }\item[{int}]{channel\+Offset }\end{DoxyParamCaption})}
+
+\Hypertarget{classVFX_afcfbd6ee72ede74f9e56f62e65863f41}\label{classVFX_afcfbd6ee72ede74f9e56f62e65863f41} 
+\index{VFX@{VFX}!getChromaticAberrationStatus@{getChromaticAberrationStatus}}
+\index{getChromaticAberrationStatus@{getChromaticAberrationStatus}!VFX@{VFX}}
+\doxysubsubsection{\texorpdfstring{getChromaticAberrationStatus()}{getChromaticAberrationStatus()}}
+{\footnotesize\ttfamily bool \& VFX\+::get\+Chromatic\+Aberration\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classVFX_ac8796c6af92e6ea41995e74d275f4f69}\label{classVFX_ac8796c6af92e6ea41995e74d275f4f69} 
+\index{VFX@{VFX}!getGlitchStatus@{getGlitchStatus}}
+\index{getGlitchStatus@{getGlitchStatus}!VFX@{VFX}}
+\doxysubsubsection{\texorpdfstring{getGlitchStatus()}{getGlitchStatus()}}
+{\footnotesize\ttfamily bool \& VFX\+::get\+Glitch\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classVFX_ac8796c6af92e6ea41995e74d275f4f69_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classVFX_a5c34ae7596b70d44d219ed65ebf15fd8}\label{classVFX_a5c34ae7596b70d44d219ed65ebf15fd8} 
+\index{VFX@{VFX}!getJitterIntensity@{getJitterIntensity}}
+\index{getJitterIntensity@{getJitterIntensity}!VFX@{VFX}}
+\doxysubsubsection{\texorpdfstring{getJitterIntensity()}{getJitterIntensity()}}
+{\footnotesize\ttfamily float \& VFX\+::get\+Jitter\+Intensity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classVFX_a5c34ae7596b70d44d219ed65ebf15fd8_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classVFX_a17c998d247536ab074bb48c555543226}\label{classVFX_a17c998d247536ab074bb48c555543226} 
+\index{VFX@{VFX}!getJitterStatus@{getJitterStatus}}
+\index{getJitterStatus@{getJitterStatus}!VFX@{VFX}}
+\doxysubsubsection{\texorpdfstring{getJitterStatus()}{getJitterStatus()}}
+{\footnotesize\ttfamily bool \& VFX\+::get\+Jitter\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classVFX_a17c998d247536ab074bb48c555543226_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classVFX_a2df1ed3623a5a0ccc20b1e3e3e9e009f}\label{classVFX_a2df1ed3623a5a0ccc20b1e3e3e9e009f} 
+\index{VFX@{VFX}!getPulseWaveStatus@{getPulseWaveStatus}}
+\index{getPulseWaveStatus@{getPulseWaveStatus}!VFX@{VFX}}
+\doxysubsubsection{\texorpdfstring{getPulseWaveStatus()}{getPulseWaveStatus()}}
+{\footnotesize\ttfamily bool \& VFX\+::get\+Pulse\+Wave\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classVFX_a2df1ed3623a5a0ccc20b1e3e3e9e009f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classVFX_ae9ccf0b39b284f840c7bf297201328fe}\label{classVFX_ae9ccf0b39b284f840c7bf297201328fe} 
+\index{VFX@{VFX}!getvortexDistortionIntensity@{getvortexDistortionIntensity}}
+\index{getvortexDistortionIntensity@{getvortexDistortionIntensity}!VFX@{VFX}}
+\doxysubsubsection{\texorpdfstring{getvortexDistortionIntensity()}{getvortexDistortionIntensity()}}
+{\footnotesize\ttfamily float \& VFX\+::getvortex\+Distortion\+Intensity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classVFX_a2f47951d9758abc5555ec94a4f42c49b}\label{classVFX_a2f47951d9758abc5555ec94a4f42c49b} 
+\index{VFX@{VFX}!getVortexDistortionStatus@{getVortexDistortionStatus}}
+\index{getVortexDistortionStatus@{getVortexDistortionStatus}!VFX@{VFX}}
+\doxysubsubsection{\texorpdfstring{getVortexDistortionStatus()}{getVortexDistortionStatus()}}
+{\footnotesize\ttfamily bool \& VFX\+::get\+Vortex\+Distortion\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classVFX_a2f47951d9758abc5555ec94a4f42c49b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classVFX_af7328e8b8044eeb2ee33cab60a5d5d51}\label{classVFX_af7328e8b8044eeb2ee33cab60a5d5d51} 
+\index{VFX@{VFX}!getWaveStatus@{getWaveStatus}}
+\index{getWaveStatus@{getWaveStatus}!VFX@{VFX}}
+\doxysubsubsection{\texorpdfstring{getWaveStatus()}{getWaveStatus()}}
+{\footnotesize\ttfamily bool \& VFX\+::get\+Wave\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classVFX_af7328e8b8044eeb2ee33cab60a5d5d51_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classVFX_a73a9e4723d8f0262ebd2468bea4d4143}\label{classVFX_a73a9e4723d8f0262ebd2468bea4d4143} 
+\index{VFX@{VFX}!glitch@{glitch}}
+\index{glitch@{glitch}!VFX@{VFX}}
+\doxysubsubsection{\texorpdfstring{glitch()}{glitch()}}
+{\footnotesize\ttfamily std\+::pair$<$ int, int $>$ VFX\+::glitch (\begin{DoxyParamCaption}\item[{std\+::pair$<$ int, int $>$}]{point }\end{DoxyParamCaption})}
+
+\Hypertarget{classVFX_ae145ee08c5671c764e696ac0c36bf266}\label{classVFX_ae145ee08c5671c764e696ac0c36bf266} 
+\index{VFX@{VFX}!jitter@{jitter}}
+\index{jitter@{jitter}!VFX@{VFX}}
+\doxysubsubsection{\texorpdfstring{jitter()}{jitter()}}
+{\footnotesize\ttfamily std\+::pair$<$ int, int $>$ VFX\+::jitter (\begin{DoxyParamCaption}\item[{std\+::pair$<$ int, int $>$}]{point }\end{DoxyParamCaption})}
+
+\Hypertarget{classVFX_a55e1b09c0e95c904b086a4208dd3a1d2}\label{classVFX_a55e1b09c0e95c904b086a4208dd3a1d2} 
+\index{VFX@{VFX}!pulseWave@{pulseWave}}
+\index{pulseWave@{pulseWave}!VFX@{VFX}}
+\doxysubsubsection{\texorpdfstring{pulseWave()}{pulseWave()}}
+{\footnotesize\ttfamily std\+::pair$<$ int, int $>$ VFX\+::pulse\+Wave (\begin{DoxyParamCaption}\item[{std\+::pair$<$ int, int $>$}]{point,  }\item[{float}]{time,  }\item[{int}]{centerX,  }\item[{int}]{centerY }\end{DoxyParamCaption})}
+
+\Hypertarget{classVFX_aea21a47b11d9d8f93daed6c7ba7f42b0}\label{classVFX_aea21a47b11d9d8f93daed6c7ba7f42b0} 
+\index{VFX@{VFX}!setChromaticAberrationStatus@{setChromaticAberrationStatus}}
+\index{setChromaticAberrationStatus@{setChromaticAberrationStatus}!VFX@{VFX}}
+\doxysubsubsection{\texorpdfstring{setChromaticAberrationStatus()}{setChromaticAberrationStatus()}}
+{\footnotesize\ttfamily void VFX\+::set\+Chromatic\+Aberration\+Status (\begin{DoxyParamCaption}\item[{bool}]{status }\end{DoxyParamCaption})}
+
+\Hypertarget{classVFX_ab49670cb99c8b23a7161e34e7f814748}\label{classVFX_ab49670cb99c8b23a7161e34e7f814748} 
+\index{VFX@{VFX}!setGlitchStatus@{setGlitchStatus}}
+\index{setGlitchStatus@{setGlitchStatus}!VFX@{VFX}}
+\doxysubsubsection{\texorpdfstring{setGlitchStatus()}{setGlitchStatus()}}
+{\footnotesize\ttfamily void VFX\+::set\+Glitch\+Status (\begin{DoxyParamCaption}\item[{bool}]{status }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classVFX_ab49670cb99c8b23a7161e34e7f814748_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classVFX_a5561ba20bf47c39d8a2ee1bcb6885aea}\label{classVFX_a5561ba20bf47c39d8a2ee1bcb6885aea} 
+\index{VFX@{VFX}!setJitterIntensity@{setJitterIntensity}}
+\index{setJitterIntensity@{setJitterIntensity}!VFX@{VFX}}
+\doxysubsubsection{\texorpdfstring{setJitterIntensity()}{setJitterIntensity()}}
+{\footnotesize\ttfamily void VFX\+::set\+Jitter\+Intensity (\begin{DoxyParamCaption}\item[{float}]{intensity }\end{DoxyParamCaption})}
+
+\Hypertarget{classVFX_a68ef23f5e1d8ec074b4e32ae9a0c0ae4}\label{classVFX_a68ef23f5e1d8ec074b4e32ae9a0c0ae4} 
+\index{VFX@{VFX}!setJitterStatus@{setJitterStatus}}
+\index{setJitterStatus@{setJitterStatus}!VFX@{VFX}}
+\doxysubsubsection{\texorpdfstring{setJitterStatus()}{setJitterStatus()}}
+{\footnotesize\ttfamily void VFX\+::set\+Jitter\+Status (\begin{DoxyParamCaption}\item[{bool}]{status }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classVFX_a68ef23f5e1d8ec074b4e32ae9a0c0ae4_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classVFX_a7d057fb9786a57d1aceeb116ddfa6264}\label{classVFX_a7d057fb9786a57d1aceeb116ddfa6264} 
+\index{VFX@{VFX}!setPulseWaveStatus@{setPulseWaveStatus}}
+\index{setPulseWaveStatus@{setPulseWaveStatus}!VFX@{VFX}}
+\doxysubsubsection{\texorpdfstring{setPulseWaveStatus()}{setPulseWaveStatus()}}
+{\footnotesize\ttfamily void VFX\+::set\+Pulse\+Wave\+Status (\begin{DoxyParamCaption}\item[{bool}]{status }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classVFX_a7d057fb9786a57d1aceeb116ddfa6264_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classVFX_a2fbfb15c018719e087086571955a743a}\label{classVFX_a2fbfb15c018719e087086571955a743a} 
+\index{VFX@{VFX}!setvortexDistortionIntensity@{setvortexDistortionIntensity}}
+\index{setvortexDistortionIntensity@{setvortexDistortionIntensity}!VFX@{VFX}}
+\doxysubsubsection{\texorpdfstring{setvortexDistortionIntensity()}{setvortexDistortionIntensity()}}
+{\footnotesize\ttfamily void VFX\+::setvortex\+Distortion\+Intensity (\begin{DoxyParamCaption}\item[{float}]{intensity }\end{DoxyParamCaption})}
+
+\Hypertarget{classVFX_a7df862c62651b02ecc51d835b7f5739e}\label{classVFX_a7df862c62651b02ecc51d835b7f5739e} 
+\index{VFX@{VFX}!setVortexDistortionStatus@{setVortexDistortionStatus}}
+\index{setVortexDistortionStatus@{setVortexDistortionStatus}!VFX@{VFX}}
+\doxysubsubsection{\texorpdfstring{setVortexDistortionStatus()}{setVortexDistortionStatus()}}
+{\footnotesize\ttfamily void VFX\+::set\+Vortex\+Distortion\+Status (\begin{DoxyParamCaption}\item[{bool}]{status }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classVFX_a7df862c62651b02ecc51d835b7f5739e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classVFX_a51cfc700374badef2e0d775abbd0949b}\label{classVFX_a51cfc700374badef2e0d775abbd0949b} 
+\index{VFX@{VFX}!setWaveStatus@{setWaveStatus}}
+\index{setWaveStatus@{setWaveStatus}!VFX@{VFX}}
+\doxysubsubsection{\texorpdfstring{setWaveStatus()}{setWaveStatus()}}
+{\footnotesize\ttfamily void VFX\+::set\+Wave\+Status (\begin{DoxyParamCaption}\item[{bool}]{status }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classVFX_a51cfc700374badef2e0d775abbd0949b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classVFX_a68e250a3c2ba297a5b285dbd60de6435}\label{classVFX_a68e250a3c2ba297a5b285dbd60de6435} 
+\index{VFX@{VFX}!vortexDistortion@{vortexDistortion}}
+\index{vortexDistortion@{vortexDistortion}!VFX@{VFX}}
+\doxysubsubsection{\texorpdfstring{vortexDistortion()}{vortexDistortion()}}
+{\footnotesize\ttfamily std\+::pair$<$ int, int $>$ VFX\+::vortex\+Distortion (\begin{DoxyParamCaption}\item[{std\+::pair$<$ int, int $>$}]{point,  }\item[{float}]{time,  }\item[{int}]{centerX,  }\item[{int}]{centerY }\end{DoxyParamCaption})}
+
+\Hypertarget{classVFX_accf04f8f9f24856b86577ab2a244372d}\label{classVFX_accf04f8f9f24856b86577ab2a244372d} 
+\index{VFX@{VFX}!waveDistortion@{waveDistortion}}
+\index{waveDistortion@{waveDistortion}!VFX@{VFX}}
+\doxysubsubsection{\texorpdfstring{waveDistortion()}{waveDistortion()}}
+{\footnotesize\ttfamily std\+::pair$<$ int, int $>$ VFX\+::wave\+Distortion (\begin{DoxyParamCaption}\item[{std\+::pair$<$ int, int $>$}]{point,  }\item[{float}]{time }\end{DoxyParamCaption})}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/\mbox{\hyperlink{VFX_8hpp}{VFX.\+hpp}}\item 
+src/\mbox{\hyperlink{VFX_8cpp}{VFX.\+cpp}}\end{DoxyCompactItemize}

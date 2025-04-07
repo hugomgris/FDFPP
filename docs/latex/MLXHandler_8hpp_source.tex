@@ -1,0 +1,91 @@
+\doxysection{MLXHandler.\+hpp}
+\hypertarget{MLXHandler_8hpp_source}{}\label{MLXHandler_8hpp_source}\index{includes/MLXHandler.hpp@{includes/MLXHandler.hpp}}
+\mbox{\hyperlink{MLXHandler_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ **************************************************************************\ */}}
+\DoxyCodeLine{00002\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00003\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :::\ \ \ \ \ \ ::::::::\ \ \ */}}
+\DoxyCodeLine{00004\ \textcolor{comment}{/*\ \ \ MLXHandler.hpp\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :+:\ \ \ \ \ \ :+:\ \ \ \ :+:\ \ \ */}}
+\DoxyCodeLine{00005\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +:+\ +:+\ \ \ \ \ \ \ \ \ +:+\ \ \ \ \ */}}
+\DoxyCodeLine{00006\ \textcolor{comment}{/*\ \ \ By:\ hmunoz-\/g\ <hmunoz-\/g@student.42.fr>\ \ \ \ \ \ \ \ \ \ +\#+\ \ +:+\ \ \ \ \ \ \ +\#+\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00007\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +\#+\#+\#+\#+\#+\ \ \ +\#+\ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00008\ \textcolor{comment}{/*\ \ \ Created:\ 2025/03/10\ 13:42:55\ by\ hmunoz-\/g\ \ \ \ \ \ \ \ \ \ \#+\#\ \ \ \ \#+\#\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00009\ \textcolor{comment}{/*\ \ \ Updated:\ 2025/04/03\ 17:55:12\ by\ hmunoz-\/g\ \ \ \ \ \ \ \ \ \#\#\#\ \ \ \#\#\#\#\#\#\#\#.fr\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00010\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*\ **************************************************************************\ */}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#ifndef\ MLXHANDLER\_HPP}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#\ define\ MLXHANDLER\_HPP}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#\ include\ <iostream>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#\ include\ <stdexcept>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#\ include\ <cstring>}\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#\ include\ "{}../libs/mlx42/include/MLX42/MLX42.h"{}}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classFDF}{FDF}};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classMLXHandler}{MLXHandler}}\{}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMLXHandler}{MLXHandler}}();}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_width;}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_height;}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_uiWidth;}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_uiHeight;}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\_title;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ mlx\_t\ *\_mlx;}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ mlx\_image\_t\ *\_img;}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ mlx\_image\_t\ *\_ui;}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ mlx\_image\_t\ *\_text1;}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ mlx\_image\_t\ *\_text2;}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classFDF}{FDF}}\ *\_fdf;}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_autoRotate;}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_leftMousePressed;}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_rightMousePressed;}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_lastMouseX;}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_lastMouseY;}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Constructors\ and\ destructor}}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMLXHandler}{MLXHandler}}(\textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{int}\ height,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ title);}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMLXHandler}{MLXHandler}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classMLXHandler}{MLXHandler}}\ \&other);}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMLXHandler_a0d2afb38640e31dc062a962f9459e222}{\string~MLXHandler}}();}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Operator\ overload}}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMLXHandler}{MLXHandler}}\ \&\mbox{\hyperlink{classMLXHandler_a6d1f64eca82496225e8ec9cbb11ef809}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classMLXHandler}{MLXHandler}}\ \&other);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Getters\ \&\ Setters}}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \&\mbox{\hyperlink{classMLXHandler_a17ff7189bdbbc4bbbc8ee2a23655cd9d}{getHeight}}();}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \&\mbox{\hyperlink{classMLXHandler_af9314f1a457cd72983f7e96e0391ddc3}{getWidth}}();}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \&\mbox{\hyperlink{classMLXHandler_a7aaa3cc2f0f5691e53b6cea57d7fec54}{getUIHeight}}();}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \&\mbox{\hyperlink{classMLXHandler_adb49fb2eacdc85e9753e0a566ced4722}{getUIWidth}}();}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ mlx\_image\_t\ *\mbox{\hyperlink{classMLXHandler_a6b65bdabeb3ed39f0ca57e4a73304d52}{getImage}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ mlx\_image\_t\ *\mbox{\hyperlink{classMLXHandler_a758a5c2b8248cece1699b6745204e79c}{getUI}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ mlx\_image\_t\ *\mbox{\hyperlink{classMLXHandler_a4b0d5a5a4f1c58737047e339222db46f}{getText1}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ mlx\_image\_t\ *\mbox{\hyperlink{classMLXHandler_a657542afab8400ef69df740658683cd8}{getText2}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ mlx\_t\ *\mbox{\hyperlink{classMLXHandler_a8caacaf61eb65b49ca20587f653e393c}{getMLX}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classFDF}{FDF}}\ *\mbox{\hyperlink{classMLXHandler_aeed034785edc8f33abd10afc0ad5bcdd}{getFDF}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \&\mbox{\hyperlink{classMLXHandler_ad2ceb52ffdf0f1d23330c4d892ee92bf}{getAutoRotate}}();}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMLXHandler_a65612ddbb62f0bbd5f47ac67ea24db89}{setAutoRotate}}(\textcolor{keywordtype}{bool}\ autoRotate);}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMLXHandler_a8e0763964a96192a7051d759248e65bb}{setFDF}}(\mbox{\hyperlink{classFDF}{FDF}}\ *fdf);}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Methods}}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMLXHandler_a122c40b6e086fda641b218eee1f9fb9f}{render}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMLXHandler_af612dbab07908c4f202c5f510d05309e}{handleEvents}}();}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMLXHandler_a2642431405e6dedd9b9dc3c929829791}{clearImage}}(mlx\_image\_t\ *img);}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMLXHandler_a07262e7064c0c53bf9a74ce60312fe4a}{cleanup}}();}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMLXHandler_a0f570b61ffcaed3f7aa2c1510a5d2aa5}{basicHooks}}(\textcolor{keywordtype}{void}\ *param);}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMLXHandler_a62ca7a51606c96dd91210cd65bda8f02}{scrollHook}}(\textcolor{keywordtype}{double}\ xdelta,\ \textcolor{keywordtype}{double}\ ydelta,\ \textcolor{keywordtype}{void}\ *param);}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMLXHandler_ae3ac2439b229870f00c95e4079b61caa}{perspectiveHooks}}(\textcolor{keywordtype}{void}\ *param);}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMLXHandler_ad3ec1c261bc9b88d27848ab456f58649}{mouseHook}}(mouse\_key\_t\ button,\ action\_t\ action,\ modifier\_key\_t\ mods,\ \textcolor{keywordtype}{void}\ *param);}
+\DoxyCodeLine{00083\ \};}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

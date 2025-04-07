@@ -1,0 +1,277 @@
+\doxysection{Height\+Map Class Reference}
+\hypertarget{classHeightMap}{}\label{classHeightMap}\index{HeightMap@{HeightMap}}
+
+
+{\ttfamily \#include $<$Height\+Map.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classHeightMap_a86eb6ace3c808c4272cc5d2a4aaf2b50}{Height\+Map}} (std\+::vector$<$ std\+::string $>$ \&map)
+\item 
+\mbox{\hyperlink{classHeightMap_a55d53e1558e0216a81c78ac152694f19}{\texorpdfstring{$\sim$}{\string~}\+Height\+Map}} ()
+\item 
+std\+::vector$<$ std\+::vector$<$ int $>$ $>$ \& \mbox{\hyperlink{classHeightMap_a3764b1ca900ddf94d1ba6be730337213}{get\+Matrix}} ()
+\item 
+int \mbox{\hyperlink{classHeightMap_a8820fd4a145bbf965fee5d6dcdf5ff1f}{get\+Matrix\+Width}} () const
+\item 
+int \mbox{\hyperlink{classHeightMap_acbb41ad127af96be6a15eead2dc6bbdb}{get\+Matrix\+Height}} () const
+\item 
+int \mbox{\hyperlink{classHeightMap_a7786413d112984e293c315077fc868bc}{getZ}} (int x, int y) const
+\item 
+int \mbox{\hyperlink{classHeightMap_aab08b0869151436b7272b1f94de7dd05}{get\+Color}} (int x, int y) const
+\item 
+bool \mbox{\hyperlink{classHeightMap_a1fdb8909cd8f71931958cab46942f350}{has\+Custom\+Color}} (int x, int y) const
+\item 
+float \mbox{\hyperlink{classHeightMap_a6ffe30bf054ce7ed9e72394d30180b6b}{normalize\+Height}} (int z) const
+\item 
+void \mbox{\hyperlink{classHeightMap_a6ceee5f6af62d92af6890955a843d51d}{set\+ZFactor}} (double factor, int mode)
+\item 
+double \mbox{\hyperlink{classHeightMap_aa0bb7e477a953a2cc5de129003f50134}{get\+ZFactor}} () const
+\item 
+int \mbox{\hyperlink{classHeightMap_aa5d629f89c2f97397b9b895571db8c88}{get\+NPoints}} () const
+\item 
+int \mbox{\hyperlink{classHeightMap_ad6989814ad76dd7e96dc067d5118e160}{get\+NEdges}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classHeightMap_a86eb6ace3c808c4272cc5d2a4aaf2b50}\label{classHeightMap_a86eb6ace3c808c4272cc5d2a4aaf2b50} 
+\index{HeightMap@{HeightMap}!HeightMap@{HeightMap}}
+\index{HeightMap@{HeightMap}!HeightMap@{HeightMap}}
+\doxysubsubsection{\texorpdfstring{HeightMap()}{HeightMap()}}
+{\footnotesize\ttfamily Height\+Map\+::\+Height\+Map (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::string $>$ \&}]{map }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHeightMap_a86eb6ace3c808c4272cc5d2a4aaf2b50_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classHeightMap_a55d53e1558e0216a81c78ac152694f19}\label{classHeightMap_a55d53e1558e0216a81c78ac152694f19} 
+\index{HeightMap@{HeightMap}!````~HeightMap@{\texorpdfstring{$\sim$}{\string~}HeightMap}}
+\index{````~HeightMap@{\texorpdfstring{$\sim$}{\string~}HeightMap}!HeightMap@{HeightMap}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}HeightMap()}{\string~HeightMap()}}
+{\footnotesize\ttfamily Height\+Map\+::\texorpdfstring{$\sim$}{\string~}\+Height\+Map (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classHeightMap_aab08b0869151436b7272b1f94de7dd05}\label{classHeightMap_aab08b0869151436b7272b1f94de7dd05} 
+\index{HeightMap@{HeightMap}!getColor@{getColor}}
+\index{getColor@{getColor}!HeightMap@{HeightMap}}
+\doxysubsubsection{\texorpdfstring{getColor()}{getColor()}}
+{\footnotesize\ttfamily int Height\+Map\+::get\+Color (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHeightMap_aab08b0869151436b7272b1f94de7dd05_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHeightMap_aab08b0869151436b7272b1f94de7dd05_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classHeightMap_a3764b1ca900ddf94d1ba6be730337213}\label{classHeightMap_a3764b1ca900ddf94d1ba6be730337213} 
+\index{HeightMap@{HeightMap}!getMatrix@{getMatrix}}
+\index{getMatrix@{getMatrix}!HeightMap@{HeightMap}}
+\doxysubsubsection{\texorpdfstring{getMatrix()}{getMatrix()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::vector$<$ int $>$ $>$ \& Height\+Map\+::get\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHeightMap_a3764b1ca900ddf94d1ba6be730337213_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classHeightMap_acbb41ad127af96be6a15eead2dc6bbdb}\label{classHeightMap_acbb41ad127af96be6a15eead2dc6bbdb} 
+\index{HeightMap@{HeightMap}!getMatrixHeight@{getMatrixHeight}}
+\index{getMatrixHeight@{getMatrixHeight}!HeightMap@{HeightMap}}
+\doxysubsubsection{\texorpdfstring{getMatrixHeight()}{getMatrixHeight()}}
+{\footnotesize\ttfamily int Height\+Map\+::get\+Matrix\+Height (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHeightMap_acbb41ad127af96be6a15eead2dc6bbdb_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHeightMap_acbb41ad127af96be6a15eead2dc6bbdb_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classHeightMap_a8820fd4a145bbf965fee5d6dcdf5ff1f}\label{classHeightMap_a8820fd4a145bbf965fee5d6dcdf5ff1f} 
+\index{HeightMap@{HeightMap}!getMatrixWidth@{getMatrixWidth}}
+\index{getMatrixWidth@{getMatrixWidth}!HeightMap@{HeightMap}}
+\doxysubsubsection{\texorpdfstring{getMatrixWidth()}{getMatrixWidth()}}
+{\footnotesize\ttfamily int Height\+Map\+::get\+Matrix\+Width (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHeightMap_a8820fd4a145bbf965fee5d6dcdf5ff1f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHeightMap_a8820fd4a145bbf965fee5d6dcdf5ff1f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classHeightMap_ad6989814ad76dd7e96dc067d5118e160}\label{classHeightMap_ad6989814ad76dd7e96dc067d5118e160} 
+\index{HeightMap@{HeightMap}!getNEdges@{getNEdges}}
+\index{getNEdges@{getNEdges}!HeightMap@{HeightMap}}
+\doxysubsubsection{\texorpdfstring{getNEdges()}{getNEdges()}}
+{\footnotesize\ttfamily int Height\+Map\+::get\+NEdges (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=348pt]{classHeightMap_ad6989814ad76dd7e96dc067d5118e160_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHeightMap_ad6989814ad76dd7e96dc067d5118e160_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classHeightMap_aa5d629f89c2f97397b9b895571db8c88}\label{classHeightMap_aa5d629f89c2f97397b9b895571db8c88} 
+\index{HeightMap@{HeightMap}!getNPoints@{getNPoints}}
+\index{getNPoints@{getNPoints}!HeightMap@{HeightMap}}
+\doxysubsubsection{\texorpdfstring{getNPoints()}{getNPoints()}}
+{\footnotesize\ttfamily int Height\+Map\+::get\+NPoints (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=349pt]{classHeightMap_aa5d629f89c2f97397b9b895571db8c88_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHeightMap_aa5d629f89c2f97397b9b895571db8c88_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classHeightMap_a7786413d112984e293c315077fc868bc}\label{classHeightMap_a7786413d112984e293c315077fc868bc} 
+\index{HeightMap@{HeightMap}!getZ@{getZ}}
+\index{getZ@{getZ}!HeightMap@{HeightMap}}
+\doxysubsubsection{\texorpdfstring{getZ()}{getZ()}}
+{\footnotesize\ttfamily int Height\+Map\+::getZ (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHeightMap_a7786413d112984e293c315077fc868bc_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHeightMap_a7786413d112984e293c315077fc868bc_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classHeightMap_aa0bb7e477a953a2cc5de129003f50134}\label{classHeightMap_aa0bb7e477a953a2cc5de129003f50134} 
+\index{HeightMap@{HeightMap}!getZFactor@{getZFactor}}
+\index{getZFactor@{getZFactor}!HeightMap@{HeightMap}}
+\doxysubsubsection{\texorpdfstring{getZFactor()}{getZFactor()}}
+{\footnotesize\ttfamily double Height\+Map\+::get\+ZFactor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHeightMap_aa0bb7e477a953a2cc5de129003f50134_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classHeightMap_a1fdb8909cd8f71931958cab46942f350}\label{classHeightMap_a1fdb8909cd8f71931958cab46942f350} 
+\index{HeightMap@{HeightMap}!hasCustomColor@{hasCustomColor}}
+\index{hasCustomColor@{hasCustomColor}!HeightMap@{HeightMap}}
+\doxysubsubsection{\texorpdfstring{hasCustomColor()}{hasCustomColor()}}
+{\footnotesize\ttfamily bool Height\+Map\+::has\+Custom\+Color (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHeightMap_a1fdb8909cd8f71931958cab46942f350_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHeightMap_a1fdb8909cd8f71931958cab46942f350_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classHeightMap_a6ffe30bf054ce7ed9e72394d30180b6b}\label{classHeightMap_a6ffe30bf054ce7ed9e72394d30180b6b} 
+\index{HeightMap@{HeightMap}!normalizeHeight@{normalizeHeight}}
+\index{normalizeHeight@{normalizeHeight}!HeightMap@{HeightMap}}
+\doxysubsubsection{\texorpdfstring{normalizeHeight()}{normalizeHeight()}}
+{\footnotesize\ttfamily float Height\+Map\+::normalize\+Height (\begin{DoxyParamCaption}\item[{int}]{z }\end{DoxyParamCaption}) const}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHeightMap_a6ffe30bf054ce7ed9e72394d30180b6b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classHeightMap_a6ceee5f6af62d92af6890955a843d51d}\label{classHeightMap_a6ceee5f6af62d92af6890955a843d51d} 
+\index{HeightMap@{HeightMap}!setZFactor@{setZFactor}}
+\index{setZFactor@{setZFactor}!HeightMap@{HeightMap}}
+\doxysubsubsection{\texorpdfstring{setZFactor()}{setZFactor()}}
+{\footnotesize\ttfamily void Height\+Map\+::set\+ZFactor (\begin{DoxyParamCaption}\item[{double}]{factor,  }\item[{int}]{mode }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classHeightMap_a6ceee5f6af62d92af6890955a843d51d_icgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/\mbox{\hyperlink{HeightMap_8hpp}{Height\+Map.\+hpp}}\item 
+src/\mbox{\hyperlink{HeightMap_8cpp}{Height\+Map.\+cpp}}\end{DoxyCompactItemize}

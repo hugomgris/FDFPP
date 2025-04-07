@@ -1,0 +1,11 @@
+<map id="src/projections/TrimectricProjection.cpp" name="src/projections/TrimectricProjection.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,191,45"/>
+<area shape="rect" id="Node000002" href="$TrimetricProjection_8hpp.html" title=" " alt="" coords="10,93,186,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,46,101,79,95,79,95,46"/>
+<area shape="rect" id="Node000003" href="$IProjection_8hpp.html" title=" " alt="" coords="39,181,157,207"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="101,134,101,167,95,167,95,134"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="25,255,85,280"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="93,208,71,244,67,242,89,206"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="109,255,172,280"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="107,206,129,242,125,244,103,208"/>
+</map>

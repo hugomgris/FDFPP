@@ -1,0 +1,23 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classIProjection.html" title=" " alt="" coords="5,228,96,253"/>
+<area shape="rect" id="Node000001" href="$classCabinetProjection.html" title=" " alt="" coords="161,5,298,31"/>
+<area shape="poly" id="edge1_Node000000_Node000001" title=" " alt="" coords="54,214,64,175,81,128,107,81,142,40,160,29,163,33,146,44,111,84,86,131,69,177,59,215"/>
+<area shape="rect" id="Node000002" href="$classCavalierProjection.html" title=" " alt="" coords="159,55,300,80"/>
+<area shape="poly" id="edge2_Node000000_Node000002" title=" " alt="" coords="59,214,89,151,113,118,142,89,163,78,165,82,146,93,117,121,94,154,63,216"/>
+<area shape="rect" id="Node000003" href="$classDimetricProjection.html" title=" " alt="" coords="158,104,301,129"/>
+<area shape="poly" id="edge3_Node000000_Node000003" title=" " alt="" coords="66,215,98,176,119,156,143,138,167,127,169,132,145,143,123,160,102,179,70,218"/>
+<area shape="rect" id="Node000004" href="$classHyperbolicProjection.html" title=" " alt="" coords="151,153,308,179"/>
+<area shape="poly" id="edge4_Node000000_Node000004" title=" " alt="" coords="83,218,143,188,175,176,177,181,145,192,85,223"/>
+<area shape="rect" id="Node000005" href="$classIsometricProjection.html" title=" " alt="" coords="155,203,303,228"/>
+<area shape="poly" id="edge5_Node000000_Node000005" title=" " alt="" coords="109,230,155,223,156,228,110,235"/>
+<area shape="rect" id="Node000006" href="$classMilitaryProjection.html" title=" " alt="" coords="161,252,298,277"/>
+<area shape="poly" id="edge6_Node000000_Node000006" title=" " alt="" coords="110,246,161,253,160,258,109,251"/>
+<area shape="rect" id="Node000007" href="$classOrthographicProjection.html" title=" " alt="" coords="144,301,315,327"/>
+<area shape="poly" id="edge7_Node000000_Node000007" title=" " alt="" coords="87,258,145,286,181,299,179,304,143,291,84,262"/>
+<area shape="rect" id="Node000008" href="$classPerspectiveProjection.html" title=" " alt="" coords="148,351,311,376"/>
+<area shape="poly" id="edge8_Node000000_Node000008" title=" " alt="" coords="71,263,103,300,145,336,172,348,170,353,143,340,99,304,67,266"/>
+<area shape="rect" id="Node000009" href="$classRecursiveDepth.html" title=" " alt="" coords="167,400,292,425"/>
+<area shape="poly" id="edge9_Node000000_Node000009" title=" " alt="" coords="64,265,94,326,117,358,146,385,168,398,165,402,142,389,113,361,90,329,59,267"/>
+<area shape="rect" id="Node000010" href="$classTrimetricProjection.html" title=" " alt="" coords="157,449,301,475"/>
+<area shape="poly" id="edge10_Node000000_Node000010" title=" " alt="" coords="60,266,70,304,87,349,112,395,146,435,166,447,163,452,142,439,107,398,82,352,65,306,55,268"/>
+</map>

@@ -1,0 +1,16 @@
+<map id="Camera::centerCamera" name="Camera::centerCamera">
+<area shape="rect" id="Node000001" title=" " alt="" coords="823,43,996,68"/>
+<area shape="rect" id="Node000002" href="$classMLXHandler.html#a0f570b61ffcaed3f7aa2c1510a5d2aa5" title=" " alt="" coords="375,5,559,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="837,43,774,33,662,24,559,21,559,15,663,19,775,27,838,37"/>
+<area shape="rect" id="Node000005" href="$classCamera.html#a8bb7101430d9adb92df1462f0dab8a93" title=" " alt="" coords="635,43,767,68"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="809,58,768,58,768,53,809,53"/>
+<area shape="rect" id="Node000006" href="$classFDF.html#a5da8d26879d4b903e4708e5d14397483" title=" " alt="" coords="628,92,775,117"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="842,74,756,95,755,89,841,69"/>
+<area shape="rect" id="Node000003" href="$classMLXHandler.html#af612dbab07908c4f202c5f510d05309e" title=" " alt="" coords="108,43,305,68"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="365,35,296,45,295,40,364,30"/>
+<area shape="rect" id="Node000004" href="$main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title=" " alt="" coords="5,43,60,68"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="94,58,60,58,60,53,94,53"/>
+<area shape="rect" id="Node000007" href="$classMLXHandler.html#ae3ac2439b229870f00c95e4079b61caa" title=" " alt="" coords="353,67,580,92"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="614,98,580,94,580,89,615,93"/>
+<area shape="poly" id="edge7_Node000007_Node000003" title=" " alt="" coords="340,70,305,67,306,62,340,65"/>
+</map>

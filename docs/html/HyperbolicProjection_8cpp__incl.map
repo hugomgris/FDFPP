@@ -1,0 +1,11 @@
+<map id="src/projections/HyperbolicProjection.cpp" name="src/projections/HyperbolicProjection.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,196,45"/>
+<area shape="rect" id="Node000002" href="$HyperbolicProjection_8hpp.html" title=" " alt="" coords="6,93,195,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="103,46,103,79,98,79,98,46"/>
+<area shape="rect" id="Node000003" href="$IProjection_8hpp.html" title=" " alt="" coords="41,181,160,207"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="103,134,103,167,98,167,98,134"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="28,255,88,280"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="96,208,74,244,70,242,91,206"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="112,255,175,280"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="110,206,132,242,127,244,105,208"/>
+</map>

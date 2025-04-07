@@ -1,0 +1,184 @@
+\doxysection{Map Class Reference}
+\hypertarget{classMap}{}\label{classMap}\index{Map@{Map}}
+
+
+{\ttfamily \#include $<$Map.\+hpp$>$}
+
+\doxysubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structMap_1_1MapPoint}{Map\+Point}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::vector$<$ \mbox{\hyperlink{structMap_1_1MapPoint}{Map\+Point}} $>$ \mbox{\hyperlink{classMap_a1f4938c64266bf225608b9364fedcbc7}{Map\+Line}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMap_a0f5ad0fd4563497b4214038cbca8b582}{Map}} ()
+\item 
+\mbox{\hyperlink{classMap_aa403fbe09394ccf39747588f5168e3b2}{\texorpdfstring{$\sim$}{\string~}\+Map}} ()
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classMap_a1f4938c64266bf225608b9364fedcbc7}{Map\+Line}} $>$ \& \mbox{\hyperlink{classMap_af2dbd18d74f4a62c16dde28bbeb628d8}{get\+Map\+Data}} ()
+\item 
+const std\+::vector$<$ \mbox{\hyperlink{classMap_a1f4938c64266bf225608b9364fedcbc7}{Map\+Line}} $>$ \& \mbox{\hyperlink{classMap_ae73cadc380693260fbfc61e302e049bd}{get\+Map\+Data}} () const
+\item 
+int \mbox{\hyperlink{classMap_ab3181204ba96eb15b96ee1ced85e198e}{get\+Width}} () const
+\item 
+int \mbox{\hyperlink{classMap_a67113f1ffac80d9a20b15fa18a58edc2}{get\+Height}} () const
+\item 
+int \mbox{\hyperlink{classMap_aad5abd2e9caedfbb706269bf86cd882a}{getZ}} (int x, int y) const
+\item 
+int \mbox{\hyperlink{classMap_abf206fec84c45a724dbc4c5141bbcbde}{get\+Color}} (int x, int y) const
+\item 
+bool \mbox{\hyperlink{classMap_ac4cff0704e5e9905159ac59b00716773}{has\+Custom\+Color}} (int x, int y) const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classMap_a1f4938c64266bf225608b9364fedcbc7}\label{classMap_a1f4938c64266bf225608b9364fedcbc7} 
+\index{Map@{Map}!MapLine@{MapLine}}
+\index{MapLine@{MapLine}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{MapLine}{MapLine}}
+{\footnotesize\ttfamily typedef std\+::vector$<$\mbox{\hyperlink{structMap_1_1MapPoint}{Map\+Point}}$>$ \mbox{\hyperlink{classMap_a1f4938c64266bf225608b9364fedcbc7}{Map\+::\+Map\+Line}}}
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classMap_a0f5ad0fd4563497b4214038cbca8b582}\label{classMap_a0f5ad0fd4563497b4214038cbca8b582} 
+\index{Map@{Map}!Map@{Map}}
+\index{Map@{Map}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{Map()}{Map()}}
+{\footnotesize\ttfamily Map\+::\+Map (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classMap_aa403fbe09394ccf39747588f5168e3b2}\label{classMap_aa403fbe09394ccf39747588f5168e3b2} 
+\index{Map@{Map}!````~Map@{\texorpdfstring{$\sim$}{\string~}Map}}
+\index{````~Map@{\texorpdfstring{$\sim$}{\string~}Map}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Map()}{\string~Map()}}
+{\footnotesize\ttfamily Map\+::\texorpdfstring{$\sim$}{\string~}\+Map (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classMap_abf206fec84c45a724dbc4c5141bbcbde}\label{classMap_abf206fec84c45a724dbc4c5141bbcbde} 
+\index{Map@{Map}!getColor@{getColor}}
+\index{getColor@{getColor}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{getColor()}{getColor()}}
+{\footnotesize\ttfamily int Map\+::get\+Color (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=293pt]{classMap_abf206fec84c45a724dbc4c5141bbcbde_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMap_abf206fec84c45a724dbc4c5141bbcbde_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMap_a67113f1ffac80d9a20b15fa18a58edc2}\label{classMap_a67113f1ffac80d9a20b15fa18a58edc2} 
+\index{Map@{Map}!getHeight@{getHeight}}
+\index{getHeight@{getHeight}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{getHeight()}{getHeight()}}
+{\footnotesize\ttfamily int Map\+::get\+Height (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMap_a67113f1ffac80d9a20b15fa18a58edc2_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMap_af2dbd18d74f4a62c16dde28bbeb628d8}\label{classMap_af2dbd18d74f4a62c16dde28bbeb628d8} 
+\index{Map@{Map}!getMapData@{getMapData}}
+\index{getMapData@{getMapData}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{getMapData()}{getMapData()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{classMap_a1f4938c64266bf225608b9364fedcbc7}{Map\+Line}} $>$ \& Map\+::get\+Map\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMap_af2dbd18d74f4a62c16dde28bbeb628d8_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMap_ae73cadc380693260fbfc61e302e049bd}\label{classMap_ae73cadc380693260fbfc61e302e049bd} 
+\index{Map@{Map}!getMapData@{getMapData}}
+\index{getMapData@{getMapData}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{getMapData()}{getMapData()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const std\+::vector$<$ \mbox{\hyperlink{classMap_a1f4938c64266bf225608b9364fedcbc7}{Map\+Line}} $>$ \& Map\+::get\+Map\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classMap_ab3181204ba96eb15b96ee1ced85e198e}\label{classMap_ab3181204ba96eb15b96ee1ced85e198e} 
+\index{Map@{Map}!getWidth@{getWidth}}
+\index{getWidth@{getWidth}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{getWidth()}{getWidth()}}
+{\footnotesize\ttfamily int Map\+::get\+Width (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMap_ab3181204ba96eb15b96ee1ced85e198e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMap_aad5abd2e9caedfbb706269bf86cd882a}\label{classMap_aad5abd2e9caedfbb706269bf86cd882a} 
+\index{Map@{Map}!getZ@{getZ}}
+\index{getZ@{getZ}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{getZ()}{getZ()}}
+{\footnotesize\ttfamily int Map\+::getZ (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=274pt]{classMap_aad5abd2e9caedfbb706269bf86cd882a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMap_aad5abd2e9caedfbb706269bf86cd882a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classMap_ac4cff0704e5e9905159ac59b00716773}\label{classMap_ac4cff0704e5e9905159ac59b00716773} 
+\index{Map@{Map}!hasCustomColor@{hasCustomColor}}
+\index{hasCustomColor@{hasCustomColor}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{hasCustomColor()}{hasCustomColor()}}
+{\footnotesize\ttfamily bool Map\+::has\+Custom\+Color (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=332pt]{classMap_ac4cff0704e5e9905159ac59b00716773_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMap_ac4cff0704e5e9905159ac59b00716773_icgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/map\+Handler/\mbox{\hyperlink{Map_8hpp}{Map.\+hpp}}\item 
+src/map\+Handler/\mbox{\hyperlink{Map_8cpp}{Map.\+cpp}}\end{DoxyCompactItemize}
