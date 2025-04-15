@@ -16,11 +16,8 @@
 # include "IProjection.hpp"
 
 class HyperbolicProjection : public IProjection{
-		private:
-			double _distance;
-		
 		public:
-			HyperbolicProjection(double distance = 1000.0);
+			HyperbolicProjection();
 			~HyperbolicProjection();
 
 			std::pair<int, int> project(int &x, int &y, int &z) const;
