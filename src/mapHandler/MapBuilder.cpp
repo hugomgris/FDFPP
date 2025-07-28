@@ -1,19 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   MapBuilder.cpp                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/06 09:45:41 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/27 12:23:57 by hmunoz-g         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../includes/mapHandler/MapBuilder.hpp"
 #include <algorithm>
 
-//Constructor and destructor
 MapBuilder::MapBuilder(std::string &input): _dicPath("dictionary/dictionary24.fdf"){
 	feedDictionary();
 
@@ -25,12 +12,10 @@ MapBuilder::MapBuilder(std::string &input): _dicPath("dictionary/dictionary24.fd
 
 MapBuilder::~MapBuilder(){}
 
-//Getters
 std::vector<std::string> &MapBuilder::getMap(){
 	return (this->_map);
 }
 
-//Methods
 void MapBuilder::feedDictionary() {
     std::ifstream dicFile(this->_dicPath.c_str());
     
@@ -58,7 +43,6 @@ void MapBuilder::feedDictionary() {
 }
 
 void MapBuilder::buildMapFromString(std::string &str){
-    // Char maps are 12x28
     if (str.size() > 100) {throw(StringTooLongException());}
 
     std::transform(str.begin(), str.end(), str.begin(), ::toupper);
@@ -97,7 +81,6 @@ void MapBuilder::buildMapFromPath(std::string &str){
 	mapFile.close();
 }
 
-//Helpers
 bool MapBuilder::checkInputType(std::string &input){
 	if (input.length() < 8) return false;
 	
@@ -116,7 +99,6 @@ bool MapBuilder::checkInputType(std::string &input){
 	return (checkA == prefix && checkB == suffix);
 }
 
-//Debuggers
 void MapBuilder::mapPrinter(){
 	for (std::vector<std::string>::iterator it = this->_map.begin(); it != this->_map.end(); it++)
 		std::cout << *it <<  std::endl;
@@ -127,7 +109,6 @@ void MapBuilder::dictionaryPrinter(){
 }
 
 
-//Exception messages
 const char *MapBuilder::BadDicFileException::what() const throw(){
 	return ("Bad dictionary file (check existance and premissions)");
 }

@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/06 10:13:14 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/07/28 15:29:02 by hmunoz-g         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../includes/mapHandler/MapBuilder.hpp"
 #include "../includes/mapHandler/MapParser.hpp"
 #include "../includes/projections/Projector.hpp"

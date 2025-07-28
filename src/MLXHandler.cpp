@@ -6,14 +6,13 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 17:54:44 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/07/28 15:18:42 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/07/28 18:28:48 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/MLXHandler.hpp"
 #include "../includes/FDF.hpp"
 
-//Constructors and destructor
 MLXHandler::MLXHandler(int width, int height, const char *title)
     : _width(width), _height(height), _title(title), _autoRotate(false),
       _leftMousePressed(false), _rightMousePressed(false), _lastMouseX(0), _lastMouseY(0) {
@@ -50,7 +49,6 @@ MLXHandler::MLXHandler(const MLXHandler &other): _title(other._title){
 
 MLXHandler::~MLXHandler() {}
 
-//Operator overload
 MLXHandler &MLXHandler::operator=(const MLXHandler &other){
 	if (this != &other){
 		this->_width = other._width;
@@ -62,7 +60,6 @@ MLXHandler &MLXHandler::operator=(const MLXHandler &other){
 	return (*this);
 }
 
-//Getters & Setters
 int &MLXHandler::getHeight(){
 	return (_height);
 }
@@ -112,7 +109,6 @@ void MLXHandler::setFDF(FDF *fdf){
 	_fdf = fdf;
 }
 
-//Methods
 void MLXHandler::render() const{
 	mlx_loop(this->_mlx);
 }
@@ -147,12 +143,11 @@ void MLXHandler::cleanup() {
 
 void MLXHandler::mouseHook(mouse_key_t button, action_t action, modifier_key_t mods, void *param) {
     MLXHandler *self = static_cast<MLXHandler *>(param);
-    (void)mods; // Suppress unused parameter warning
+    (void)mods;
     
     int32_t mouseX, mouseY;
     mlx_get_mouse_pos(self->_mlx, &mouseX, &mouseY);
     
-    // Track mouse button state
     if (button == MLX_MOUSE_BUTTON_LEFT) {
         if (action == MLX_PRESS) {
             self->_leftMousePressed = true;
@@ -192,7 +187,6 @@ void MLXHandler::basicHooks(void *param) {
 
     bool needsRedraw = false;
 
-    // Handle mouse movement
     if (self->_leftMousePressed || self->_rightMousePressed) {
         int32_t mouseX, mouseY;
         mlx_get_mouse_pos(self->_mlx, &mouseX, &mouseY);
@@ -215,11 +209,9 @@ void MLXHandler::basicHooks(void *param) {
         self->_lastMouseY = mouseY;
     }
 
-    // Check for window close
     if (mlx_is_key_down(self->_mlx, MLX_KEY_ESCAPE))
         mlx_close_window(self->_mlx);
 
-    // Z-factor adjustment
     if (mlx_is_key_down(self->_mlx, MLX_KEY_UP)) {
         self->_fdf->setZFactor(0.1, 1);
         needsRedraw = true;
@@ -229,7 +221,6 @@ void MLXHandler::basicHooks(void *param) {
         needsRedraw = true;
     }
 
-    // Zoom controls
     if (mlx_is_key_down(self->_mlx, MLX_KEY_KP_SUBTRACT)) {
         self->_fdf->zoom(0.9, -1, -1);
         needsRedraw = true;
@@ -239,7 +230,6 @@ void MLXHandler::basicHooks(void *param) {
         needsRedraw = true;
     }
 
-    // Panning controls
     if (mlx_is_key_down(self->_mlx, MLX_KEY_A)) {
         self->_fdf->pan(10, 0);
         needsRedraw = true;
@@ -257,7 +247,6 @@ void MLXHandler::basicHooks(void *param) {
         needsRedraw = true;
     }
 
-    // Rotation controls
     if (mlx_is_key_down(self->_mlx, MLX_KEY_Q)) {
         self->_fdf->rotateZ(-0.05);
         needsRedraw = true;
@@ -283,7 +272,6 @@ void MLXHandler::basicHooks(void *param) {
         needsRedraw = true;
     }
 
-    // RESET
     if (mlx_is_key_down(self->_mlx, MLX_KEY_R)) {
         self->_fdf->getCamera()->reset();
         self->_fdf->getCamera()->calculateInitialScale();
@@ -298,7 +286,6 @@ void MLXHandler::basicHooks(void *param) {
         needsRedraw = true;
     }
 
-    // COLORS
     bool PadOneKeyIsPressed = mlx_is_key_down(self->_mlx, MLX_KEY_KP_1);
     if (PadOneKeyIsPressed && !PadOneKeyWasPressed) {
         self->_fdf->getColorManager()->setColorSet(0);
@@ -341,7 +328,6 @@ void MLXHandler::basicHooks(void *param) {
     }
     PadSixKeyWasPressed = PadSixKeyIsPressed;
 
-    // EFFECTS
     bool oneKeyIsPressed = mlx_is_key_down(self->_mlx, MLX_KEY_1);
     if (oneKeyIsPressed && !oneKeyWasPressed) {
         self->setAutoRotate(!self->getAutoRotate());
@@ -404,7 +390,6 @@ void MLXHandler::scrollHook(double xdelta, double ydelta, void *param)
     bool needsRedraw = false;
     (void)xdelta;
     
-    // Get current mouse position
     int32_t mouseX, mouseY;
     mlx_get_mouse_pos(self->_mlx, &mouseX, &mouseY);
     

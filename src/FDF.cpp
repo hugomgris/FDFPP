@@ -12,7 +12,6 @@ FDF::FDF(std::vector<std::string> &map, Projector *projector, MLXHandler &MLXHan
 FDF::~FDF() {
 }
 
-// Getters
 Projector *FDF::getProjector() {
     return _projector;
 }

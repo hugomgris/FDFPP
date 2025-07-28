@@ -1,18 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   UI.cpp                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/27 15:27:00 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/07/28 15:44:47 by hmunoz-g         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../includes/UI.hpp"
 
-// Constructor and destructor
 UI::UI(HeightMap *heightMap, MLXHandler *mlxhandler, int uiWidth, int uiHeight)
 	: _heightMap(heightMap), _MLXHandler(mlxhandler), _uiWidth(uiWidth), _uiHeight(uiHeight) {
 	
@@ -101,33 +88,28 @@ UI::UI(HeightMap *heightMap, MLXHandler *mlxhandler, int uiWidth, int uiHeight)
 
 UI::~UI() {}
 
-// Getters
 mlx_image_t *UI::getUI() const{ return (_MLXHandler->getUI()); }
 
-// Methods
 void UI::fillBackground() {
 	uint8_t greyValue = 128; 
 	uint8_t opacity = 120;
 
-	// Iterate through each pixel of the image
 	for (int y = 0; y < _uiHeight; ++y) {
 		for (int x = 0; x < _uiWidth; ++x) {
 
 			mlx_put_pixel(_MLXHandler->getUI(), x, y, 
-				(greyValue << 24) |  // Red component 
-				(greyValue << 16) |  // Green component
-				(greyValue << 8)  |  // Blue component
-				opacity             // Alpha/Opacity component
+				(greyValue << 24) |
+				(greyValue << 16) |
+				(greyValue << 8)  |
+				opacity
 			);
 		}
 	}
 }
 
 void UI::outputControls() {
-	// Clear any existing texts first
 	clearTexts();
 
-	// Add texts
 	for (size_t i = 0; i < _controls.size(); ++i) {
 		mlx_image_t *textImage1 = _MLXHandler->getText1();
 		textImage1 = mlx_put_string(_MLXHandler->getMLX(), _controls[i].c_str(), 20, _controlsOffset + (_interlineSpacing * i));
@@ -146,14 +128,6 @@ void UI::outputControls() {
 	}
 }
 
-/*
-Pastel pink: (203, 192, 255)
-Pastel blue: (230, 216, 173)
-Pastel green: (170, 240, 170)
-Pastel purple: (230, 190, 230)
-Pastel orange: (160, 200, 255)
-*/
-
 void UI::ColorText(mlx_image_t *img, uint8_t targetR, uint8_t targetG, uint8_t targetB) {
     if (!img) return;
 
@@ -167,10 +141,10 @@ void UI::ColorText(mlx_image_t *img, uint8_t targetR, uint8_t targetG, uint8_t t
            
             if (a > 0) {
                 uint32_t new_pixel =
-                    (a << 24) |       // Alpha
-                    (targetR << 16) | // Red
-                    (targetG << 8) |  // Green
-                    (targetB);        // Blue
+                    (a << 24) |
+                    (targetR << 16) |
+                    (targetG << 8) |
+                    (targetB);
                
                 pixels[idx] = new_pixel;
             }
@@ -178,7 +152,6 @@ void UI::ColorText(mlx_image_t *img, uint8_t targetR, uint8_t targetG, uint8_t t
     }
 }
 
-// Method to clear text images
 void UI::clearTexts() {
 	for (auto textImg : _textImages) {
 		if (textImg) {

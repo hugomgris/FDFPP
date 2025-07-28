@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 17:41:05 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/07/28 15:17:32 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/07/28 16:50:50 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,87 +22,82 @@ class ColorManager {
         HeightMap &_heightMap;
         
         static constexpr uint32_t _colors1[] = {
-            0x2B3042ff, // Deep navy blue (lowest points, shadows)
-            0x495867ff, // Slate blue
-            0x748CABff, // Dusty sky blue
-            0xAFC1D6ff, // Pale periwinkle
-            0xD9E4F5ff, // Light cloud blue
-            0xF2E9E4ff, // Soft peach white
-            0xF4C095ff, // Warm sand
-            0xE57A44ff, // Terracotta orange
-            0xB85042ff, // Burnt coral
-            0x873D34ff  // Dark red clay (highest peaks)
+            0x2B3042ff,
+            0x495867ff,
+            0x748CABff,
+            0xAFC1D6ff,
+            0xD9E4F5ff,
+            0xF2E9E4ff,
+            0xF4C095ff,
+            0xE57A44ff,
+            0xB85042ff,
+            0x873D34ff
         };
 
-        // Forest & Mountains Palette
         static constexpr uint32_t _colors2[] = {
-            0x1A2F38ff, // Deep forest blue (water/valleys)
-            0x39444Eff, // Slate gray
-            0x5E747Fff, // Muted blue-gray
-            0x7A9E7Eff, // Sage green
-            0x9EB25Eff, // Olive green
-            0xC1C56Aff, // Light olive
-            0xDBC077ff, // Wheat
-            0xBD8B5Eff, // Tan brown
-            0x96624Eff, // Cedar brown
-            0x6E392Eff  // Dark auburn (peaks)
+            0x1A2F38ff,
+            0x39444Eff,
+            0x5E747Fff,
+            0x7A9E7Eff,
+            0x9EB25Eff,
+            0xC1C56Aff,
+            0xDBC077ff,
+            0xBD8B5Eff,
+            0x96624Eff,
+            0x6E392Eff
         };
         
-        // Desert & Canyons Palette
         static constexpr uint32_t _colors3[] = {
-            0x0F2C4Aff, // Deep blue (oasis water)
-            0x254B7Aff, // Medium blue
-            0x4A6D8Cff, // Dusty blue
-            0xD19C4Cff, // Sand yellow
-            0xDFAC66ff, // Light sand
-            0xE8BA81ff, // Pale sand
-            0xC67052ff, // Clay orange
-            0xA44A3Fff, // Rust
-            0x7D3B34ff, // Brick red
-            0x582C2Cff  // Dark brown (peaks)
+            0x0F2C4Aff,
+            0x254B7Aff,
+            0x4A6D8Cff,
+            0xD19C4Cff,
+            0xDFAC66ff,
+            0xE8BA81ff,
+            0xC67052ff,
+            0xA44A3Fff,
+            0x7D3B34ff,
+            0x582C2Cff
         };
         
-        // Volcanic & Lava Palette
         static constexpr uint32_t _colors4[] = {
-            0x0E0B16ff, // Dark purple-black (valleys)
-            0x221E32ff, // Deep indigo
-            0x36304Aff, // Dark slate purple
-            0x4A444Cff, // Charcoal
-            0x564E4Aff, // Dark ash
-            0x7A522Eff, // Bronze
-            0xA93E2Eff, // Burnt orange
-            0xCC2D2Dff, // Fire red
-            0xE83A0Fff, // Bright orange
-            0xFFD700ff  // Glowing yellow (peaks/lava)
+            0x0E0B16ff,
+            0x221E32ff,
+            0x36304Aff,
+            0x4A444Cff,
+            0x564E4Aff,
+            0x7A522Eff,
+            0xA93E2Eff,
+            0xCC2D2Dff,
+            0xE83A0Fff,
+            0xFFD700ff
         };
 
 
-        // Kentucky Route Zero-inspired Palette
         static constexpr uint32_t _colors5[] = {
-            0x181A1Bff, // Deep charcoal (shadows)
-            0x2C2F33ff, // Dark slate
-            0x3C4A4Eff, // Muted blue-gray
-            0x4B5D6Eff, // Faded blue
-            0x6C7A89ff, // Misty gray-blue
-            0xA3A9A6ff, // Pale gray
-            0xC9B89Aff, // Muted tan
-            0xE3C77Aff, // Pale gold
-            0xE8A87Aff, // Soft orange
-            0xF7F7F7ff  // Off-white (peaks/highlights)
+            0x181A1Bff,
+            0x2C2F33ff,
+            0x3C4A4Eff,
+            0x4B5D6Eff,
+            0x6C7A89ff,
+            0xA3A9A6ff,
+            0xC9B89Aff,
+            0xE3C77Aff,
+            0xE8A87Aff,
+            0xF7F7F7ff
         };
 
-        // Black & White Palette
         static constexpr uint32_t _colors6[] = {
-            0x000000ff, // Black
-            0x222222ff, // Very dark gray
-            0x444444ff, // Dark gray
-            0x666666ff, // Gray
-            0x888888ff, // Medium gray
-            0xAAAAAAff, // Light gray
-            0xCCCCCCff, // Lighter gray
-            0xEEEEEEff, // Very light gray
-            0xF7F7F7ff, // Near white
-            0xFFFFFFFF  // White
+            0x000000ff,
+            0x222222ff,
+            0x444444ff,
+            0x666666ff,
+            0x888888ff,
+            0xAAAAAAff,
+            0xCCCCCCff,
+            0xEEEEEEff,
+            0xF7F7F7ff,
+            0xFFFFFFFF
         };
 
         static constexpr int COLOR_COUNT = 10;

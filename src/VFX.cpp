@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 09:32:18 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/17 17:28:13 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/07/28 18:31:04 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ VFX::VFX(): _jitterIntensity(1.0f), _vortexDistortionIntensity(1.0f){
 
 VFX::~VFX(){}
 
-// Getters
 float &VFX::getJitterIntensity(){
     return (_jitterIntensity);
 }
@@ -56,7 +55,6 @@ bool &VFX::getChromaticAberrationStatus() {
     return (_chromaticAberrationStatus);
 }
 
-// Setters
 void VFX::setJitterIntensity(float intensity){
     _jitterIntensity = intensity;
 }
@@ -85,7 +83,6 @@ void VFX::setChromaticAberrationStatus(bool status) {
     _chromaticAberrationStatus = status;
 }
 
-//Effects
 std::pair<int, int> VFX::jitter(std::pair <int, int> point){
     static std::default_random_engine generator;
     std::uniform_real_distribution<float> distribution(-_jitterIntensity, _jitterIntensity);
@@ -105,7 +102,7 @@ std::pair<int, int> VFX::waveDistortion(std::pair<int, int> point, float time) {
 std::pair<int, int> VFX::glitch(std::pair<int, int> point) {
     static std::default_random_engine generator;
     std::uniform_int_distribution<int> displacement(-5, 5);
-    if (rand() % 10 < 2) { // Ocurrence
+    if (rand() % 10 < 2) {
         point.first += displacement(generator);
         point.second += displacement(generator);
     }
@@ -113,19 +110,15 @@ std::pair<int, int> VFX::glitch(std::pair<int, int> point) {
 }
 
 std::pair<int, int> VFX::pulseWave(std::pair<int, int> point, float time, int centerX, int centerY) {
-    // Calculate distance from center
     float dx = point.first - centerX;
     float dy = point.second - centerY;
     float distance = sqrt(dx*dx + dy*dy);
     
-    // Create expanding circular waves
     float waveFactor = sin(distance * 0.05 - time * 2.0) * 5.0;
     
-    // Direction from center point
     float dirX = (dx == 0) ? 0 : dx / distance;
     float dirY = (dy == 0) ? 0 : dy / distance;
-    
-    // Apply distortion along the direction from center
+
     int newX = point.first + dirX * waveFactor;
     int newY = point.second + dirY * waveFactor;
     
@@ -133,22 +126,17 @@ std::pair<int, int> VFX::pulseWave(std::pair<int, int> point, float time, int ce
 }
 
 std::pair<int, int> VFX::vortexDistortion(std::pair<int, int> point, float time, int centerX, int centerY) {
-    // Calculate vector from center to point
     float dx = point.first - centerX;
     float dy = point.second - centerY;
     
-    // Distance from center
     float distance = sqrt(dx*dx + dy*dy);
-    
-    // Skip points at the very center to avoid division by zero
+
     if (distance < 5.0f) {
         return point;
     }
     
-    // Calculate rotation angle based on distance
     float angle = _vortexDistortionIntensity * sin(time * 0.5) / (distance * 0.05);
     
-    // Rotate the point around the center
     float cosA = cos(angle);
     float sinA = sin(angle);
     

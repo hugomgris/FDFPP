@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   HeightMap.cpp                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 17:42:05 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/04/03 13:02:59 by hmunoz-g         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../includes/HeightMap.hpp"
 
 HeightMap::HeightMap(std::vector<std::string> &map) : _zFactor(1.0) {
@@ -63,31 +51,24 @@ void HeightMap::parseMapLine(const std::string &line, std::vector<Map::MapPoint>
         int color = 0;
         bool hasCustomColor = false;
         
-        // Check if token contains a comma (indicating color)
         size_t commaPos = token.find(',');
         if (commaPos != std::string::npos) {
-            // Extract z-value
             std::string zStr = token.substr(0, commaPos);
             z = std::stoi(zStr);
             
-            // Extract color value
             std::string colorStr = token.substr(commaPos + 1);
             if (colorStr.substr(0, 2) == "0x" || colorStr.substr(0, 2) == "0X") {
-                // Parse hex color
                 std::stringstream ss;
                 ss << std::hex << colorStr.substr(2);
                 ss >> color;
                 hasCustomColor = true;
             }
         } else {
-            // Just a z-value
             z = std::stoi(token);
         }
         
-        // Add point to the line
         points.push_back(Map::MapPoint(z, color, hasCustomColor));
         
-        // Update min and max height
         _minHeight = std::min(_minHeight, z);
         _maxHeight = std::max(_maxHeight, z);
     }
@@ -141,7 +122,6 @@ void HeightMap::setZFactor(double factor, int mode) {
     if (mode < 0)
         _zFactor -= factor;
         
-    // Recalculate height extremes after changing z factor
     calculateMinMaxHeight();
 }
 
