@@ -6,7 +6,7 @@
 #    By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/13 13:48:05 by hmunoz-g          #+#    #+#              #
-#    Updated: 2025/03/31 10:02:14 by hmunoz-g         ###   ########.fr        #
+#    Updated: 2025/07/28 16:43:52 by hmunoz-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,8 @@ SRC         := src/main.cpp \
 				src/projections/MilitaryProjection.cpp \
 				src/projections/RecursiveDepthProjection.cpp \
 				src/projections/HyperbolicProjection.cpp \
+				src/projections/ConicProjection.cpp \
+				src/projections/SphericalConicProjection.cpp \
 
 OBJS        = $(addprefix $(OBJ_DIR)/, $(SRC:.cpp=.o))
 DEPS        = $(addprefix $(DEP_DIR)/, $(SRC:.cpp=.d))
@@ -100,9 +102,19 @@ $(NAME): $(OBJS) Makefile
 	@echo "$(GREEN)$(NAME) compiled!$(DEF_COLOR)"
 	@echo "$(RED)So preoccupied with whether or not I could, I didn't stop to think if I should.$(DEF_COLOR)"
 
-doxy:
-	doxygen Doxyfile
+DOXYGEN_VERSION = 1.10.0
+DOXYGEN_DIR = $(HOME)/doxygen-$(DOXYGEN_VERSION)
+DOXYGEN_BIN = $(DOXYGEN_DIR)/bin/doxygen
+
+doxy: $(DOXYGEN_BIN)
+	@$(DOXYGEN_BIN) Doxyfile
 	@echo "$(GREEN)Doxy documentation generated in docs/index.html$< $(DEF_COLOR)"
+
+$(DOXYGEN_BIN):
+	@echo "Downloading Doxygen"
+	@wget -q https://www.doxygen.nl/files/doxygen-$(DOXYGEN_VERSION).linux.bin.tar.gz -O /tmp/doxygen.tar.gz
+	@tar -xzf /tmp/doxygen.tar.gz -C $(HOME)
+	@rm /tmp/doxygen.tar.gz
 
 doxyclean:
 	rm -rf docs/html/ docs/latex/ docs/xml/ docs/rtf/ docs/man/ docs/docbook/

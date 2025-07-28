@@ -1,9 +1,0 @@
-<map id="VFX::setVortexDistortionStatus" name="VFX::setVortexDistortionStatus">
-<area shape="rect" id="Node000001" title=" " alt="" coords="585,5,768,45"/>
-<area shape="rect" id="Node000002" href="$classMLXHandler.html#a0f570b61ffcaed3f7aa2c1510a5d2aa5" title=" " alt="" coords="353,13,537,38"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="571,28,538,28,538,23,571,23"/>
-<area shape="rect" id="Node000003" href="$classMLXHandler.html#af612dbab07908c4f202c5f510d05309e" title=" " alt="" coords="108,13,305,38"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="339,28,306,28,306,23,339,23"/>
-<area shape="rect" id="Node000004" href="$main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title=" " alt="" coords="5,13,60,38"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="94,28,60,28,60,23,94,23"/>
-</map>

@@ -1,9 +1,0 @@
-<map id="FDF::getProjector" name="FDF::getProjector">
-<area shape="rect" id="Node000001" title=" " alt="" coords="628,5,763,31"/>
-<area shape="rect" id="Node000002" href="$classMLXHandler.html#ae3ac2439b229870f00c95e4079b61caa" title=" " alt="" coords="353,5,580,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="614,21,580,21,580,15,614,15"/>
-<area shape="rect" id="Node000003" href="$classMLXHandler.html#af612dbab07908c4f202c5f510d05309e" title=" " alt="" coords="108,5,305,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="340,21,306,21,306,15,340,15"/>
-<area shape="rect" id="Node000004" href="$main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title=" " alt="" coords="5,5,60,31"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="94,21,60,21,60,15,94,15"/>
-</map>

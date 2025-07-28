@@ -1,9 +1,0 @@
-<map id="HeightMap::getZ" name="HeightMap::getZ">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,136,56"/>
-<area shape="rect" id="Node000002" href="$classMap.html#aad5abd2e9caedfbb706269bf86cd882a" title=" " alt="" coords="184,31,272,56"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="136,41,170,41,170,46,136,46"/>
-<area shape="rect" id="Node000003" href="$classMap.html#a67113f1ffac80d9a20b15fa18a58edc2" title=" " alt="" coords="320,5,443,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="272,34,306,28,307,33,273,39"/>
-<area shape="rect" id="Node000004" href="$classMap.html#ab3181204ba96eb15b96ee1ced85e198e" title=" " alt="" coords="323,55,440,80"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="273,48,309,53,309,59,272,53"/>
-</map>

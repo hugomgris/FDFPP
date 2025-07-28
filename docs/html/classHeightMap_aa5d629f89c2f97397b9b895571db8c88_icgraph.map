@@ -1,7 +1,0 @@
-<map id="HeightMap::getNPoints" name="HeightMap::getNPoints">
-<area shape="rect" id="Node000001" title=" " alt="" coords="225,31,397,56"/>
-<area shape="rect" id="Node000002" href="$classHeightMap.html#a86eb6ace3c808c4272cc5d2a4aaf2b50" title=" " alt="" coords="5,5,177,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="211,34,177,31,178,25,212,29"/>
-<area shape="rect" id="Node000003" href="$classUI.html#ab22e0be6db01d34d7fed1d5ed515c6ee" title=" " alt="" coords="62,55,121,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="211,57,121,67,121,62,211,52"/>
-</map>

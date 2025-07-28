@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:27:00 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/04/03 18:02:20 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/07/28 15:44:47 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ UI::UI(HeightMap *heightMap, MLXHandler *mlxhandler, int uiWidth, int uiHeight)
 		"			ZOOM:  ,  /        ",
 		"			HEIGHT:   ,",
 		"			RESET: ",
-		"			EXIT: ",
 		" ",
 		"			AUTOROTATE: ",
 		"			JITTERING: ",
@@ -48,15 +47,17 @@ UI::UI(HeightMap *heightMap, MLXHandler *mlxhandler, int uiWidth, int uiHeight)
 		"			MILITARY: ",
 		"			RECURSIVE-DEPTH: ",
 		"			HYPERBOLIC: ",
+		"			CONIC: ",
+		"			SPHERICAL: ",
 		" ",
 		"			EARTHVOID: ",
 		"			FOREST-MOUNTAIN: ",
 		"			CANYONS: ",
 		"			LAVA: ",
+		"			KRZ: ",
+		"			B&W: ",
 		" ",
-		" ",
-		"			POINTS:",
-		"			EDGES:",
+		"			POINTS:       // EDGES:",
 	};
 
 	_controls2 = {
@@ -66,7 +67,6 @@ UI::UI(HeightMap *heightMap, MLXHandler *mlxhandler, int uiWidth, int uiHeight)
 		"			      - +   Scroll",
 		"		         UP DOWN",
 		"			       R",
-		"			      ESC",
 		"EFFECTS:",
 		"			            1",
 		"			           2",
@@ -85,15 +85,17 @@ UI::UI(HeightMap *heightMap, MLXHandler *mlxhandler, int uiWidth, int uiHeight)
 		"			          F8",
 		"			                 F9",
 		"			            F10",
+		"			       F11",
+		"			           F12",
 		"COLORS:",
 		"			           KP-1",
 		"			                 KP-2",
 		"			         KP-3",
 		"			      KP-4",
-		" ",
+		"			     KP-5",
+		"			     KP-6",
 		"INFO:",
-		"			        " + _nPoints,
-		"			       " + _nEdges,
+		"			        " + _nPoints + "            " + _nEdges,
 	};
 }
 

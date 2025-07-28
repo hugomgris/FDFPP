@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 17:54:44 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/04/03 18:00:28 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/07/28 15:18:42 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,8 @@ void MLXHandler::basicHooks(void *param) {
     static bool PadTwoKeyWasPressed = false;
     static bool PadThreeKeyWasPressed = false;
     static bool PadFourKeyWasPressed = false;
+    static bool PadFiveKeyWasPressed = false;
+    static bool PadSixKeyWasPressed = false;
 
     bool needsRedraw = false;
 
@@ -324,6 +326,20 @@ void MLXHandler::basicHooks(void *param) {
         needsRedraw = true;
     }
     PadFourKeyWasPressed = PadFourKeyIsPressed;
+
+    bool PadFiveKeyIsPressed = mlx_is_key_down(self->_mlx, MLX_KEY_KP_5);
+    if (PadFiveKeyIsPressed && !PadFiveKeyWasPressed) {
+        self->_fdf->getColorManager()->setColorSet(4);
+        needsRedraw = true;
+    }
+    PadFiveKeyWasPressed = PadFiveKeyIsPressed;
+
+    bool PadSixKeyIsPressed = mlx_is_key_down(self->_mlx, MLX_KEY_KP_6);
+    if (PadSixKeyIsPressed && !PadSixKeyWasPressed) {
+        self->_fdf->getColorManager()->setColorSet(5);
+        needsRedraw = true;
+    }
+    PadSixKeyWasPressed = PadSixKeyIsPressed;
 
     // EFFECTS
     bool oneKeyIsPressed = mlx_is_key_down(self->_mlx, MLX_KEY_1);
@@ -480,4 +496,18 @@ void MLXHandler::perspectiveHooks(void *param){
         self->_fdf->centerCamera();
 		self->_fdf->draw();
 	}
+
+    if (mlx_is_key_down(self->_mlx, MLX_KEY_F11)){
+        self->clearImage(self->_img);
+        self->_fdf->getProjector()->setType(11);
+        self->_fdf->centerCamera();
+        self->_fdf->draw();
+    }
+
+    if (mlx_is_key_down(self->_mlx, MLX_KEY_F12)){
+        self->clearImage(self->_img);
+        self->_fdf->getProjector()->setType(12);
+        self->_fdf->centerCamera();
+        self->_fdf->draw();
+    }
 }

@@ -1,7 +1,0 @@
-<map id="Map::getColor" name="Map::getColor">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,119,56"/>
-<area shape="rect" id="Node000002" href="$classMap.html#a67113f1ffac80d9a20b15fa18a58edc2" title=" " alt="" coords="167,5,289,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="119,32,153,27,153,32,119,37"/>
-<area shape="rect" id="Node000003" href="$classMap.html#ab3181204ba96eb15b96ee1ced85e198e" title=" " alt="" coords="169,55,287,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="119,49,156,54,155,60,119,54"/>
-</map>

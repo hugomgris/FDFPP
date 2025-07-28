@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Projector.hpp                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/12 14:39:42 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/12 15:35:07 by hmunoz-g         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef PROJECTOR_HPP
 # define PROJECTOR_HPP
 
@@ -25,6 +13,8 @@
 # include "../../includes/projections/MilitaryProjection.hpp"
 # include "../../includes/projections/RecursiveDepthProjection.hpp"
 # include "../../includes/projections/HyperbolicProjection.hpp"
+# include "../../includes/projections/ConicProjection.hpp"
+# include "../../includes/projections/SphericalConicProjection.hpp"
 
 class Projector{
 	private:
@@ -40,6 +30,8 @@ class Projector{
 		MilitaryProjection *_military;
 		RecursiveDepth *_recursive;
 		HyperbolicProjection *_hyperbolic;
+		ConicProjection *_conic;
+		SphericalConicProjection *_spherical;
 
 	public:
 		class BadProjectionException : public std::exception{

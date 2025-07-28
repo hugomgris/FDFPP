@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:44:03 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/12 15:35:04 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/07/28 14:32:22 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ Projector::Projector(){
 	_military = new MilitaryProjection();
 	_recursive = new RecursiveDepth();
 	_hyperbolic = new HyperbolicProjection();
+	_conic = new ConicProjection();
+	_spherical = new SphericalConicProjection();
 }
 
 Projector::~Projector(){
@@ -36,6 +38,8 @@ Projector::~Projector(){
     delete _military;
     delete _recursive;
 	delete _hyperbolic;
+	delete _conic;
+	delete _spherical;
 }
 
 IProjection *Projector::getProjection(){
@@ -74,11 +78,17 @@ void Projector::setType(int type){
 		case 10:
 			_selectedProjection = _hyperbolic;
 			break;
+		case 11:
+			_selectedProjection = _conic;
+			break;
+		case 12:
+			_selectedProjection = _spherical;
+			break;
 		default:
 			throw(BadProjectionException());
 	}
 }
 
 const char *Projector::BadProjectionException::what() const throw(){
-	return ("Bad projection selection! (Try with values 1-9 or use 'help' as argument for further instructions)");
+	return ("Bad projection selection! (Try with values 1-11 or use 'help' as argument for further instructions)");
 }

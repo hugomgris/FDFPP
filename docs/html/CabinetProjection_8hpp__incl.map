@@ -1,9 +1,0 @@
-<map id="includes/projections/CabinetProjection.hpp" name="includes/projections/CabinetProjection.hpp">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,175,45"/>
-<area shape="rect" id="Node000002" href="$IProjection_8hpp.html" title=" " alt="" coords="31,93,149,119"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,46,93,79,87,79,87,46"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="17,167,77,192"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="85,120,63,156,59,154,81,118"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="101,167,164,192"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="99,118,121,154,117,156,95,120"/>
-</map>

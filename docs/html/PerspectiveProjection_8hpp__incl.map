@@ -1,9 +1,0 @@
-<map id="includes/projections/PerspectiveProjection.hpp" name="includes/projections/PerspectiveProjection.hpp">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,200,45"/>
-<area shape="rect" id="Node000002" href="$IProjection_8hpp.html" title=" " alt="" coords="43,93,162,119"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,46,105,79,100,79,100,46"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="30,167,90,192"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="98,120,76,156,72,154,93,118"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="114,167,177,192"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="112,118,134,154,129,156,107,120"/>
-</map>

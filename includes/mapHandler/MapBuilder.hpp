@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   MapBuilder.hpp                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/06 09:39:17 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/03/20 17:47:56 by hmunoz-g         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef MAPBUILDER_HPP
 # define MAPBUILDER_HPP
 
@@ -24,10 +12,8 @@
 
 class MapBuilder{
 	private:
-		//Constructors
 		MapBuilder(const MapBuilder &other);
 
-		//Operator overload
 		MapBuilder &operator=(const MapBuilder &other);
 
 		const std::string _dicPath;
@@ -35,7 +21,6 @@ class MapBuilder{
 		std::vector<std::string> _map;
 
 	public:
-		//Exception classes
 		class BadDicFileException : public std::exception{
 			const char *what() const throw();
 		};
@@ -52,22 +37,17 @@ class MapBuilder{
 			const char *what () const throw();
 		};
 
-		//Constructor and destructor
 		MapBuilder(std::string &input);
 		~MapBuilder();
 
-		//Getters
 		std::vector<std::string> &getMap();
 
-		//Methods
 		void feedDictionary();
 		void buildMapFromString(std::string &str);
 		void buildMapFromPath(std::string &str);
 
-		//Helpers
 		bool checkInputType(std::string &input);
 
-		//Debuggers
 		void mapPrinter();
 		void dictionaryPrinter();
 };

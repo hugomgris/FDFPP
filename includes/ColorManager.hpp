@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 17:41:05 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/04/03 14:25:58 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/07/28 15:17:32 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,35 @@ class ColorManager {
             0xFFD700ff  // Glowing yellow (peaks/lava)
         };
 
+
+        // Kentucky Route Zero-inspired Palette
+        static constexpr uint32_t _colors5[] = {
+            0x181A1Bff, // Deep charcoal (shadows)
+            0x2C2F33ff, // Dark slate
+            0x3C4A4Eff, // Muted blue-gray
+            0x4B5D6Eff, // Faded blue
+            0x6C7A89ff, // Misty gray-blue
+            0xA3A9A6ff, // Pale gray
+            0xC9B89Aff, // Muted tan
+            0xE3C77Aff, // Pale gold
+            0xE8A87Aff, // Soft orange
+            0xF7F7F7ff  // Off-white (peaks/highlights)
+        };
+
+        // Black & White Palette
+        static constexpr uint32_t _colors6[] = {
+            0x000000ff, // Black
+            0x222222ff, // Very dark gray
+            0x444444ff, // Dark gray
+            0x666666ff, // Gray
+            0x888888ff, // Medium gray
+            0xAAAAAAff, // Light gray
+            0xCCCCCCff, // Lighter gray
+            0xEEEEEEff, // Very light gray
+            0xF7F7F7ff, // Near white
+            0xFFFFFFFF  // White
+        };
+
         static constexpr int COLOR_COUNT = 10;
 
         const uint32_t* _selectedColors;
@@ -98,6 +127,12 @@ class ColorManager {
                     break;
                 case 3:
                     _selectedColors = _colors4;
+                    break;
+                case 4:
+                    _selectedColors = _colors5;
+                    break;
+                case 5:
+                    _selectedColors = _colors6;
                     break;
                 default:
                     _selectedColors = _colors1;

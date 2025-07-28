@@ -1,7 +1,0 @@
-<map id="Map::getZ" name="Map::getZ">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,93,56"/>
-<area shape="rect" id="Node000002" href="$classMap.html#a67113f1ffac80d9a20b15fa18a58edc2" title=" " alt="" coords="141,5,264,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,34,127,28,128,33,94,39"/>
-<area shape="rect" id="Node000003" href="$classMap.html#ab3181204ba96eb15b96ee1ced85e198e" title=" " alt="" coords="144,55,261,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="94,48,131,53,130,59,93,53"/>
-</map>

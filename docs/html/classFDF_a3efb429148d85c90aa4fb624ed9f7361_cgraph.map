@@ -1,5 +1,0 @@
-<map id="FDF::draw" name="FDF::draw">
-<area shape="rect" id="Node000001" title="Renders the heightmap with current transformations." alt="" coords="5,5,92,31"/>
-<area shape="rect" id="Node000002" href="$classRenderer.html#a9a0a5f207e3d9f60c6372a9c79b25df9" title=" " alt="" coords="140,5,261,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="92,15,126,15,126,21,92,21"/>
-</map>

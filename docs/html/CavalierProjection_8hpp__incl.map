@@ -1,9 +1,0 @@
-<map id="includes/projections/CavalierProjection.hpp" name="includes/projections/CavalierProjection.hpp">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,179,45"/>
-<area shape="rect" id="Node000002" href="$IProjection_8hpp.html" title=" " alt="" coords="33,93,151,119"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,46,95,79,89,79,89,46"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="19,167,79,192"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="87,120,65,156,61,154,83,118"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="103,167,166,192"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="101,118,123,154,119,156,97,120"/>
-</map>
