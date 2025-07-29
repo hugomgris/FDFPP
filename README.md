@@ -124,10 +124,9 @@ Transform text into 3D wireframe maps using a comprehensive character dictionary
 - **Real-time Generation**: Maps are built and rendered immediately
 
 **Usage:**
-- Press `T` in the application to open the text-to-map builder
+- Run the program with a string argument instead of a map path (check usage examples above)
 - Input text will be converted using the character dictionary
 - Each character becomes a 3D representation in the wireframe
-- Perfect for creating personalized maps and text-based visualizations
 
 ## Controls
 
@@ -164,6 +163,9 @@ Transform text into 3D wireframe maps using a comprehensive character dictionary
 - **Left Click + Drag**: Pan the map view
 - **Right Click + Drag**: 3D rotation
 - **Scroll Wheel**: Zoom with mouse-centered scaling
+
+## Documentation
+
 
 ## Acknowledgements
 
