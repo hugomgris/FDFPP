@@ -1,6 +1,0 @@
-digraph h {
-  K -> L
-  S -> T  [minlen=3]
-  U -> V
-  L [style=dotted]
-}

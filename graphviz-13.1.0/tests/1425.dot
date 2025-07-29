@@ -1,9 +1,0 @@
-digraph
-{
-  n  [
-    label = <
-      <table tooltip="table tip">
-        <tr> <td tooltip="td tip"> td </td> </tr>
-      </table>
-    >]
-}

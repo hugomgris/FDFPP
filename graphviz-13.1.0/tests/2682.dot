@@ -1,6 +1,0 @@
-digraph {
-  pack="true"
-  "A" "B" "C"
-
-  "A" -> "B" [label="label"];
-}
