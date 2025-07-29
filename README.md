@@ -183,21 +183,21 @@ This design ensures extensibility, maintainability, and performance optimization
 
 This project is fully documented using [Doxygen](https://www.doxygen.nl/), a tool for generating comprehensive code documentation from annotated C++ source files.
 
+
 ### How to Generate Documentation
 
-1. **Ensure Doxygen is installed:**
-   - On most Linux systems: `sudo apt-get install doxygen`
-   - Or see [Doxygen installation guide](https://www.doxygen.nl/manual/install.html)
-
-2. **Generate the documentation:**
-   - From the project root, run:
+1. **Run the documentation build:**
+   - From the project root, simply run:
      ```sh
      make doxy
      ```
-   - This will use the provided `Doxyfile` configuration to generate HTML documentation in the `docs/` directory.
+   - If Doxygen is not installed, this rule will automatically download and set up a local copy for you.
+
+2. **Optional: Install Graphviz for diagrams:**
+   - If [Graphviz](https://graphviz.gitlab.io/) is installed (`sudo apt-get install graphviz`), the generated documentation will include class diagrams and inheritance graphs for better visualization.
 
 3. **View the documentation:**
-   - Open `docs/index.html` in your web browser to browse the full documentation, including class descriptions, file overviews, and method details.
+   - Open `docs/index.html` in your web browser to browse the full documentation, including class descriptions, file overviews, method details, and (if Graphviz is present) graphical diagrams.
 
 ### What is Documented?
 - All major classes, methods, and files are annotated with Doxygen comments.
