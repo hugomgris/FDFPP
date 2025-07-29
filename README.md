@@ -17,4 +17,4 @@ Thanks, Nico <3
 
 It also is inspired by the work @ailopez-o did for their FDF project at 42. 
 
-You can check their repo at https://github.com/ailopez-o/42Barcelona-FdF. 
+You can check their repo at https://github.com/ailopez-o/42Barcelona-FdF (some of the maps included in my repo are taken from there, so thanks for that too!)
