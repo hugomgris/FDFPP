@@ -60,6 +60,7 @@ FDF++ is a powerful and extensible wireframe renderer for 3D maps, written in mo
 ./FDF++ maps/42.fdf
 ./FDF++ maps/test_maps/pylone.fdf
 ./FDF++ helloworld
+```
 
 Example maps are available in the `maps/` directory, including terrain data, geometric patterns, and test files.
 
