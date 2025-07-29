@@ -1,7 +1,7 @@
 # <h1 align="center">FDF++</h1>
 
 <p align="center">
-	<b>A map-based wireframe renderer written in C++ and built on MLX42</b><br>
+   <b>A map-based wireframe renderer written in C++ and built on MLX42</b><br>
 </p>
 
 ---
@@ -164,8 +164,51 @@ Transform text into 3D wireframe maps using a comprehensive character dictionary
 - **Right Click + Drag**: 3D rotation
 - **Scroll Wheel**: Zoom with mouse-centered scaling
 
+## Technical Architecture
+
+FDF++ follows a modular architecture with clear separation of concerns:
+
+- **FDF Class**: Main orchestrator managing all components
+- **Renderer**: Handles wireframe drawing and VFX application  
+- **Camera**: Manages viewport transformations and user interaction
+- **Projector**: Factory for different projection algorithms
+- **ColorManager**: Height-based color interpolation and palette management
+- **VFX Engine**: Real-time visual effects processing
+- **MapBuilder**: File parsing and text-to-map conversion
+- **MLXHandler**: Window management and event handling
+
+This design ensures extensibility, maintainability, and performance optimization for real-time rendering.
+
 ## Documentation
 
+This project is fully documented using [Doxygen](https://www.doxygen.nl/), a tool for generating comprehensive code documentation from annotated C++ source files.
+
+### How to Generate Documentation
+
+1. **Ensure Doxygen is installed:**
+   - On most Linux systems: `sudo apt-get install doxygen`
+   - Or see [Doxygen installation guide](https://www.doxygen.nl/manual/install.html)
+
+2. **Generate the documentation:**
+   - From the project root, run:
+     ```sh
+     make doxy
+     ```
+   - This will use the provided `Doxyfile` configuration to generate HTML documentation in the `docs/` directory.
+
+3. **View the documentation:**
+   - Open `docs/index.html` in your web browser to browse the full documentation, including class descriptions, file overviews, and method details.
+
+### What is Documented?
+- All major classes, methods, and files are annotated with Doxygen comments.
+- Mathematical details for each projection type are included in the documentation.
+- The documentation covers:
+  - Core rendering pipeline (FDF, Renderer, Camera, ColorManager, VFX, UI)
+  - Map parsing and building (Map, MapBuilder, MapParser)
+  - All projection algorithms (Isometric, Orthographic, Cabinet, Cavalier, Trimetric, Dimetric, Military, Perspective, RecursiveDepth, Hyperbolic, Conic, SphericalConic)
+  - Usage instructions and control schemes
+
+For a high-level overview, see `docs/mainpage.dox`.
 
 ## Acknowledgements
 
@@ -182,18 +225,3 @@ It also is inspired by the work @ailopez-o did for their FDF project at 42.
 You can check their repo at https://github.com/ailopez-o/42Barcelona-FdF (some of the maps included in my repo are taken from there, so thanks for that too!)
 
 ---
-
-## Technical Architecture
-
-FDF++ follows a modular architecture with clear separation of concerns:
-
-- **FDF Class**: Main orchestrator managing all components
-- **Renderer**: Handles wireframe drawing and VFX application  
-- **Camera**: Manages viewport transformations and user interaction
-- **Projector**: Factory for different projection algorithms
-- **ColorManager**: Height-based color interpolation and palette management
-- **VFX Engine**: Real-time visual effects processing
-- **MapBuilder**: File parsing and text-to-map conversion
-- **MLXHandler**: Window management and event handling
-
-This design ensures extensibility, maintainability, and performance optimization for real-time rendering.
