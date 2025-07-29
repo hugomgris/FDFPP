@@ -1,5 +1,17 @@
+/**
+# * @file Projector.cpp
+# * @brief Implements the Projector class for managing and selecting projection types.
+# *
+# * The Projector class holds instances of all supported projection types and allows switching between them.
+# * Provides access to the currently selected projection and handles errors for invalid selections.
+# */
+
+
 #include "../../includes/projections/Projector.hpp"
 
+/**
+ * @brief Constructs a Projector object and initializes all supported projection types.
+ */
 Projector::Projector(){
 	_isometric = new IsometricProjection();
 	_perspective = new PerspectiveProjection();
@@ -15,16 +27,19 @@ Projector::Projector(){
 	_spherical = new SphericalConicProjection();
 }
 
+/**
+ * @brief Destructor for Projector. Cleans up all projection type instances.
+ */
 Projector::~Projector(){
 	delete _isometric;
-    delete _perspective;
-    delete _orthographic;
-    delete _trimetric;
-    delete _dimetric;
-    delete _cabinet;
-    delete _cavalier;
-    delete _military;
-    delete _recursive;
+	delete _perspective;
+	delete _orthographic;
+	delete _trimetric;
+	delete _dimetric;
+	delete _cabinet;
+	delete _cavalier;
+	delete _military;
+	delete _recursive;
 	delete _hyperbolic;
 	delete _conic;
 	delete _spherical;
@@ -32,8 +47,15 @@ Projector::~Projector(){
 
 IProjection *Projector::getProjection(){
 	return (_selectedProjection);
+
 }
 
+/**
+ * @brief Sets the active projection type by integer code.
+ *
+ * Switches the selected projection to the corresponding type. Throws BadProjectionException for invalid codes.
+ * @param type Integer code for the projection type (1-12).
+ */
 void Projector::setType(int type){
 	switch (type){
 		case 1:

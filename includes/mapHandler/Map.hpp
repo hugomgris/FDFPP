@@ -1,3 +1,12 @@
+#/**
+# * @file Map.hpp
+# * @class Map
+# * @brief Stores and provides access to a grid of map points with height and color information.
+# *
+# * Manages a 2D grid of MapPoint structures, each representing a height (z), color,
+# * and custom color flag. Provides methods for accessing map dimensions, Z values, colors, and custom color status.
+# */
+
 #ifndef MAP_HPP
 # define MAP_HPP
 

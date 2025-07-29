@@ -1,3 +1,12 @@
+#/**
+# * @file MapParser.hpp
+# * @class MapParser
+# * @brief Validates and parses map matrices for correct format and structure.
+# *
+# * Checks the format of a map matrix, ensuring consistent row lengths and valid structure.
+# * Provides error handling for malformed maps.
+# */
+
 #ifndef MAPPARSER_HPP
 # define MAPPARSER_HPP
 

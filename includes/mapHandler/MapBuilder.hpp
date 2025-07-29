@@ -1,3 +1,12 @@
+#/**
+# * @file MapBuilder.hpp
+# * @class MapBuilder
+# * @brief Builds map data from input strings or files, using a dictionary for character mapping.
+# *
+# * Loads map data from a file or string, parses dictionary files for character maps,
+# * and provides methods for building, printing, and validating map input. Includes custom exceptions for error handling.
+# */
+
 #ifndef MAPBUILDER_HPP
 # define MAPBUILDER_HPP
 
