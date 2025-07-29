@@ -68,6 +68,10 @@ FDF++ is a powerful and extensible wireframe renderer for 3D maps, written in mo
 
 Example maps are available in the `maps/` directory, including terrain data, geometric patterns, and test files.
 
+![Main Project Screenshot](img/screenshot_04.png)
+![Main Project Screenshot](img/screenshot_05.png)
+![Main Project Screenshot](img/screenshot_06.png)
+
 ## Detailed Features
 
 ### Color Palettes
@@ -167,6 +171,8 @@ Transform text into 3D wireframe maps using a comprehensive character dictionary
 - **Left Click + Drag**: Pan the map view
 - **Right Click + Drag**: 3D rotation
 - **Scroll Wheel**: Zoom with mouse-centered scaling
+
+![Main Project Screenshot](img/screenshot_07.png)
 
 ## Technical Architecture
 
