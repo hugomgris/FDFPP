@@ -6,6 +6,17 @@
 
 ---
 
+<p align="center">
+    <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/hugomgris/FDFPP?color=lightblue" />
+    <img alt="Code language count" src="https://img.shields.io/github/languages/count/hugomgris/FDFPP?color=yellow" />
+    <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/hugomgris/FDFPP?color=blue" />
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/hugomgris/FDFPP?color=green" />
+    <img alt="GitHub issues" src="https://img.shields.io/github/issues/hugomgris/FDFPP?color=orange" />
+    <img alt="GitHub forks" src="https://img.shields.io/github/forks/hugomgris/FDFPP?color=purple" />
+    <img alt="GitHub stars" src="https://img.shields.io/github/stars/hugomgris/FDFPP?color=gold" />
+    <img alt="GitHub license" src="https://img.shields.io/github/license/hugomgris/FDFPP?color=gray" />
+</p>
+
 ## General Description
 
 FDF++ is a powerful and extensible wireframe renderer for 3D maps, written in modern C++. It leverages the MLX42 graphics library to provide smooth rendering, interactive controls, and a rich set of features for map visualization, color management, projections, and visual effects. The project is designed for educational and creative purposes, allowing users to explore mathematical projections, color palettes, and custom map building. It is based on 42's Common Core's FDF project, which is asked to be written in C, as a side activity to train my C++ skills and OOP muscles. It also served as an opportunity to add a handful of extra features to the usual FDF project and try to come up with interesting build ideas.
@@ -63,7 +74,6 @@ FDF++ is a powerful and extensible wireframe renderer for 3D maps, written in mo
 ```
 
 Example maps are available in the `maps/` directory, including terrain data, geometric patterns, and test files.
-
 
 ## Detailed Features
 
@@ -129,7 +139,6 @@ Transform text into 3D wireframe maps using a comprehensive character dictionary
 - Input text will be converted using the character dictionary
 - Each character becomes a 3D representation in the wireframe
 
-
 ## Controls
 
 ### Camera Controls
@@ -181,7 +190,6 @@ FDF++ follows a modular architecture with clear separation of concerns:
 
 This design ensures extensibility, maintainability, and performance optimization for real-time rendering.
 
-
 ## Documentation
 
 This project is fully documented using [Doxygen](https://www.doxygen.nl/).
@@ -212,7 +220,6 @@ This project is fully documented using [Doxygen](https://www.doxygen.nl/).
   - Usage instructions and control schemes
 
 For a high-level overview, see `docs/mainpage.dox`.
-
 
 ## Acknowledgements
 
