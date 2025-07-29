@@ -1,4 +1,4 @@
-#/**
+/**
 # * @file MapBuilder.hpp
 # * @class MapBuilder
 # * @brief Builds map data from input strings or files, using a dictionary for character mapping.

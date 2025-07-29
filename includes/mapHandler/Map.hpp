@@ -1,4 +1,4 @@
-#/**
+/**
 # * @file Map.hpp
 # * @class Map
 # * @brief Stores and provides access to a grid of map points with height and color information.

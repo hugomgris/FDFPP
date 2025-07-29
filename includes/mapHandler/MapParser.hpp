@@ -1,4 +1,4 @@
-#/**
+/**
 # * @file MapParser.hpp
 # * @class MapParser
 # * @brief Validates and parses map matrices for correct format and structure.

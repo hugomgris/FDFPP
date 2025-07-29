@@ -1,4 +1,4 @@
-#/**
+/**
 # * @file MapParser.cpp
 # * @brief Implements the MapParser class for validating and parsing map matrices.
 # *

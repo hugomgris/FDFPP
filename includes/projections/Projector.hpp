@@ -1,12 +1,3 @@
-#/**
-# * @file Projector.hpp
-# * @class Projector
-# * @brief Manages and selects projection types for rendering 3D maps.
-# *
-# * The Projector class holds instances of all supported projection types and allows switching between them.
-# * Provides access to the currently selected projection and handles errors for invalid selections.
-# */
-
 #ifndef PROJECTOR_HPP
 # define PROJECTOR_HPP
 

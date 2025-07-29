@@ -1,16 +1,19 @@
 /**
-# * @file Projector.cpp
-# * @brief Implements the Projector class for managing and selecting projection types.
-# *
-# * The Projector class holds instances of all supported projection types and allows switching between them.
-# * Provides access to the currently selected projection and handles errors for invalid selections.
-# */
-
+ * @file Projector.cpp
+ * @brief Implements the Projector class, which manages different 3D to 2D projection methods.
+ *
+ * The Projector class serves as a factory and manager for various projection algorithms,
+ * allowing dynamic switching between different projection types such as isometric,
+ * perspective, orthographic, and other specialized projections for 3D wireframe rendering.
+ */
 
 #include "../../includes/projections/Projector.hpp"
 
 /**
- * @brief Constructs a Projector object and initializes all supported projection types.
+ * @brief Constructs a Projector object and initializes all available projection types.
+ * 
+ * Creates instances of all supported projection algorithms and sets up the projection
+ * management system. Each projection type is instantiated and ready for use.
  */
 Projector::Projector(){
 	_isometric = new IsometricProjection();
@@ -28,18 +31,20 @@ Projector::Projector(){
 }
 
 /**
- * @brief Destructor for Projector. Cleans up all projection type instances.
+ * @brief Destructor for the Projector class.
+ * 
+ * Properly deallocates memory for all projection instances to prevent memory leaks.
  */
 Projector::~Projector(){
 	delete _isometric;
-	delete _perspective;
-	delete _orthographic;
-	delete _trimetric;
-	delete _dimetric;
-	delete _cabinet;
-	delete _cavalier;
-	delete _military;
-	delete _recursive;
+    delete _perspective;
+    delete _orthographic;
+    delete _trimetric;
+    delete _dimetric;
+    delete _cabinet;
+    delete _cavalier;
+    delete _military;
+    delete _recursive;
 	delete _hyperbolic;
 	delete _conic;
 	delete _spherical;
@@ -47,14 +52,19 @@ Projector::~Projector(){
 
 IProjection *Projector::getProjection(){
 	return (_selectedProjection);
-
 }
 
 /**
- * @brief Sets the active projection type by integer code.
- *
- * Switches the selected projection to the corresponding type. Throws BadProjectionException for invalid codes.
- * @param type Integer code for the projection type (1-12).
+ * @brief Sets the active projection type based on the provided type identifier.
+ * 
+ * Switches between different projection algorithms using a numeric identifier.
+ * Each number corresponds to a specific projection type:
+ * 1: Isometric, 2: Perspective, 3: Orthographic, 4: Trimetric, 5: Dimetric,
+ * 6: Cabinet, 7: Cavalier, 8: Military, 9: Recursive Depth, 10: Hyperbolic,
+ * 11: Conic, 12: Spherical Conic
+ * 
+ * @param type Integer identifier for the desired projection type (1-12).
+ * @throws BadProjectionException If the type parameter is outside the valid range.
  */
 void Projector::setType(int type){
 	switch (type){
@@ -99,6 +109,11 @@ void Projector::setType(int type){
 	}
 }
 
+/**
+ * @brief Returns the error message for invalid projection selection.
+ * 
+ * @return C-style string describing the error and valid range of projection types.
+ */
 const char *Projector::BadProjectionException::what() const throw(){
 	return ("Bad projection selection! (Try with values 1-11 or use 'help' as argument for further instructions)");
 }

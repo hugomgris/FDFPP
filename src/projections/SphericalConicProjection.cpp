@@ -1,14 +1,11 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   SphericalConicProjection.cpp                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/28 14:20:07 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/07/28 18:22:56 by hmunoz-g         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+/**
+ * @file SphericalConicProjection.cpp
+ * @brief Implements the SphericalConicProjection class for spherical conic projection.
+ *
+ * Spherical conic projection first maps 3D coordinates onto a spherical surface,
+ * then applies conic perspective projection. This creates unique curved perspective
+ * effects useful for visualizing data on spherical or curved surfaces.
+ */
 
 #include "../../includes/projections/SphericalConicProjection.hpp"
 
@@ -16,6 +13,19 @@ SphericalConicProjection::SphericalConicProjection(double radius) : _radius(radi
 SphericalConicProjection::SphericalConicProjection() : _radius(400.0) {}
 SphericalConicProjection::~SphericalConicProjection(){}
 
+/**
+ * @brief Projects 3D coordinates to 2D using spherical conic projection.
+ * 
+ * First normalizes the 3D coordinates to lie on a sphere of the specified radius,
+ * then applies a conic perspective transformation. The spherical mapping ensures
+ * all points lie on the sphere surface before the final 2D projection.
+ * 
+ * @param x X coordinate in 3D space.
+ * @param y Y coordinate in 3D space.
+ * @param z Z coordinate (height) in 3D space.
+ * @return A pair containing the spherical-conic-projected 2D screen coordinates.
+ */
+ 
 std::pair<int, int> SphericalConicProjection::project(int &x, int &y, int &z) const {
     double distance = sqrt(x*x + y*y + z*z);
     if (distance == 0) distance = 1;
