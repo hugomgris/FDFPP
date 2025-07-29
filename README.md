@@ -27,9 +27,6 @@ FDF++ is a powerful and extensible wireframe renderer for 3D maps, written in mo
 ![Main Project Screenshot](img/screenshot_02.png)
 ![Main Project Screenshot](img/screenshot_03.png)
 
-
-*More images and GIFs coming soon!*
-
 ## Build & Execution Instructions
 
 ### Prerequisites
