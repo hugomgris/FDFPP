@@ -6,7 +6,6 @@
 
 ---
 
-
 ## General Description
 
 FDF++ is a powerful and extensible wireframe renderer for 3D maps, written in modern C++. It leverages the MLX42 graphics library to provide smooth rendering, interactive controls, and a rich set of features for map visualization, color management, projections, and visual effects. The project is designed for educational and creative purposes, allowing users to explore mathematical projections, color palettes, and custom map building. It is based on 42's Common Core's FDF project, which is asked to be written in C, as a side activity to train my C++ skills and OOP muscles. It also served as an opportunity to add a handful of extra features to the usual FDF project and try to come up with interesting build ideas.
@@ -64,7 +63,6 @@ FDF++ is a powerful and extensible wireframe renderer for 3D maps, written in mo
 ```
 
 Example maps are available in the `maps/` directory, including terrain data, geometric patterns, and test files.
-
 
 ## Detailed Features
 
@@ -130,7 +128,6 @@ Transform text into 3D wireframe maps using a comprehensive character dictionary
 - Input text will be converted using the character dictionary
 - Each character becomes a 3D representation in the wireframe
 
-
 ## Controls
 
 ### Camera Controls
@@ -182,7 +179,6 @@ FDF++ follows a modular architecture with clear separation of concerns:
 
 This design ensures extensibility, maintainability, and performance optimization for real-time rendering.
 
-
 ## Documentation
 
 This project is fully documented using [Doxygen](https://www.doxygen.nl/).
@@ -213,7 +209,6 @@ This project is fully documented using [Doxygen](https://www.doxygen.nl/).
   - Usage instructions and control schemes
 
 For a high-level overview, see `docs/mainpage.dox`.
-
 
 ## Acknowledgements
 
