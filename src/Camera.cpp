@@ -1,7 +1,27 @@
+/**
+ * @file Camera.cpp
+ * @brief Implements the Camera class, which manages zooming, panning, rotation,
+ *        and coordinate transformation for rendering height maps.
+ *
+ * The Camera class is responsible for adjusting the view in 2D screen space
+ * based on user interactions and applying geometrical transformations such as
+ * zooming, panning, centering, and rotating the wireframe projection.
+ */
+
 #include "../includes/Camera.hpp"
 #include <cmath>
 #include <iostream>
 
+/**
+ * @brief Constructs a Camera object with references to rendering context and data.
+ * 
+ * Initializes camera transformation values and computes initial scale and offset
+ * based on the height map and projection.
+ * 
+ * @param MLXHandler Reference to the MLX rendering context.
+ * @param projector Pointer to the Projector used for coordinate projection.
+ * @param heightMap Reference to the HeightMap being rendered.
+ */
 Camera::Camera(MLXHandler &MLXHandler, Projector *projector, HeightMap &heightMap)
     : _rotationAngleX(0.0), _rotationAngleY(0.0), _rotationAngleZ(0.0), _MLXHandler(MLXHandler), _projector(projector), _heightMap(heightMap) {
     _zoomLevel = 1.0;
@@ -26,9 +46,10 @@ Camera::Camera(MLXHandler &MLXHandler, Projector *projector, HeightMap &heightMa
     centerCamera();
 }
 
+/**
+ * @brief Destructor for the Camera class.
+ */
 Camera::~Camera() {}
-
-// Getters and Setters
 
 double Camera::getZoomLevel() const {
     return _zoomLevel;
@@ -54,37 +75,54 @@ double Camera::getSpacing() const {
     return _spacing;
 }
 
-// Methods
+/**
+ * @brief Zooms the camera in or out by a given factor.
+ * 
+ * If a mouse position is provided, the zoom centers on that point to maintain
+ * its screen position after scaling. Otherwise, it zooms toward the center.
+ *
+ * @param factor Zoom factor (values >1 zoom in, <1 zoom out).
+ * @param mouseX X coordinate of the mouse on screen, or -1 if unused.
+ * @param mouseY Y coordinate of the mouse on screen, or -1 if unused.
+ */
 void Camera::zoom(double factor, int mouseX, int mouseY) {
-    // If mouse position is provided, zoom toward that point
     if (mouseX >= 0 && mouseY >= 0) {
-        // Calculate the world coordinates under the mouse before zooming
         double worldX = (mouseX - _MLXHandler.getWidth() / 2) / _zoomLevel + _cameraX;
         double worldY = (mouseY - _MLXHandler.getHeight() / 2) / _zoomLevel + _cameraY;
-        
-        // Apply zoom
+
         _zoomLevel *= factor;
-        
-        // Enforce min/max zoom levels
+
         _zoomLevel = std::max(0.1, std::min(_zoomLevel, 10.0));
         
-        // Calculate new camera position to keep mouse over same world position
         _cameraX = worldX - (mouseX - _MLXHandler.getWidth() / 2) / _zoomLevel;
         _cameraY = worldY - (mouseY - _MLXHandler.getHeight() / 2) / _zoomLevel;
     } else {
-        // Just zoom without adjusting camera position
         _zoomLevel *= factor;
         _zoomLevel = std::max(0.1, std::min(_zoomLevel, 10.0));
     }
 }
 
+/**
+ * @brief Moves the camera position by a given offset.
+ * 
+ * Pan movement is adjusted by the current zoom level for intuitive navigation.
+ *
+ * @param dx Horizontal movement in screen coordinates.
+ * @param dy Vertical movement in screen coordinates.
+ */
 void Camera::pan(int dx, int dy) {
     _cameraX += dx / _zoomLevel;
     _cameraY += dy / _zoomLevel;
 }
 
+/**
+ * @brief Centers the rendered map within the screen.
+ *
+ * Calculates the bounding box of the projected heightmap and computes the
+ * necessary offsets to center it on screen, resetting the camera position
+ * in the process.
+ */
 void Camera::centerCamera() {
-    // Find the minimum and maximum projected coordinates
     int minX = INT_MAX, minY = INT_MAX;
     int maxX = INT_MIN, maxY = INT_MIN;
     
@@ -102,32 +140,34 @@ void Camera::centerCamera() {
             maxY = std::max(maxY, projectedPoint.second);
         }
     }
-    
-    // Calculate the center of the map's bounding box
+
     int mapCenterX = (minX + maxX) / 2;
     int mapCenterY = (minY + maxY) / 2;
-    
-    // Calculate the screen center
+
     int screenCenterX = _MLXHandler.getWidth() / 2;
     int screenCenterY = _MLXHandler.getHeight() / 2;
-    
-    // Calculate the required offset to center the map
+
     _horizontalOffset = screenCenterX - mapCenterX;
     _verticalOffset = screenCenterY - mapCenterY;
     
-    // Reset camera position (we'll use offsets for centering)
     _cameraX = 0;
     _cameraY = 0;
 }
 
+/**
+ * @brief Calculates screen-space offsets to center the projected map.
+ *
+ * Projects each point in the heightmap to determine its bounds,
+ * then sets horizontal and vertical offsets so that the entire map
+ * appears centered in the window.
+ */
+
 void Camera::calculateOffset() {
-    // First find the min and max coordinates after projection
     int minX = INT_MAX;
     int maxX = INT_MIN;
     int minY = INT_MAX;
     int maxY = INT_MIN;
     
-    // Calculate the projected bounds of the entire map
     for (int y = 0; y < _heightMap.getMatrixHeight(); y++) {
         for (int x = 0; x < _heightMap.getMatrixWidth(); x++) {
             int z = _heightMap.getZ(x, y);
@@ -143,15 +183,20 @@ void Camera::calculateOffset() {
         }
     }
     
-    // Calculate width and height of the projected map
     int projectedWidth = maxX - minX;
     int projectedHeight = maxY - minY;
     
-    // Calculate offsets to center the projected map
     _horizontalOffset = ((_MLXHandler.getWidth() - projectedWidth) / 2) - minX;
     _verticalOffset = ((_MLXHandler.getHeight() - projectedHeight) / 2) - minY;
 }
 
+/**
+ * @brief Computes initial spacing and adjusts Z-factor based on map dimensions.
+ * 
+ * Determines a base spacing value that ensures the map fits within the window,
+ * and computes a suitable Z-scaling factor to maintain proportion with
+ * horizontal dimensions, adapting to both wide and tall maps.
+ */
 void Camera::calculateInitialScale() {
     double maxWindowDimension = std::min(_MLXHandler.getWidth(), _MLXHandler.getHeight()) * 0.8;
     double mapDimension = std::max(_heightMap.getMatrixWidth(), _heightMap.getMatrixHeight());
@@ -198,70 +243,66 @@ void Camera::calculateInitialScale() {
     }
 }
 
+/**
+ * @brief Transforms world coordinates to screen-space using projection and camera state.
+ * 
+ * Applies spacing, rotation (X, Y, Z), and current zoom/pan values to convert
+ * a 3D point in the heightmap into its final 2D screen position.
+ *
+ * @param x X coordinate in the height map grid.
+ * @param y Y coordinate in the height map grid.
+ * @param z Height value (Z-axis) at the given grid point.
+ * @return A pair of integers representing the screen X and Y coordinates.
+ */
 std::pair<int, int> Camera::worldToScreen(int x, int y, int z) const {
-    // Scale coordinates based on spacing
     int drawX = x * _spacing;
     int drawY = y * _spacing;
-    int drawZ = z;  // You might want to scale Z too based on your requirements
+    int drawZ = z;
     
-    // Calculate the center point of the heightmap for rotation
     int centerX = _heightMap.getMatrixWidth() / 2 * _spacing;
     int centerY = _heightMap.getMatrixHeight() / 2 * _spacing;
-    int centerZ = 0;  // Adjust if needed
-    
-    // Translate to origin for rotation
+    int centerZ = 0;
+
     drawX -= centerX;
     drawY -= centerY;
     drawZ -= centerZ;
     
-    // Store original values for rotation calculations
     int originalX = drawX;
     int originalY = drawY;
     int originalZ = drawZ;
-    
-    // Apply rotations using temporary variables to avoid precision loss
-    // The trig functions return doubles, so we'll cast back to int at the end
-    
-    // Apply X-axis rotation (pitch)
+
     if (_rotationAngleX != 0.0) {
         double cosX = cos(_rotationAngleX);
         double sinX = sin(_rotationAngleX);
         drawY = round(originalY * cosX - originalZ * sinX);
         drawZ = round(originalY * sinX + originalZ * cosX);
         
-        // Update for next rotation
         originalY = drawY;
         originalZ = drawZ;
     }
     
-    // Apply Y-axis rotation (yaw)
     if (_rotationAngleY != 0.0) {
         double cosY = cos(_rotationAngleY);
         double sinY = sin(_rotationAngleY);
         drawX = round(originalX * cosY + originalZ * sinY);
         drawZ = round(-originalX * sinY + originalZ * cosY);
         
-        // Update for next rotation
         originalX = drawX;
     }
     
-    // Apply Z-axis rotation (roll)
     if (_rotationAngleZ != 0.0) {
         double cosZ = cos(_rotationAngleZ);
         double sinZ = sin(_rotationAngleZ);
         drawX = round(originalX * cosZ - originalY * sinZ);
         drawY = round(originalX * sinZ + originalY * cosZ);
     }
-    
-    // Translate back from origin
+
     drawX += centerX;
     drawY += centerY;
     drawZ += centerZ;
-    
-    // Project the 3D coordinates to 2D using the selected projection
+
     std::pair<int, int> projectedPoint = _projector->getProjection()->project(drawX, drawY, drawZ);
     
-    // Apply offset, camera position, and zoom
     int centeredX = projectedPoint.first + _horizontalOffset;
     int centeredY = projectedPoint.second + _verticalOffset;
     
@@ -274,6 +315,18 @@ std::pair<int, int> Camera::worldToScreen(int x, int y, int z) const {
     return {screenX, screenY};
 }
 
+/**
+ * @name Rotation Methods
+ * @brief Rotate the camera around the X, Y, or Z axes.
+ * 
+ * Each method adds the given angle to the respective rotation angle and ensures
+ * the result stays within [0, 2π) for stability.
+ * @{
+ */
+void rotateX(double angle);
+void rotateY(double angle);
+void rotateZ(double angle);
+/** @} */
 void Camera::rotateX(double angle) {
     _rotationAngleX += angle;
     while (_rotationAngleX >= 2 * M_PI) _rotationAngleX -= 2 * M_PI;
@@ -304,6 +357,12 @@ double Camera::getRotationAngleZ() const {
     return _rotationAngleZ;
 }
 
+/**
+ * @brief Resets the camera to its initial state.
+ *
+ * Restores original zoom, pan, spacing, and rotation values that were
+ * set during initialization.
+ */
 void Camera::reset(){
     _zoomLevel = _OriginalZoomLevel;
     _cameraX = _OriginalCameraX;

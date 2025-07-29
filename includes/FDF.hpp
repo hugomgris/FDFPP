@@ -1,3 +1,12 @@
+/**
+ * @class FDF
+ * @brief Core rendering controller for the FDF++ application.
+ *
+ * Responsible for linking the rendering pipeline components (HeightMap, Projector,
+ * Camera, VFX, Renderer, ColorManager), and exposing interaction methods such as
+ * zooming, rotating, and drawing the map.
+ */
+
 #ifndef FDF_HPP
 #define FDF_HPP
 

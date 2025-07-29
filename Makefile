@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/02/13 13:48:05 by hmunoz-g          #+#    #+#              #
-#    Updated: 2025/07/28 16:43:52 by hmunoz-g         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 # -=-=-=-=-    COLOURS -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
 
 DEF_COLOR   = \033[0;39m
@@ -102,23 +90,42 @@ $(NAME): $(OBJS) Makefile
 	@echo "$(GREEN)$(NAME) compiled!$(DEF_COLOR)"
 	@echo "$(RED)So preoccupied with whether or not I could, I didn't stop to think if I should.$(DEF_COLOR)"
 
+# -=-=-=-=-    DOCUMENTATION -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= #
+
 DOXYGEN_VERSION = 1.10.0
 DOXYGEN_DIR = $(HOME)/doxygen-$(DOXYGEN_VERSION)
 DOXYGEN_BIN = $(DOXYGEN_DIR)/bin/doxygen
 
+# Generate project documentation using Doxygen
+# NOTE: This target will work with or without Graphviz installed:
+#   - WITH Graphviz: Generates full docs including dependency graphs, call graphs,
+#     class collaboration diagrams, and inheritance charts
+#   - WITHOUT Graphviz: Generates complete documentation but without visual graphs
+#
+# To enable visual graphs, install Graphviz on your system:
+#   Ubuntu/Debian: sudo apt-get install graphviz
+#   macOS: brew install graphviz
+#   Arch: sudo pacman -S graphviz
 doxy: $(DOXYGEN_BIN)
+	@if command -v dot >/dev/null 2>&1; then \
+		echo "$(GREEN)Generating documentation with Graphviz support$(DEF_COLOR)"; \
+	else \
+		echo "$(YELLOW)Generating documentation without graphs (Graphviz not found)$(DEF_COLOR)"; \
+		echo "$(CYAN)Tip: Install graphviz package to enable dependency graphs$(DEF_COLOR)"; \
+	fi
 	@$(DOXYGEN_BIN) Doxyfile
-	@echo "$(GREEN)Doxy documentation generated in docs/index.html$< $(DEF_COLOR)"
+	@echo "$(GREEN)Documentation generated in docs/html/index.html$(DEF_COLOR)"
 
 $(DOXYGEN_BIN):
-	@echo "Downloading Doxygen"
+	@echo "$(CYAN)Downloading Doxygen$(DEF_COLOR)"
 	@wget -q https://www.doxygen.nl/files/doxygen-$(DOXYGEN_VERSION).linux.bin.tar.gz -O /tmp/doxygen.tar.gz
 	@tar -xzf /tmp/doxygen.tar.gz -C $(HOME)
 	@rm /tmp/doxygen.tar.gz
+	@echo "$(GREEN)Doxygen installed successfully$(DEF_COLOR)"
 
 doxyclean:
-	rm -rf docs/html/ docs/latex/ docs/xml/ docs/rtf/ docs/man/ docs/docbook/
-	@echo "$(RED)Cleaned doxy files and documentation$(DEF_COLOR)"
+	@rm -rf docs/html/ docs/latex/ docs/xml/ docs/rtf/ docs/man/ docs/docbook/
+	@echo "$(RED)Cleaned documentation files$(DEF_COLOR)"
 
 clean:
 	@$(RM) $(OBJ_DIR) $(DEP_DIR)
@@ -132,4 +139,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re directories doxy index
+.PHONY: all clean fclean re directories doxy doxyclean

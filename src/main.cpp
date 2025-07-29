@@ -1,3 +1,17 @@
+/**
+ * @file main.cpp
+ * @brief Entry point of the FDF++ application.
+ *
+ * Initializes core components including the map parser, rendering window,
+ * projector, visual effects, and user interface. Loads the map data, applies
+ * projections, and starts the main render and event loop using MLX42.
+ *
+ * Expected usage:
+ * @code
+ * ./FDF++ <map_file_or_string>
+ * @endcode
+ */
+
 #include "../includes/mapHandler/MapBuilder.hpp"
 #include "../includes/mapHandler/MapParser.hpp"
 #include "../includes/projections/Projector.hpp"
@@ -5,6 +19,24 @@
 #include "../includes/FDF.hpp"
 #include "../includes/UI.hpp"
 
+/**
+ * @brief Main entry point. Sets up the FDF++ rendering pipeline.
+ *
+ * Initializes and connects the following components:
+ * - MapBuilder: Parses the map input (file or inline string).
+ * - MLXHandler: Handles window creation and MLX42 interactions.
+ * - Projector: Manages the type of projection used.
+ * - VFX: Configures visual effects.
+ * - FDF: Central renderer combining map, projection, and VFX.
+ * - UI: Displays control interface and render info.
+ * - MapParser: Extracts map metadata and normalizes values.
+ *
+ * Runs the main render loop and cleans up all allocated resources.
+ *
+ * @param argc Number of command-line arguments.
+ * @param argv Command-line arguments. Expects one argument: the map input.
+ * @return Exit code (0 on success, 1 on error).
+ */
 int main(int argc, char **argv){
 	if (argc != 2){
 		std::cerr << "Bad arguments!!(Try ./FDF++ <string/map>)" << std::endl;

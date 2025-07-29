@@ -1,3 +1,12 @@
+/**
+ * @class HeightMap
+ * @brief Parses and stores map height data and metadata for rendering.
+ *
+ * Converts a string-based height map into a 2D matrix of Z-values and optionally
+ * colored points. Provides access to dimensions, normalization, and metadata
+ * such as total points and edge counts.
+ */
+
 #ifndef HEIGHTMAP_HPP
 # define HEIGHTMAP_HPP
 

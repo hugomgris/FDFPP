@@ -1,15 +1,11 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ColorManager.hpp                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 17:41:05 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/07/28 16:50:50 by hmunoz-g         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
+/**
+ * @class ColorManager
+ * @brief Manages color selection and interpolation based on height values.
+ *
+ * Provides a way to color heightmap points by interpolating between predefined
+ * color palettes. Also supports custom per-point colors defined in the HeightMap.
+ */
+ 
 #ifndef COLOR_MANAGER_HPP
 #define COLOR_MANAGER_HPP
 

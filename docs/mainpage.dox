@@ -6,7 +6,7 @@
  * 
  * @section features Features
  * - Text map input or string-to-map generation managed by a @ref MapBuilder "Map Builder"
- * - 3D interactive rendering (wireframe) of @ref HeightMap "Height Maps" using [**MLX42**](https://github.com/codam-coding-college/MLX42) library
+ * - @ref FDF "3D interactive rendering" (wireframe) of @ref HeightMap "Height Maps" using [**MLX42**](https://github.com/codam-coding-college/MLX42) library
  * - Full @ref Camera "Camera controls" (pan, zoom, rotate)
  * - Switchable @ref ColorManager "Color palettes"
  * - Several @ref VFX "Visual Effects" such as autorotation, jittering, wave distorsion, glitching, pulse waves and vortex distorsions.

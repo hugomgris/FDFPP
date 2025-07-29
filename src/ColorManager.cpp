@@ -1,11 +1,41 @@
+/**
+ * @file ColorManager.cpp
+ * @brief Implements the ColorManager class, which provides color interpolation
+ *        for height-based rendering.
+ *
+ * Responsible for mapping height values in the heightmap to color gradients,
+ * using either predefined or custom color sets. Supports smooth interpolation
+ * between color segments and respects per-point overrides.
+ */
+
 #include "../includes/ColorManager.hpp"
 
+/**
+ * @brief Constructs a ColorManager for the given height map.
+ * 
+ * @param heightMap Reference to the HeightMap used for determining heights and custom colors.
+ */
 ColorManager::ColorManager(HeightMap &heightMap) 
     : _heightMap(heightMap), _selectedColors(_colors1), _currentColorSet(0) {}
 
+/**
+ * @brief Destructor for ColorManager.
+ */
 ColorManager::~ColorManager() {
 }
 
+/**
+ * @brief Computes the final color for a heightmap point based on its height.
+ * 
+ * If the point has a custom color defined in the height map, that color is returned.
+ * Otherwise, the height is normalized and used to interpolate between two neighboring
+ * colors in the active palette.
+ * 
+ * @param x X coordinate in the height map.
+ * @param y Y coordinate in the height map.
+ * @param z Height value at the (x, y) position.
+ * @return A 32-bit integer representing the final ARGB color.
+ */
 int ColorManager::getColorFromHeight(int x, int y, int z) {
     if (_heightMap.hasCustomColor(x, y)) {
         return _heightMap.getColor(x, y);
@@ -25,6 +55,17 @@ int ColorManager::getColorFromHeight(int x, int y, int z) {
     return interpolateColor(colorA, colorB, localT);
 }
 
+/**
+ * @brief Linearly interpolates between two ARGB colors.
+ * 
+ * Each channel (A, R, G, B) is interpolated independently, and the final
+ * color is clamped to the 0–255 range for each component.
+ * 
+ * @param color1 First color (as 0xAARRGGBB).
+ * @param color2 Second color (as 0xAARRGGBB).
+ * @param t Interpolation factor between 0.0 (color1) and 1.0 (color2).
+ * @return Interpolated ARGB color as a 32-bit integer.
+ */
 int ColorManager::interpolateColor(int color1, int color2, float t) {
     t = std::max(0.0f, std::min(1.0f, t));
     

@@ -1,21 +1,10 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Camera.hpp                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 17:40:50 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/07/28 16:48:58 by hmunoz-g         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 /**
  * @class Camera
- * @brief Handles user interaction and controls the viewing transformation.
- * 
- * The Camera class manages panning, zooming, and rotating the 3D view. It works
- * together with the Projector and Renderer to adjust how the heightmap is displayed.
+ * @brief Controls the rendering viewport and transformations for a height map.
+ *
+ * This class manages camera transformations such as zoom, pan, rotation, and spacing,
+ * and computes projection-related offsets to correctly position the rendered map
+ * within the viewport.
  */
 
 #ifndef CAMERA_HPP

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+  ],
+  "packageRules": [
+    // Don't update e.g. ubuntu 20.04 to 24.04.
+    {
+      "matchDatasources": ["docker"],
+      "matchUpdateTypes": ["major", "minor", "patch"],
+      "enabled": false,
+    },
+    // Append SHA256 digests to any docker images.
+    {
+      "matchDatasources": ["docker"],
+      "pinDigests": true,
+    },
+  ],
+  "gitlabci": {
+    // We don't have anything useful to update in .gitlab-ci.yml
+    "enabled": false
+  },
+  // We need to support an older version of python that not all PyPI packages support.
+  "constraints": {
+    "python": "3.8"
+  },
+  "constraintsFiltering": "strict",
+}
