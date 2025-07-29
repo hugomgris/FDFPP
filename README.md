@@ -64,6 +64,7 @@ FDF++ is a powerful and extensible wireframe renderer for 3D maps, written in mo
 
 Example maps are available in the `maps/` directory, including terrain data, geometric patterns, and test files.
 
+
 ## Detailed Features
 
 ### Color Palettes
@@ -128,6 +129,7 @@ Transform text into 3D wireframe maps using a comprehensive character dictionary
 - Input text will be converted using the character dictionary
 - Each character becomes a 3D representation in the wireframe
 
+
 ## Controls
 
 ### Camera Controls
@@ -179,9 +181,10 @@ FDF++ follows a modular architecture with clear separation of concerns:
 
 This design ensures extensibility, maintainability, and performance optimization for real-time rendering.
 
+
 ## Documentation
 
-This project is fully documented using [Doxygen](https://www.doxygen.nl/), a tool for generating comprehensive code documentation from annotated C++ source files.
+This project is fully documented using [Doxygen](https://www.doxygen.nl/).
 
 
 ### How to Generate Documentation
@@ -210,6 +213,7 @@ This project is fully documented using [Doxygen](https://www.doxygen.nl/), a too
 
 For a high-level overview, see `docs/mainpage.dox`.
 
+
 ## Acknowledgements
 
 This project owes a lot to my beloved 42 partner Nico (/mrlouf), who did a very good FDF project which I used as reference to build my C++ version.
@@ -218,9 +222,7 @@ You can check out his work at https://github.com/mrlouf/fdf
 
 Thanks, Nico <3
 
--------------------------------
-
-It also is inspired by the work @ailopez-o did for their FDF project at 42. 
+The work by @ailopez-o for their FDF project at 42 was also a huge inspiration.
 
 You can check their repo at https://github.com/ailopez-o/42Barcelona-FdF (some of the maps included in my repo are taken from there, so thanks for that too!)
 
