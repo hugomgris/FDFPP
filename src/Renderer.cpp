@@ -1,13 +1,36 @@
+/**
+ * @file Renderer.cpp
+ * @brief Implements the Renderer class, which draws the heightmap wireframe and points.
+ *
+ * The Renderer class is responsible for rendering the map points and edges using the current camera,
+ * color manager, and visual effects. It applies VFX transformations and draws lines with color gradients.
+ * Rendering is performed in real-time for interactive visualization.
+ */
 #include "../includes/Renderer.hpp"
 #include "../includes/FDF.hpp"
 #include <cmath>
 
+/**
+ * @brief Constructs a Renderer object for drawing the heightmap and wireframe.
+ *
+ * Initializes references to MLXHandler, HeightMap, Camera, ColorManager, and VFX.
+ * Sets up the rendering state and time variable for effects.
+ *
+ * @param MLXHandler Reference to the MLX rendering context.
+ * @param heightMap Reference to the HeightMap to render.
+ * @param camera Reference to the Camera for coordinate transformations.
+ * @param colorManager Reference to the ColorManager for color interpolation.
+ * @param vfx Pointer to the VFX engine for visual effects.
+ */
 Renderer::Renderer(MLXHandler &MLXHandler, HeightMap &heightMap, Camera &camera, 
                    ColorManager &colorManager, VFX *vfx)
     : _MLXHandler(MLXHandler), _heightMap(heightMap), _camera(camera), 
       _colorManager(colorManager), _vfx(vfx), _time(0.0f) {
 }
 
+/**
+ * @brief Destructor for Renderer. Cleans up rendering resources if needed.
+ */
 Renderer::~Renderer() {
 }
 
@@ -17,6 +40,11 @@ void Renderer::draw() {
     drawLines();
 }
 
+/**
+ * @brief Draws all map points to the screen, applying VFX transformations and color interpolation.
+ *
+ * Iterates over the heightmap grid, transforms each point, applies effects, and draws colored pixels.
+ */
 void Renderer::drawPoints() {
     int pointSize = 0;
     
@@ -75,6 +103,11 @@ void Renderer::drawPoints() {
     }
 }
 
+/**
+ * @brief Draws all wireframe edges between map points, applying VFX and color gradients.
+ *
+ * Connects adjacent points horizontally and vertically, applies effects, and draws lines with color gradients.
+ */
 void Renderer::drawLines() {
     for (int y = 0; y < _heightMap.getMatrixHeight(); y++) {
         for (int x = 0; x < _heightMap.getMatrixWidth(); x++) {
@@ -167,6 +200,16 @@ void Renderer::drawLines() {
     }
 }
 
+/**
+ * @brief Draws a line between two points with a color gradient, safely handling screen bounds.
+ *
+ * Uses Bresenham's algorithm and interpolates color between start and end points. Only draws pixels within screen bounds.
+ *
+ * @param start Starting screen coordinates (x, y).
+ * @param end Ending screen coordinates (x, y).
+ * @param startColor Color at the start point.
+ * @param endColor Color at the end point.
+ */
 void Renderer::drawLineSafeWithGradient(std::pair<int, int> start, std::pair<int, int> end, 
                                         int startColor, int endColor) {
     int x1 = start.first;

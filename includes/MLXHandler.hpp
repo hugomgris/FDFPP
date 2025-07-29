@@ -1,3 +1,12 @@
+/**
+ * @file MLXHandler.hpp
+ * @brief Declares the MLXHandler class for managing MLX42 window, images, and event hooks.
+ *
+ * MLXHandler provides the interface for window creation, image buffer management, event handling,
+ * and connection to the FDF rendering pipeline. It exposes methods for event hooks, image clearing,
+ * and resource cleanup.
+ */
+ 
 #ifndef MLXHANDLER_HPP
 # define MLXHANDLER_HPP
 
@@ -10,7 +19,7 @@ class FDF;
 
 class MLXHandler{
 	private:
-    	MLXHandler();
+		MLXHandler();
 		
 		int	_width;
 		int	_height;

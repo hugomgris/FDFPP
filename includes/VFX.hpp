@@ -1,3 +1,11 @@
+/**
+ * @file VFX.hpp
+ * @brief Declares the VFX class for providing visual effects in map rendering.
+ *
+ * The VFX class exposes effect toggles and transformation methods for jitter, wave distortion,
+ * glitch, pulse wave, vortex distortion, and chromatic aberration, enabling real-time rendering effects.
+ */
+ 
 #ifndef VFX_HPP
 # define VFX_HPP
 

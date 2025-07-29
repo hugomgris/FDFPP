@@ -1,5 +1,24 @@
+/**
+ * @file UI.cpp
+ * @brief Implements the UI class, which displays controls, info, and overlays in the FDF++ application.
+ *
+ * The UI class manages the user interface overlay, including control instructions, effect toggles,
+ * projection modes, color schemes, and map statistics. It draws background panels and colored text
+ * using MLX42 image buffers.
+ */
+
 #include "../includes/UI.hpp"
 
+/**
+ * @brief Constructs a UI object for displaying overlays and controls.
+ *
+ * Initializes references to HeightMap and MLXHandler, sets up UI dimensions, and prepares control strings.
+ *
+ * @param heightMap Pointer to the HeightMap for statistics.
+ * @param mlxhandler Pointer to the MLXHandler for image buffers.
+ * @param uiWidth Width of the UI overlay.
+ * @param uiHeight Height of the UI overlay.
+ */
 UI::UI(HeightMap *heightMap, MLXHandler *mlxhandler, int uiWidth, int uiHeight)
 	: _heightMap(heightMap), _MLXHandler(mlxhandler), _uiWidth(uiWidth), _uiHeight(uiHeight) {
 	
@@ -86,10 +105,18 @@ UI::UI(HeightMap *heightMap, MLXHandler *mlxhandler, int uiWidth, int uiHeight)
 	};
 }
 
+/**
+ * @brief Destructor for UI. Cleans up UI resources if needed.
+ */
 UI::~UI() {}
 
 mlx_image_t *UI::getUI() const{ return (_MLXHandler->getUI()); }
 
+/**
+ * @brief Fills the UI background with a semi-transparent grey color.
+ *
+ * Iterates over the UI image buffer and sets each pixel to the background color.
+ */
 void UI::fillBackground() {
 	uint8_t greyValue = 128; 
 	uint8_t opacity = 120;
@@ -107,6 +134,11 @@ void UI::fillBackground() {
 	}
 }
 
+/**
+ * @brief Outputs control instructions, effect toggles, and info to the UI overlay.
+ *
+ * Draws control and info strings to the UI image buffer and colors the text.
+ */
 void UI::outputControls() {
 	clearTexts();
 
@@ -128,30 +160,45 @@ void UI::outputControls() {
 	}
 }
 
+/**
+ * @brief Colors the text in a given MLX image buffer with the specified RGB values.
+ *
+ * Iterates over the image pixels and applies the target color to non-transparent text pixels.
+ *
+ * @param img Pointer to the MLX image buffer containing text.
+ * @param targetR Target red value.
+ * @param targetG Target green value.
+ * @param targetB Target blue value.
+ */
 void UI::ColorText(mlx_image_t *img, uint8_t targetR, uint8_t targetG, uint8_t targetB) {
-    if (!img) return;
+	if (!img) return;
 
-    uint32_t *pixels = reinterpret_cast<uint32_t*>(img->pixels);
+	uint32_t *pixels = reinterpret_cast<uint32_t*>(img->pixels);
 	
-    for (uint32_t y = 0; y < img->height; y++) {
-        for (uint32_t x = 0; x < img->width; x++) {
-            uint32_t idx = y * img->width + x;
-            uint32_t pixel = pixels[idx];
-            uint8_t a = (pixel >> 24) & 0xFF;
-           
-            if (a > 0) {
-                uint32_t new_pixel =
-                    (a << 24) |
-                    (targetR << 16) |
-                    (targetG << 8) |
-                    (targetB);
-               
-                pixels[idx] = new_pixel;
-            }
-        }
-    }
+	for (uint32_t y = 0; y < img->height; y++) {
+		for (uint32_t x = 0; x < img->width; x++) {
+			uint32_t idx = y * img->width + x;
+			uint32_t pixel = pixels[idx];
+			uint8_t a = (pixel >> 24) & 0xFF;
+		   
+			if (a > 0) {
+				uint32_t new_pixel =
+					(a << 24) |
+					(targetR << 16) |
+					(targetG << 8) |
+					(targetB);
+			   
+				pixels[idx] = new_pixel;
+			}
+		}
+	}
 }
 
+/**
+ * @brief Clears all text images from the UI overlay and deletes their buffers.
+ *
+ * Iterates over stored text image pointers and deletes them from the MLX context.
+ */
 void UI::clearTexts() {
 	for (auto textImg : _textImages) {
 		if (textImg) {

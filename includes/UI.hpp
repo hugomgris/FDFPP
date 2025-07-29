@@ -1,3 +1,11 @@
+/**
+ * @file UI.hpp
+ * @brief Declares the UI class for displaying controls, info, and overlays in FDF++.
+ *
+ * The UI class provides the interface for rendering the user interface overlay, including control
+ * instructions, effect toggles, projection modes, color schemes, and map statistics.
+ */
+ 
 #ifndef UI_HPP
 # define UI_HPP
 

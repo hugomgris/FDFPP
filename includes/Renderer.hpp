@@ -1,3 +1,11 @@
+/**
+ * @file Renderer.hpp
+ * @brief Declares the Renderer class for drawing the heightmap wireframe and points.
+ *
+ * The Renderer class exposes methods for rendering map points and edges, applying color gradients,
+ * and integrating visual effects. It is designed for real-time interactive visualization.
+ */
+ 
 #ifndef RENDERER_HPP
 #define RENDERER_HPP
 
